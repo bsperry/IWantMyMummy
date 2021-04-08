@@ -24,4 +24,5 @@ namespace IWantMyMummy.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
+
 }
