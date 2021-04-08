@@ -88,3 +88,18 @@ div.login-logout-tab a.nav-link {
     color: #495057;
     text-align: center;
 }
+
+
+html, body {
+    height: 100%;
+}
+
+.containing-element {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page-content {
+    flex-grow: 1;
+}
