@@ -30,16 +30,12 @@ namespace IWantMyMummy.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString(SessionName, "test");
+            //HttpContext.Session.SetString(SessionName, "test"); (in case we want to use sessions)
             var role = (context.UserRoles
                 .Where(r => r.UserId == userManager.GetUserId(User))
                 .FirstOrDefault());
 
-            if (role is null)
-            {
-                ViewBag.Role = 1;
-            }
-            else
+            if (!(role is null))
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
@@ -54,6 +50,14 @@ namespace IWantMyMummy.Controllers
             
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
             ViewBag.Id = userManager.GetUserId(User);
+            var role = (context.UserRoles
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View();
         }
@@ -66,16 +70,41 @@ namespace IWantMyMummy.Controllers
         //researcher only
         public IActionResult ResearchPage()
         {
+            var role = (context.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            } 
             return View();
         }
 
         public IActionResult ResearchPageMummyInfo()
         {
+            var role = (context.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AdminPage()
         {
+            var role = (context.UserRoles
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View();
         }
 
