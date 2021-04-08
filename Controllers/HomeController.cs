@@ -15,7 +15,7 @@ namespace IWantMyMummy.Controllers
 {
     public class HomeController : Controller
     {
-        const string SessionName = "Name";
+       // const string SessionName = "Name";
 
         private UserManager<IWantMyMummyUser> userManager;
         private readonly ILogger<HomeController> _logger;
@@ -48,7 +48,6 @@ namespace IWantMyMummy.Controllers
         public IActionResult BurialList()
         {
             
-            ViewBag.Name = HttpContext.Session.GetString(SessionName);
             ViewBag.Id = userManager.GetUserId(User);
             var role = (context.UserRoles
                         .Where(r => r.UserId == userManager.GetUserId(User))
@@ -93,19 +92,6 @@ namespace IWantMyMummy.Controllers
             }
 
             return View();
-        }
-
-        public IActionResult AdminPage()
-        {
-            var role = (context.UserRoles
-                        .Where(r => r.UserId == userManager.GetUserId(User))
-                        .FirstOrDefault());
-
-            if (!(role is null))
-            {
-                ViewBag.Role = Int32.Parse(role.RoleId);
-            }
-            return View(context.Users);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

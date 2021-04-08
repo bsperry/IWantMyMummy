@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IWantMyMummy.Areas.Identity.Data.IWantMyMummyUser
+
+<div class="container">
+    <form>
+        <label asp-for="Email">Email</label>
+        <input type="email" asp-for="Email" />
+
+        <label asp-for="Firstname">First Name</label>
+        <input type="text" asp-for="Firstname" />
+
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input type="text" asp-for="PhoneNumber" />
+    </form>
+</div>

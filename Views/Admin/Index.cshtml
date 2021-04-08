@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<IWantMyMummy.Areas.Identity.Data.IWantMyMummyUser>
+Add user
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@user.Firstname</td>
+            <td>@user.LastName</td>
+            <td>
+                <form asp-action="EditUser" asp-controller="Admin" method="get">
+                    <input type="hidden" value="@user.Id" name="user_id" id="user_id" />
+                    <input type="submit" value="Edit" />
+                </form>
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>
