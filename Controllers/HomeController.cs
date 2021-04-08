@@ -105,7 +105,7 @@ namespace IWantMyMummy.Controllers
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
-            return View();
+            return View(context.Users);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

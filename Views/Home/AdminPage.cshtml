@@ -4,4 +4,12 @@
 @{
 }
 
-Admin pages
+@model IEnumerable<IWantMyMummy.Areas.Identity.Data.IWantMyMummyUser>
+Add user
+
+Edit user
+
+@foreach (var user in Model)
+{
+    @user.Firstname
+}
