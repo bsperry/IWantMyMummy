@@ -31,27 +31,45 @@ namespace IWantMyMummy.Controllers
         public IActionResult Index()
         {
             HttpContext.Session.SetString(SessionName, "test");
+            var role = (context.UserRoles
+                .Where(r => r.UserId == userManager.GetUserId(User))
+                .FirstOrDefault());
+
+            if (role is null)
+            {
+                ViewBag.Role = 1;
+            }
+            else
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
+
             return View();
+
+
         }
         public IActionResult BurialList()
         {
             
             ViewBag.Name = HttpContext.Session.GetString(SessionName);
             ViewBag.Id = userManager.GetUserId(User);
-            var role = (context.UserRoles
-                .Where(r => r.UserId == userManager.GetUserId(User))
-                .FirstOrDefault()).RoleId;
-
-            ViewBag.Role = role;
 
             return View();
         }
+
+        public IActionResult MummyJokes()
+        {
+            return View();
+        }
+
+        //researcher only
         public IActionResult ResearchPage()
         {
             return View();
         }
 
-        public IActionResult MummyJokes()
+        public IActionResult ResearchPageMummyInfo()
         {
             return View();
         }
