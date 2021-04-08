@@ -78,6 +78,25 @@ namespace IWantMyMummy.Controllers
 
         }
        
+        [HttpPost]
+
+        public IActionResult DeleteUser(string userId)
+        {
+            var deleteUser = context.Users
+                                .Where(u => u.Id == userId)
+                                .FirstOrDefault();
+
+            var deleteUserRole = context.UserRoles
+                                    .Where(ur => ur.UserId == userId)
+                                    .FirstOrDefault();
+
+            context.Users.Remove(deleteUser);
+            context.UserRoles.Remove(deleteUserRole);
+            context.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
 
     }
 }
