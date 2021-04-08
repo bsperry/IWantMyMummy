@@ -49,13 +49,39 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            var user = context.Users
-                        .Where(u => u.Id == userId)
-                        .FirstOrDefault();
 
-            ViewBag.User = user;
+            //var user = context.Users
+            //	.Join(context.UserRoles)
+            //	.Where(u => u.Id == userId)
+            //	.FirstOrDefault();
+
+            var user =
+                        (from u in context.Users
+                         join r in context.UserRoles on u.Id equals r.UserId
+                         select new { FirstName = u.Firstname, LastName = u.LastName, PhoneNumer = u.PhoneNumber, Email = u.Email, UserId = u.Id, RoleId = r.RoleId });
+            var test = user
+                .Where(r => r.UserId == userId);
+
+            //ViewBag.User = test;
+
+
+
+            foreach (var u in test)
+            {
+                ViewBag.FirstName = u.FirstName;
+                ViewBag.LastName = u.LastName;
+                ViewBag.Email = u.Email;
+                ViewBag.PhoneNumber = u.PhoneNumer;
+                ViewBag.UserId = u.UserId;
+                ViewBag.UserRole = u.RoleId;
+
+            }
+
+
+
             return View();
         }
+
 
         [HttpPost]
         public IActionResult EditUser(IWantMyMummyUser user)

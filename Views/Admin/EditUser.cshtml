@@ -9,16 +9,24 @@
 <div class="container">
     <form>
         <label asp-for="Email">Email</label>
-        <input type="email" asp-for="Email" value="@ViewBag.User.Email"/>
+        <input type="email" asp-for="Email" value="@ViewBag.Email" />
 
         <label asp-for="Firstname">First Name</label>
-        <input type="text" asp-for="Firstname" value="@ViewBag.User.Firstname" />
+        <input type="text" asp-for="Firstname" value="@ViewBag.FirstName" />
 
         <label asp-for="LastName">Last Name</label>
-        <input type="text" asp-for="LastName" value="@ViewBag.User.LastName" />
+        <input type="text" asp-for="LastName" value="@ViewBag.LastName" />
 
         <label asp-for="PhoneNumber">Phone Number</label>
-        <input type="text" asp-for="PhoneNumber" value="@ViewBag.User.PhoneNumber" />
+        <input type="text" asp-for="PhoneNumber" value="@ViewBag.PhoneNumber" />
+
+        <label>Role</label>
+        <select>
+            <option>@ViewBag.UserRole</option>
+            <option>Public</option>
+            <option>Researcher</option>
+            <option>Admin</option>
+        </select>
 
         <input type="submit" value="Edit User" />
     </form>
