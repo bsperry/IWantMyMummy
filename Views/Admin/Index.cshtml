@@ -24,7 +24,7 @@ Add user
             <td>@user.LastName</td>
             <td>
                 <form asp-action="EditUser" asp-controller="Admin" method="get">
-                    <input type="hidden" value="@user.Id" name="user_id" id="user_id" />
+                    <input type="hidden" value="@user.Id" name="userId" id="userId" />
                     <input type="submit" value="Edit" />
                 </form>
             </td>

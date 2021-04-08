@@ -37,8 +37,8 @@ namespace IWantMyMummy.Controllers
             return View(context.Users);
         }
 
-        [HttpGet]
-        public IActionResult EditUser()
+        [HttpGet("EditUser")]
+        public IActionResult EditUser(string userId)
         {
             var role = (context.UserRoles
                         .Where(r => r.UserId == userManager.GetUserId(User))
@@ -48,7 +48,34 @@ namespace IWantMyMummy.Controllers
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
+
+            var user = context.Users
+                        .Where(u => u.Id == userId)
+                        .FirstOrDefault();
+
+            ViewBag.User = user;
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(IWantMyMummyUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var role = (context.UserRoles
+                    .Where(r => r.UserId == userManager.GetUserId(User))
+                    .FirstOrDefault());
+
+                if (!(role is null))
+                {
+                    ViewBag.Role = Int32.Parse(role.RoleId);
+                }
+
+                return View("Index", context.Users);
+            }
+
+            return View();
+
         }
        
 
