@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApp1</title>
+    <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <script async src="https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js"></script>
     <link rel="stylesheet" href="https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css" media="all">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body class="test">
     <div class="containing-element">
         <byu-header>
             <span slot="site-title">I Want My Mummy</span>
@@ -19,17 +19,30 @@
             </byu-user-info>
             <byu-menu slot="nav" active-selector=".is-active">
                 <a asp-controller="Home" asp-action="Index">Home</a>
-                <a asp-controller="Home" asp-action="BurialList">View Burials</a>
-                @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
-                {
-                    <a asp-controller="Home" asp-action="ResearchPage">Add Burial</a>
-                }
+
                 @if (ViewBag.Role == 3)
                 {
-                    <a asp-controller="Admin" asp-action="Index">Admin</a>
-
+                    <!--dropdown admin-->
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Admin</button>
+                        <div class="dropdown-child">
+                            <a asp-controller="Admin" asp-action="Index">Users</a>
+                        </div>
+                    </div>
                 }
 
+                <!--dropdown burials (researcher and admin)-->
+                <div style="margin-left: 15px;" class="dropdown">
+                    <button class="dropdown-btn">Burials</button>
+                    <div class="dropdown-child">
+                        <a asp-controller="Home" asp-action="BurialList">View Burials</a>
+                        @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
+                        {
+                            <a asp-controller="Home" asp-action="ResearchPage">Add Burial</a>
+                        }
+
+                    </div>
+                </div>
 
             </byu-menu>
 
