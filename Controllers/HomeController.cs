@@ -94,6 +94,21 @@ namespace IWantMyMummy.Controllers
             return View();
         }
 
+        public IActionResult ResearcherBurals()
+        {
+            var role = (context.UserRoles
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
+            return View();
+
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
