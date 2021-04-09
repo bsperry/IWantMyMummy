@@ -3,6 +3,7 @@ using IWantMyMummy.Data;
 using IWantMyMummy.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,7 @@ namespace IWantMyMummy.Controllers
 
             }
 
+
             List<string> RoleList = new List<string>();
             RoleList.Add("Public");
             RoleList.Add("Researcher");
@@ -132,6 +134,7 @@ namespace IWantMyMummy.Controllers
 
                 if (updateRole != null)
                 {
+
                     context.UserRoles.Remove(updateRole);
 
                     context.SaveChanges();

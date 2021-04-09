@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using IWantMyMummy.Areas.Identity.Data;
+using IWantMyMummy.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,8 @@ namespace IWantMyMummy.Areas.Identity.Pages.Account
         private readonly UserManager<IWantMyMummyUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+
+        private IWantMyMummyContext context;
 
         public RegisterModel(
             UserManager<IWantMyMummyUser> userManager,
