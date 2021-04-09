@@ -7,9 +7,8 @@
 
 
 
-<div class="container">
-    <div class="container">
-        <br /><br />
+    <div class="container viewContainer">
+        <h1>Edit User</h1>
               <form asp-controller="Admin" asp-action="EditUser" method="post">
                   <label class="form-label" asp-for="Email">Email</label>
                   <input class="form-control" type="email" asp-for="Email" value="@ViewBag.Email" />
@@ -39,9 +38,8 @@
                   </select>
                   <br />
                   <input type="hidden" value="@ViewBag.UserId" name="Id" id="Id" />
-                  <input class="btn btn-primary" type="submit" value="Edit User" />
+                  <input class="btn btn-primary" type="submit" value="Save" />
               </form>
     </div>
 
 
-</div>

@@ -1,31 +1,49 @@
 ﻿@model IEnumerable<IWantMyMummy.Models.BurialQuadrant>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quadrants";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container viewContainer">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialSquareId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialSubplot)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <div class="text-center">
+        <h1>Quadrants</h1>
+    </div>
+
+    @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+    {
+<div>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+    <br /><br />
+
+</div>
+
+    }
+
+
+
+    <table class="table table-bordered table-striped table-hover burialTable">
+        <caption>List of Quadrants</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Burial Square ID
+                </th>
+                <th>
+                    Burial Quadrant
+                </th>
+                @if(ViewBag.Role == 3)
+			    {
+                    <th></th>
+			    }
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.BurialSquareId)
@@ -33,12 +51,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.BurialSubplot)
                 </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.BurialSquareId" asp-route-subid="@item.BurialSubplot">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BurialSquareId" asp-route-subid="@item.BurialSubplot">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+                @if (ViewBag.Role == 3)
+                {
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.BurialSquareId" asp-route-subid="@item.BurialSubplot">Delete</a>
+            </td>
+                }
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
