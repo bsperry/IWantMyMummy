@@ -31,14 +31,29 @@
                     </div>
                 }
 
-                <!--dropdown burials (researcher and admin)-->
+                <!--dropdown burialSquares (researcher and admin)-->
                 <div style="margin-left: 15px;" class="dropdown">
-                    <button class="dropdown-btn">Burials</button>
+                    <button class="dropdown-btn">Square</button>
                     <div class="dropdown-child">
-                        <a asp-controller="Home" asp-action="BurialList">View Burials</a>
+                        <a asp-controller="BurialSquares" asp-action="Index">View Burial Squares</a>
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
                         {
-                            <a asp-controller="Home" asp-action="ResearchPage">Add Burial</a>
+                            <a asp-controller="BurialSquares" asp-action="Create">Add Burial Square</a>
+                            <a asp-controller="BurialSquares" asp-action="Index">My Burials</a>
+                        }
+
+                    </div>
+                </div>
+
+                <!--dropdown burialQuadrant (researcher and admin)-->
+                <div style="margin-left: 15px;" class="dropdown">
+                    <button class="dropdown-btn">Subplot</button>
+                    <div class="dropdown-child">
+                        <a asp-controller="BurialQuadrants" asp-action="Index">View Burial Quadrants</a>
+                        @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
+                        {
+                            <a asp-controller="BurialQuadrants" asp-action="Create">Add Burial Quadrant</a>
+                            <a asp-controller="BurialQuadrants" asp-action="Index">My Burials</a>
                         }
 
                     </div>

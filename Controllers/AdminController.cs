@@ -45,16 +45,22 @@ namespace IWantMyMummy.Controllers
                         .Where(r => r.UserId == userManager.GetUserId(User))
                         .FirstOrDefault());
 
+
+
             if (!(role is null))
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
 
+
+
             //var user = context.Users
-            //	.Join(context.UserRoles)
-            //	.Where(u => u.Id == userId)
-            //	.FirstOrDefault();
+            //    .Join(context.UserRoles)
+            //    .Where(u => u.Id == userId)
+            //    .FirstOrDefault();
+
+
 
             var user =
                         (from u in context.Users
@@ -64,9 +70,9 @@ namespace IWantMyMummy.Controllers
             var test = user
                 .Where(r => r.UserId == userId);
 
+
+
             //ViewBag.User = test;
-
-
 
             foreach (var u in test)
             {
@@ -77,9 +83,9 @@ namespace IWantMyMummy.Controllers
                 ViewBag.UserId = u.UserId;
                 ViewBag.UserRole = u.RoleId;
 
-            }
 
-            
+
+            }
 
 
             List<string> RoleList = new List<string>();
@@ -87,9 +93,7 @@ namespace IWantMyMummy.Controllers
             RoleList.Add("Researcher");
             RoleList.Add("Admin");
 
-
             ViewBag.RoleList = RoleList;
-
 
             return View();
         }
@@ -119,7 +123,8 @@ namespace IWantMyMummy.Controllers
                                   select rol).FirstOrDefault();
 
                 if (updateRole != null)
-				{
+                {
+
                     context.UserRoles.Remove(updateRole);
 
                     context.SaveChanges();
@@ -160,7 +165,7 @@ namespace IWantMyMummy.Controllers
             return View("Index", context.Users);
 
         }
-       
+
         [HttpPost]
 
         public IActionResult DeleteUser(string userId)
