@@ -1,0 +1,43 @@
+﻿@model IWantMyMummy.Models.Burial
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Burial</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="BurialSquareId" class="control-label"></label>
+                <select asp-for="BurialSquareId" class="form-control" asp-items="ViewBag.BurialSquareId"></select>
+                <p>
+                    <a asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
+                </p>
+            </div>
+            <div class="form-group">
+                <label asp-for="BurialSubplot" class="control-label"></label>
+                <select asp-for="BurialSubplot" class="form-control" asp-items="ViewBag.BurialSubplot"></select>
+                <p>
+                    <a asp-controller="BurialQuadrants" asp-action="Create">Create New Subplot</a>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

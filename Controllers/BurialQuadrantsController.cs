@@ -52,6 +52,11 @@ namespace IWantMyMummy.Controllers
             //return View();
             //with view model
 
+            List<string> AvailableSubplots = new List<string> {"NE","NW", "SE", "SW" };
+            ViewBag.AvailPlots = AvailableSubplots;
+            //List<string> uniqueList = new List<string> { };
+            //ViewBag.UniqueList = uniqueList;
+
             return View(new BurialInformationViewModel
             {
                 BurialSquare = _context.BurialSquare.ToList(),
@@ -60,6 +65,7 @@ namespace IWantMyMummy.Controllers
                     BurialSubplot = "",
                 },
                 BurialQuadrantsList = _context.BurialQuadrant.ToList(),
+                Subplots = {},
             });
         }
 

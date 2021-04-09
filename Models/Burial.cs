@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -85,6 +86,9 @@ namespace IWantMyMummy.Models
         public string ToothEruption { get; set; }
         public string PathologyAnomalies { get; set; }
         public bool? EpiphysealUnion { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+
         public DateTime? DateFound { get; set; }
         public string AgeAtDeath { get; set; }
         public bool? AgeMethodSkull { get; set; }
