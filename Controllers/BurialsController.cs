@@ -22,7 +22,6 @@ namespace IWantMyMummy.Controllers
 
 
 
-
         public BurialsController(MummyContext context, UserManager<IWantMyMummyUser> tempUser, IWantMyMummyContext con)
         {
             _context = context;
@@ -31,9 +30,9 @@ namespace IWantMyMummy.Controllers
         }
 
         // GET: Burials
-        public IActionResult Index()
+        public IActionResult Index(int pageNum = 0)
         {
-            int pageSize = 5;
+            int pageSize = 2;
             
             
             var role = wantContext.UserRoles
@@ -48,9 +47,17 @@ namespace IWantMyMummy.Controllers
 
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            return View(mummyContext
-                        .OrderByDescending(x => x.DateFound)
-                );
+            return View(new BurialsViewModel
+                            { 
+                                PageNumberingInfo = new PageNumberingInfo
+                                {
+                                    NumItemsPerPage = pageSize,
+                                    CurrentPage = pageNum,
+
+                                    TotalNumItems = _context.Burial.Count()
+                                }
+                            }
+                );;
         }
 
         // GET: Burials/Details/5

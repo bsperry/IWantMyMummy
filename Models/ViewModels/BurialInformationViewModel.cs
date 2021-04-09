@@ -34,8 +34,5 @@ namespace IWantMyMummy.Models.ViewModels
         public double GeFunctionTotal { get; set; }
         public string HeadDirection { get; set; }
 
-
-
-
     }
 }
