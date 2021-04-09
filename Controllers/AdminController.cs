@@ -44,27 +44,34 @@ namespace IWantMyMummy.Controllers
                         .Where(r => r.UserId == userManager.GetUserId(User))
                         .FirstOrDefault());
 
+
+
             if (!(role is null))
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
 
+
+
             //var user = context.Users
-            //	.Join(context.UserRoles)
-            //	.Where(u => u.Id == userId)
-            //	.FirstOrDefault();
+            //    .Join(context.UserRoles)
+            //    .Where(u => u.Id == userId)
+            //    .FirstOrDefault();
+
+
 
             var user =
                         (from u in context.Users
-                         join r in context.UserRoles on u.Id equals r.UserId
+                         join r in context.UserRoles on u.Id equals r.UserId into ps
+                         from r in ps.DefaultIfEmpty()
                          select new { FirstName = u.Firstname, LastName = u.LastName, PhoneNumer = u.PhoneNumber, Email = u.Email, UserId = u.Id, RoleId = r.RoleId });
             var test = user
                 .Where(r => r.UserId == userId);
 
+
+
             //ViewBag.User = test;
-
-
 
             foreach (var u in test)
             {
@@ -75,35 +82,87 @@ namespace IWantMyMummy.Controllers
                 ViewBag.UserId = u.UserId;
                 ViewBag.UserRole = u.RoleId;
 
+
+
             }
 
+            List<string> RoleList = new List<string>();
+            RoleList.Add("Public");
+            RoleList.Add("Researcher");
+            RoleList.Add("Admin");
 
+            ViewBag.RoleList = RoleList;
 
             return View();
         }
 
 
-        [HttpPost]
-        public IActionResult EditUser(IWantMyMummyUser user)
+        [HttpPost("EditUser")]
+        public IActionResult EditUser(IWantMyMummyUser user, string roleId)
         {
             if (ModelState.IsValid)
             {
+                //context.Users.Update(user);
+                //context.SaveChanges();
+
+                var updateUsers = (from use in context.Users
+                                   where use.Id == user.Id
+                                   select use).FirstOrDefault();
+
+                updateUsers.Firstname = user.Firstname;
+                updateUsers.LastName = user.LastName;
+                updateUsers.Email = user.Email;
+                updateUsers.PhoneNumber = user.PhoneNumber;
+
+                context.SaveChanges();
+
+                var updateRole = (from rol in context.UserRoles
+                                  where rol.UserId == user.Id
+                                  select rol).FirstOrDefault();
+
+                if (updateRole != null)
+                {
+                    context.UserRoles.Remove(updateRole);
+
+                    context.SaveChanges();
+
+                    updateRole.RoleId = roleId;
+                    context.UserRoles.Add(updateRole);
+
+                }
+                else
+                {
+                    var row = new IdentityUserRole<string>
+                    {
+                        RoleId = roleId,
+                        UserId = user.Id
+                    };
+
+                    context.UserRoles.Add(row);
+                }
+
+
+
+                context.SaveChanges();
+
+
                 var role = (context.UserRoles
                     .Where(r => r.UserId == userManager.GetUserId(User))
                     .FirstOrDefault());
+
 
                 if (!(role is null))
                 {
                     ViewBag.Role = Int32.Parse(role.RoleId);
                 }
 
-                return View("Index", context.Users);
+                return RedirectToAction("index", "Admin");
             }
 
-            return View();
+            return View("Index", context.Users);
 
         }
-       
+
         [HttpPost]
 
         public IActionResult DeleteUser(string userId)

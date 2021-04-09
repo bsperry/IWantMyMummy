@@ -19,7 +19,7 @@ namespace IWantMyMummy.Controllers
 
         private UserManager<IWantMyMummyUser> userManager;
         private readonly ILogger<HomeController> _logger;
-        private IWantMyMummyContext context;
+        private IWantMyMummyContext context { get; set; }
 
         public HomeController(ILogger<HomeController> logger, IWantMyMummyContext con, UserManager<IWantMyMummyUser> tempUser)
         {
@@ -94,7 +94,7 @@ namespace IWantMyMummy.Controllers
             return View();
         }
 
-        public IActionResult ResearcherBurals()
+        public IActionResult ResearcherBurials()
         {
             var role = (context.UserRoles
                         .Where(r => r.UserId == userManager.GetUserId(User))

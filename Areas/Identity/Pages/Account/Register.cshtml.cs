@@ -92,6 +92,7 @@ namespace IWantMyMummy.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new IWantMyMummyUser { UserName = Input.Email, Email = Input.Email, Firstname = Input.FirstName, LastName = Input.LastName, PhoneNumber = Input.PhoneNumber };
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
