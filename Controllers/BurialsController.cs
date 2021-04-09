@@ -46,7 +46,7 @@ namespace IWantMyMummy.Controllers
 
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            return View(_context.Burial
+            return View(mummyContext
                         .OrderByDescending(x => x.DateFound)
                 );
         }
