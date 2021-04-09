@@ -20,12 +20,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="BurialLocationNs" class="control-label"></label>
-                <input asp-for="BurialLocationNs" class="form-control" />
+                <select asp-for="BurialLocationNs" class="form-control">
+                    <option></option>
+                    <option>N</option>
+                    <option>S</option>
+                </select>
                 <span asp-validation-for="BurialLocationNs" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BurialLocationEw" class="control-label"></label>
-                <input asp-for="BurialLocationEw" class="form-control" />
+                <select asp-for="BurialLocationEw" class="form-control">
+                    <option></option>
+                    <option>E</option>
+                    <option>W</option>
+                </select>
                 <span asp-validation-for="BurialLocationEw" class="text-danger"></span>
             </div>
             <div class="form-group">

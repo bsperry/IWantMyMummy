@@ -12,7 +12,7 @@ namespace IWantMyMummy.Models.ViewModels
         
         public List<BurialQuadrant> BurialQuadrantsList { get; set; }
 
-        //public List<string> AvailableSubplots { get; set; }
+        public List<string> Subplots { get; set; }
 
     }
 }

@@ -32,11 +32,49 @@
             <div class="form-group">
                 <label asp-for="@Model.BurialQuadrant.BurialSubplot" class="control-label"></label>
                 <select asp-for="@Model.BurialQuadrant.BurialSubplot" class="form-control">
+                    <option></option>
                     <option>NE</option>
                     <option>NW</option>
                     <option>SE</option>
                     <option>SW</option>
                 </select>
+
+                @*@foreach (var subid in Model.BurialQuadrantsList)
+        {
+            if (@subid.BurialSubplot != @ViewBag.AvailPlots[0])
+            {
+                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                {
+                    Model.Subplots.Add(@subid.BurialSubplot);
+                }
+            }
+            if (@subid.BurialSubplot != @ViewBag.AvailPlots[1])
+            {
+                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                {
+                    Model.Subplots.Add(@subid.BurialSubplot);
+                }
+            }
+            if (@subid.BurialSubplot != @ViewBag.AvailPlots[2])
+            {
+                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                {
+                    Model.Subplots.Add(@subid.BurialSubplot);
+                }
+            }
+            if (@subid.BurialSubplot != @ViewBag.AvailPlots[3])
+            {
+                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                {
+                    Model.Subplots.Add(@subid.BurialSubplot);
+                }
+            }
+        }
+        @foreach (var subid in Model.BurialQuadrant.BurialSubplot)
+        {
+            <option>@subid</option>
+        }</select>*@
+
 
                 <span asp-validation-for="@Model.BurialQuadrant.BurialSubplot" class="text-danger"></span>
             </div>
