@@ -1,5 +1,6 @@
 ﻿using IWantMyMummy.Areas.Identity.Data;
 using IWantMyMummy.Data;
+using IWantMyMummy.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,7 +35,16 @@ namespace IWantMyMummy.Controllers
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
-            return View(context.Users);
+
+            var viewModel =
+                    from user in context.Users
+                    join userrole in context.UserRoles on user.Id equals userrole.UserId
+                    join roledef in context.Roles on userrole.RoleId equals roledef.Id
+                    orderby user.LastName
+                    select new UsersRolesViewModel { mummyUser = user, identityUserRole = userrole, identityRole = roledef };
+
+
+            return View(viewModel);
         }
 
         [HttpGet("EditUser")]

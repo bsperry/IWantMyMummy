@@ -21,9 +21,9 @@
 
                   <label class="form-label" asp-for="PhoneNumber">Phone Number</label>
                   <input class="form-control" type="text" asp-for="PhoneNumber" value="@ViewBag.PhoneNumber" />
-
-                  <label>Role</label>
-                  <select name="RoleId" id="RoleId" class="form-select">
+                  <br />
+                  <label class="form-label">Role</label><br />
+                  <select class="form-select" style="border-color: lightgrey; padding: 7px; border-radius: 5px;" name="RoleId" id="RoleId" >
                       @for (int i = 1; i <= 3; i++)
                       {
                           @if (ViewBag.UserRole == i.ToString())
@@ -36,7 +36,8 @@
                           }
                       }
                   </select>
-                  <br />
+
+                  <br /><br />
                   <input type="hidden" value="@ViewBag.UserId" name="Id" id="Id" />
                   <input class="btn btn-primary" type="submit" value="Edit User" />
               </form>
