@@ -125,9 +125,21 @@ namespace IWantMyMummy.Controllers
                     context.SaveChanges();
 
                     updateRole.RoleId = roleId;
+                    context.UserRoles.Add(updateRole);
+
+                }
+                else
+                {
+                    var row = new IdentityUserRole<string>
+                    {
+                        RoleId = roleId,
+                        UserId = user.Id
+                    };
+
+                    context.UserRoles.Add(row);
                 }
 
-                context.UserRoles.Add(updateRole);
+
 
                 context.SaveChanges();
 
