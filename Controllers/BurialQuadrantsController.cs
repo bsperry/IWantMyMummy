@@ -65,7 +65,7 @@ namespace IWantMyMummy.Controllers
                     BurialSubplot = "",
                 },
                 BurialQuadrantsList = _context.BurialQuadrant.ToList(),
-                Subplots = {},
+                // not using currently Subplots = {},
             });
         }
 
