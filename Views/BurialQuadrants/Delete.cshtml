@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<div class="container viewContainer">
+    <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>BurialQuadrant</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="BurialSquareId" />
-        <input type="hidden" asp-for="BurialSubplot" />
-        <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@ViewBag.Fid" asp-route-subid="@Model.BurialSubplot"/> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <h3>Are you sure you want to delete this?</h3>
+    <br /><br />
+    <div>
+        <h4>BurialQuadrant</h4>
+        <hr />
+        <dl class="row">
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="BurialSquareId" />
+            <input type="hidden" asp-for="BurialSubplot" />
+            <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@ViewBag.Fid" asp-route-subid="@Model.BurialSubplot" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
 </div>
+
