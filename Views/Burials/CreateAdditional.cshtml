@@ -1,0 +1,55 @@
+﻿@model BurialInformationViewModel 
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Burial Additional</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h4>More information for...</h4>
+                <p>@ViewBag.BurialSquareId @ViewBag.BurialSubplot #@ViewBag.BurialNumber</p>
+            </div>
+            <div id="hidden values">
+                <input type="hidden" value="@ViewBag.BurialSquareId" asp-for="@Model.SelectedSquareId" />
+                <input type="hidden" value="@ViewBag.BurialSubplot" asp-for="@Model.BurialSubplot" />
+                <input type="hidden" value="@ViewBag.BurialNumber" asp-for="@Model.BurialNumber" />
+                <input type="hidden" value="@ViewBag.BurialDepth" asp-for="@Model.BurialDepth" />
+                <input type="hidden" value="@ViewBag.SouthToHead" asp-for="@Model.SouthToHead" />
+                <input type="hidden" value="@ViewBag.SouthToFeet" asp-for="@Model.SouthToFeet" />
+                <input type="hidden" value="@ViewBag.WestToHead" asp-for="@Model.WestToHead" />
+                <input type="hidden" value="@ViewBag.WestToFeet" asp-for="@Model.WestToFeet" />
+                <input type="hidden" value="@ViewBag.BurialSituation" asp-for="@Model.BurialSituation" />
+                <input type="hidden" value="@ViewBag.BurialWrapping" asp-for="@Model.BurialWrapping" />
+                <input type="hidden" value="@ViewBag.BurialWrappingMaterial" asp-for="@Model.BurialWrappingMaterial" />
+                <input type="hidden" value="@ViewBag.BurialAdult" asp-for="@Model.BurialAdult" />
+                <input type="hidden" value="@ViewBag.LengthOfRemains" asp-for="@Model.LengthOfRemains" />
+                <input type="hidden" value="@ViewBag.SampleNumber" asp-for="@Model.SampleNumber" />
+                <input type="hidden" value="@ViewBag.GenderGe" asp-for="@Model.GenderGe" />
+                <input type="hidden" value="@ViewBag.SexMethodSkull" asp-for="@Model.SexMethodSkull" />
+                <input type="hidden" value="@ViewBag.GeFunctionTotal" asp-for="@Model.GeFunctionTotal" />
+                <input type="hidden" value="@ViewBag.HeadDirection" asp-for="@Model.HeadDirection" />
+            </div>
+
+
+
+            <div class="form-group">
+                <input method="post" asp-action="Create1" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
