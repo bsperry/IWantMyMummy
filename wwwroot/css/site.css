@@ -148,3 +148,13 @@ html, body {
     display: block;
     background-color: white;
 }
+
+/* Home page */
+
+.bgImage {
+    background: url(../img/pyramids-2159286_1920.jpg);
+    height: 600px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
