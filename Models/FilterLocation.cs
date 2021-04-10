@@ -15,7 +15,6 @@ namespace IWantMyMummy.Models
         public string LocationEw { get; set; }
         public string LowPairEw { get; set; }
         public string HighPairEw { get; set; }
-        public string SubPlot { get; set; }
 
         public string Gender { get; set; }
 
@@ -30,7 +29,6 @@ namespace IWantMyMummy.Models
             LocationEw = filters[3];
             LowPairEw = filters[4];
             HighPairEw = filters[5];
-            SubPlot = filters[6];
 
             //Other filters (I'd prefer to add them to a different class, but for time issues, let's not overcomplicate things)
             Gender = filters[7];
@@ -42,7 +40,6 @@ namespace IWantMyMummy.Models
         public bool HasLocationEw => LocationEw.ToLower() != "all";
         public bool HasLowPairEw => LowPairEw.ToLower() != "all";
         public bool HasHighPairEw => HighPairEw.ToLower() != "all";
-        public bool HasSubPlot => SubPlot.ToLower() != "all";
 
         public bool HasGender => Gender.ToLower() != "all";
 
