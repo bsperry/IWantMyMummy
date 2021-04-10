@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+
 }
 .footer {
   position: absolute;
@@ -147,4 +148,96 @@ html, body {
 .dropdown:hover .dropdown-child {
     display: block;
     background-color: white;
+}
+
+/* Home page */
+
+.bgImage {
+    background-image: url(../img/pyramids-2159286_1920.jpg);
+    height: 800px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    position:relative !important;
+    margin-bottom:60px;
+
+}
+
+.row{
+
+
+    
+}
+
+.col1{
+    border-right:solid;
+    
+}
+
+.col2{
+    margin-left:15px;
+
+
+}
+
+.texts{
+    margin-bottom:60px;
+
+}
+
+.words{
+    margin-top:20px;
+    position:relative;
+}
+
+.video{
+    margin-top:30px;
+    margin-bottom: 70px;
+    align-self:center;
+}
+
+.burialTable{
+
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}*/
+
+/*    input[type=submit]:hover {
+        background-color: #45a049;
+    }*/
+
+.viewContainer{
+    margin-top:50px;
+}
+
+.withQuad{
+    border-right:solid;
+}
+
+.createSquare{
+    position:absolute;
+    right:16px;
+}
+
+.addBurialRow{
+    margin-bottom:50px;
 }

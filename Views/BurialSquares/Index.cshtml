@@ -1,72 +1,98 @@
 ﻿@model IEnumerable<IWantMyMummy.Models.BurialSquare>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Squares";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container viewContainer">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialSquareId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialLocationNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialLocationEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowPairNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighPairNs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowPairEw)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HighPairEw)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSquareId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairEw)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BurialSquareId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BurialSquareId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BurialSquareId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-center">
+        <h1>Squares</h1>
+    </div>
+
+
+
+    @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+    {
+        <p>
+            <a class="btn btn-primary" asp-action="Create">Create New</a>
+        </p>
+    }
+
+    <table class="table table-bordered table-striped table-hover squareTable">
+        <caption>List of Squares</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Burial Square ID
+                </th>
+                <th>
+                    Burial Location (N/S)
+                </th>
+                <th>
+                    Burial Location (E/W)
+                </th>
+                <th>
+                    Low Pair (N/S)
+                </th>
+                <th>
+                    High Pair (N/S)
+                </th>
+                <th>
+                    Low Pair (EW)
+                </th>
+                <th>
+                    High Pair (EW)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSquareId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialLocationNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialLocationEw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowPairNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighPairNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowPairEw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighPairEw)
+                </td>
+
+
+                @if (ViewBag.Role == 2)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BurialSquareId">Edit</a>
+                    </td>
+                }
+
+                @if (ViewBag.Role == 3)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BurialSquareId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BurialSquareId">Delete</a>
+                    </td>
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

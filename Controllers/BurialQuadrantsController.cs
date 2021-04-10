@@ -7,21 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
 using IWantMyMummy.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using IWantMyMummy.Areas.Identity.Data;
+using IWantMyMummy.Data;
 
 namespace IWantMyMummy.Controllers
 {
     public class BurialQuadrantsController : Controller
     {
         private readonly MummyContext _context;
+        private UserManager<IWantMyMummyUser> userManager;
+        private IWantMyMummyContext mummyContext;
 
-        public BurialQuadrantsController(MummyContext context)
+        public BurialQuadrantsController(MummyContext context, IWantMyMummyContext con, UserManager<IWantMyMummyUser> tempUser)
         {
             _context = context;
+            mummyContext = con;
+            userManager = tempUser;
         }
 
         // GET: BurialQuadrants
         public async Task<IActionResult> Index()
         {
+            var role = (mummyContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(await _context.BurialQuadrant.ToListAsync());
         }
 
