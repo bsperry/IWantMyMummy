@@ -19,23 +19,58 @@
     <br /><br />
     
     <!--filtering-->
-          <form asp-controller="Burials" asp-action="FilterLoc" method="post">
-              <select name="filter">
-                  @foreach (var item in ViewBag.LocationNStemp)
-                  {
-                      <option>@item</option>
-                  }
-              </select>
+    <div class="row">
+        <form asp-controller="Burials" asp-action="FilterLoc" method="post">
+            <label>Location N/S</label>
+            <select onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LocationNs == "all")
+                {
+                    <option selected value="all">All</option>
+                }
+                else
+                {
+                    <option value="all">All</option>
+                }
+                @foreach (var item in ViewBag.LocationNStemp)
+                {
+                    @if (ViewBag.FilterLoc.LocationNs == item)
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+            <label>Low Pair N/S</label>
+            <select onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LowPairNs.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
+                }
+                else
+                {
+                    <option value="all">All</option>
+                }
+                @foreach (var item in ViewBag.LowPairNs)
+                {
+                    @if (ViewBag.FilterLoc.LowPairNs.ToString() == item.ToString())
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
 
-              <button type="submit" class="btn btn-primary">Filter</button>
-
-          </form>
-
-
-    VC location
-    <div>
-        <vc:location-ns />
+        </form>
     </div>
+          
+
+
     <p>
         <a class="btn btn-primary" asp-action="Create1">Create New Burial</a>
     </p>

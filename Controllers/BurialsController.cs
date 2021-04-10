@@ -79,11 +79,20 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.BurialLocationNs)
                                       .Distinct()
                                       .ToList();
+            ViewBag.LowPairNs = _context.BurialSquare
+                                      .Select(b => b.LowPairNs)
+                                      .Distinct()
+                                      .ToList();
 
 
             if (filterLoc.HasLocationNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationNs == filterLoc.LocationNs);
+            }
+
+            if (filterLoc.HasLowPairNs)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.LowPairNs.ToString() == filterLoc.LowPairNs);
             }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
