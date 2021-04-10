@@ -90,6 +90,9 @@ namespace IWantMyMummy.Models.ViewModels
         public string AgeAtDeath { get; set; }
         public bool AgeMethodSkull { get; set; }
 
+        //for the create burial additional param
+        public string Addition { get; set; }
+
 
 
 

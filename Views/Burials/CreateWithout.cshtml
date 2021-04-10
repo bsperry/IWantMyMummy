@@ -147,6 +147,8 @@
             <div class="form-group">
                 <input asp-action="Create1" method="post" type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+            <input type="hidden" asp-for="Addition" value="@ViewBag.CreateParam" />
             <!--add more information-->
             <div class="form-group">
                 <span>Additional Burial Information</span>
