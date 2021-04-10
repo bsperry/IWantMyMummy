@@ -29,7 +29,6 @@ namespace IWantMyMummy.Controllers
         }
 
         // GET: Burials
-        // GET: Burials
         public IActionResult Index(string filterId, int pageNum = 1)
         {
             int pageSize = 5;

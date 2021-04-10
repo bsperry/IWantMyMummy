@@ -42,7 +42,7 @@
                         <a asp-controller="Burials" asp-action="Index">View Burials</a>
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
                         {
-                            <a asp-controller="Burials" asp-action="Create1">Add Burial Development</a>
+                            <a asp-controller="Burials" asp-action="Create1">Add Burial</a>
 
                         }
 
@@ -84,8 +84,8 @@
                     <button class="dropdown-btn">Additional</button>
                     <div class="dropdown-child">
                         <a asp-controller="Images" asp-action="Index">View Images</a>
-                        <a asp-controller="CranialSample" asp-action="Index">View Cranial Samples</a>
-                        <a asp-controller="RackSample" asp-action="Index">View Rack Samples</a>
+                        <a asp-controller="CranialSamples" asp-action="Index" method="get">View Cranial Samples</a>
+                        <a asp-controller="RackSamples" asp-action="Index" method="get">View Rack Samples</a>
 
                     </div>
                 </div>

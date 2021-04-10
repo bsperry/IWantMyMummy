@@ -65,8 +65,8 @@
                 @if (ViewBag.Role == 2 || ViewBag.Role == 3)
                 {
                     <td>
-                        <a asp-action="Edit" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Edit</a> |
-                        <a asp-action="Details" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Details</a> |
+                        <a asp-action="Edit" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Edit</a> 
+                        <a asp-action="Details" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Details</a> 
                         <a asp-action="Delete" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Delete</a>
                     </td>
                 }
