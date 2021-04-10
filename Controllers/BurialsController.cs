@@ -15,7 +15,7 @@ namespace IWantMyMummy.Controllers
 {
     public class BurialsController : Controller
     {
-        private MummyContext context { get; set; }
+        private MummyContext _context { get; set; }
         private IWantMyMummyContext wantContext;
         private UserManager<IWantMyMummyUser> userManager;
 
@@ -23,18 +23,17 @@ namespace IWantMyMummy.Controllers
 
         public BurialsController(MummyContext ctx, UserManager<IWantMyMummyUser> tempUser, IWantMyMummyContext con)
         {
-            context = ctx;
+            _context = ctx;
             userManager = tempUser;
             wantContext = con;
         }
 
         // GET: Burials
-        public IActionResult Index(string locationNS, int pageNum = 1)
+        public IActionResult Index(string filterId, int pageNum = 1)
         { 
             int pageSize = 2;
-            ViewBag.LocationNS = locationNS;
-            
-            
+            //ViewBag.LocationNS = locationNS;
+
             var role = wantContext.UserRoles
                         .Where(r => r.UserId == userManager.GetUserId(User))
                         .FirstOrDefault();
@@ -44,35 +43,66 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            var partialResult = (from b in context.Burial
-                                 join bsquare in context.BurialSquare
 
-                                 on b.BurialSquareId equals bsquare.BurialSquareId
-                                 select new JoinBurialSquareViewModel
-                                 {
-                                    Burials = b,
-                                    BurialSquare = bsquare,
-                                 })
-                                 .Where(x => x.BurialSquare.BurialLocationNs == locationNS || locationNS == null)
-                                 .Skip((pageNum - 1) * pageSize)
-                                 .Take(pageSize)
-                                 .ToList();
 
-            var mummyContext = context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
+            //var partialResult = (from b in _context.Burial
+            //                     join bsquare in _context.BurialSquare
+
+            //                     on b.BurialSquareId equals bsquare.BurialSquareId
+            //                     select new JoinBurialSquareViewModel
+            //                     {
+            //                        Burials = b,
+            //                        BurialSquare = bsquare,
+            //                     })
+            //                     .Where(x => x.BurialSquare.BurialLocationNs == locationNS || locationNS == null)
+            //                     .Skip((pageNum - 1) * pageSize)
+            //                     .Take(pageSize)
+            //                     .ToList();
+
+            var queryFilter = (from b in _context.Burial
+                               join bsquare in _context.BurialSquare
+
+                               on b.BurialSquareId equals bsquare.BurialSquareId
+                               select new JoinBurialSquareViewModel
+                               {
+                                   Burials = b,
+                                   BurialSquare = bsquare,
+                               })
+                                             .Skip((pageNum - 1) * pageSize)
+                                             .Take(pageSize);
+
+            var test = _context.Burial;
+
+
+            var filterLoc = new FilterLocation(filterId);
+            ViewBag.FilterLoc = filterLoc;
+            ViewBag.LocationNStemp = _context.BurialSquare
+                                      .Select(b => b.BurialLocationNs)
+                                      .Distinct()
+                                      .ToList();
+
+
+            if (filterLoc.HasLocationNs)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationNs == filterLoc.LocationNs);
+            }
+
+
+            var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
             ViewBag.mummy = mummyContext.ToList();
             
             return View(new BurialsViewModel
             {
-                JoinBurialSquareViewModel = partialResult,
+                JoinBurialSquareViewModel = queryFilter.ToList(),
                 PageNumberingInfo = new PageNumberingInfo
                 {
                     NumItemsPerPage = pageSize,
                     CurrentPage = pageNum,
 
-                    TotalNumItems = context.Burial.Count()
+                    TotalNumItems = queryFilter.Count()
                 },
 
-                LocationNS = locationNS,
+                //LocationNS = locationNS,
             }
                 );
             //return View(new BurialsViewModel
@@ -95,6 +125,16 @@ namespace IWantMyMummy.Controllers
             //                });
         }
 
+
+        //FILTERING
+        [HttpPost]
+        public IActionResult FilterLoc(string[] filter)
+        {
+            string filterId = string.Join('-', filter);
+            int pageNum = 1;
+            return RedirectToAction("Index", new { filterId, pageNum });
+        }
+
         // GET: Burials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -113,7 +153,7 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await context.Burial
+            var burial = await _context.Burial
                 .Include(b => b.BurialS)
                 .Include(b => b.BurialSquare)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
@@ -138,8 +178,8 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
-            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId");
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
             return View();
         }
 
@@ -172,8 +212,8 @@ namespace IWantMyMummy.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Add(burial);
-                await context.SaveChangesAsync();
+                _context.Add(burial);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -191,13 +231,13 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
-            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId");
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
 
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = context.BurialSquare.ToList(),
-                BurialQuadrantsList = context.BurialQuadrant.ToList(),
+                BurialSquare = _context.BurialSquare.ToList(),
+                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
             };
 
@@ -214,8 +254,8 @@ namespace IWantMyMummy.Controllers
         {
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = context.BurialSquare.ToList(),
-                BurialQuadrantsList = context.BurialQuadrant.ToList(),
+                BurialSquare = _context.BurialSquare.ToList(),
+                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
                 Burial = new Burial {
                     BurialSquareId = SelectedSquareId,
                     BurialSubplot = BurialSubplot,
@@ -287,8 +327,8 @@ namespace IWantMyMummy.Controllers
             ViewBag.Sid = SelectedSquareId;
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = context.BurialSquare.ToList(),
-                BurialQuadrantsList = context.BurialQuadrant.ToList(),
+                BurialSquare = _context.BurialSquare.ToList(),
+                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
             };
             return View(viewModel);
@@ -330,8 +370,8 @@ namespace IWantMyMummy.Controllers
 
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = context.BurialSquare.ToList(),
-                BurialQuadrantsList = context.BurialQuadrant.ToList(),
+                BurialSquare = _context.BurialSquare.ToList(),
+                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
                 SelectedSquareId = SelectedSquareId,
                 BurialSubplot = BurialSubplot,
@@ -371,13 +411,13 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await context.Burial.FindAsync(id);
+            var burial = await _context.Burial.FindAsync(id);
             if (burial == null)
             {
                 return NotFound();
             }
-            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
-            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
             return View(burial);
         }
 
@@ -406,8 +446,8 @@ namespace IWantMyMummy.Controllers
             {
                 try
                 {
-                    context.Update(burial);
-                    await context.SaveChangesAsync();
+                    _context.Update(burial);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -422,8 +462,8 @@ namespace IWantMyMummy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
-            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
             return View(burial);
         }
 
@@ -444,7 +484,7 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await context.Burial
+            var burial = await _context.Burial
                 .Include(b => b.BurialS)
                 .Include(b => b.BurialSquare)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
@@ -461,9 +501,9 @@ namespace IWantMyMummy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var burial = await context.Burial.FindAsync(id);
-            context.Burial.Remove(burial);
-            await context.SaveChangesAsync();
+            var burial = await _context.Burial.FindAsync(id);
+            _context.Burial.Remove(burial);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -478,7 +518,7 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            return context.Burial.Any(e => e.BurialId == id);
+            return _context.Burial.Any(e => e.BurialId == id);
         }
     }
 }

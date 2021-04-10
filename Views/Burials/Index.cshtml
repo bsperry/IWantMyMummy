@@ -14,10 +14,24 @@
 }
 
 
-
 <div class="container">
     <h1>Burials</h1>
     <br /><br />
+    
+    <!--filtering-->
+          <form asp-controller="Burials" asp-action="FilterLoc" method="post">
+              <select name="filter">
+                  @foreach (var item in ViewBag.LocationNStemp)
+                  {
+                      <option>@item</option>
+                  }
+              </select>
+
+              <button type="submit" class="btn btn-primary">Filter</button>
+
+          </form>
+
+
     VC location
     <div>
         <vc:location-ns />
