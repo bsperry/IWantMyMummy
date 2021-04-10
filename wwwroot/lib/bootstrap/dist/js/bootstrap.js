@@ -4,13 +4,13 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined'  factory(exports, require('jquery'), require('popper.js')) :
+  typeof define === 'function' && define.amd  define(['exports', 'jquery', 'popper.js'], factory) :
   (global = global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
 }(this, function (exports, $, Popper) { 'use strict';
 
-  $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
-  Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
+  $ = $ && $.hasOwnProperty('default')  $['default'] : $;
+  Popper = Popper && Popper.hasOwnProperty('default')  Popper['default'] : Popper;
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -45,7 +45,7 @@
 
   function _objectSpread(target) {
     for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
+      var source = arguments[i] != null  arguments[i] : {};
       var ownKeys = Object.keys(source);
 
       if (typeof Object.getOwnPropertySymbols === 'function') {
@@ -143,11 +143,11 @@
 
       if (!selector || selector === '#') {
         var hrefAttr = element.getAttribute('href');
-        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
+        selector = hrefAttr && hrefAttr !== '#'  hrefAttr.trim() : '';
       }
 
       try {
-        return document.querySelector(selector) ? selector : null;
+        return document.querySelector(selector)  selector : null;
       } catch (err) {
         return null;
       }
@@ -190,7 +190,7 @@
         if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
           var expectedTypes = configTypes[property];
           var value = config[property];
-          var valueType = value && Util.isElement(value) ? 'element' : toType(value);
+          var valueType = value && Util.isElement(value)  'element' : toType(value);
 
           if (!new RegExp(expectedTypes).test(valueType)) {
             throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
@@ -206,7 +206,7 @@
 
       if (typeof element.getRootNode === 'function') {
         var root = element.getRootNode();
-        return root instanceof ShadowRoot ? root : null;
+        return root instanceof ShadowRoot  root : null;
       }
 
       if (element instanceof ShadowRoot) {
@@ -526,7 +526,7 @@
     Button._jQueryInterface.call($(button), 'toggle');
   }).on(Event$1.FOCUS_BLUR_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
     var button = $(event.target).closest(Selector$1.BUTTON)[0];
-    $(button).toggleClass(ClassName$1.FOCUS, /^focus(in)?$/.test(event.type));
+    $(button).toggleClass(ClassName$1.FOCUS, /^focus(in)$/.test(event.type));
   });
   /**
    * ------------------------------------------------------------------------
@@ -700,7 +700,7 @@
       }
 
       if (this._config.interval && !this._isPaused) {
-        this._interval = setInterval((document.visibilityState ? this.nextWhenVisible : this.next).bind(this), this._config.interval);
+        this._interval = setInterval((document.visibilityState  this.nextWhenVisible : this.next).bind(this), this._config.interval);
       }
     };
 
@@ -728,7 +728,7 @@
         return;
       }
 
-      var direction = index > activeIndex ? Direction.NEXT : Direction.PREV;
+      var direction = index > activeIndex  Direction.NEXT : Direction.PREV;
 
       this._slide(direction, this._items[index]);
     };
@@ -892,7 +892,7 @@
     };
 
     _proto._getItemIndex = function _getItemIndex(element) {
-      this._items = element && element.parentNode ? [].slice.call(element.parentNode.querySelectorAll(Selector$2.ITEM)) : [];
+      this._items = element && element.parentNode  [].slice.call(element.parentNode.querySelectorAll(Selector$2.ITEM)) : [];
       return this._items.indexOf(element);
     };
 
@@ -909,9 +909,9 @@
         return activeElement;
       }
 
-      var delta = direction === Direction.PREV ? -1 : 1;
+      var delta = direction === Direction.PREV  -1 : 1;
       var itemIndex = (activeIndex + delta) % this._items.length;
-      return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
+      return itemIndex === -1  this._items[this._items.length - 1] : this._items[itemIndex];
     };
 
     _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
@@ -1045,7 +1045,7 @@
           _config = _objectSpread({}, _config, config);
         }
 
-        var action = typeof config === 'string' ? config : _config.slide;
+        var action = typeof config === 'string'  config : _config.slide;
 
         if (!data) {
           data = new Carousel(this, _config);
@@ -1214,7 +1214,7 @@
         }
       }
 
-      this._parent = this._config.parent ? this._getParent() : null;
+      this._parent = this._config.parent  this._getParent() : null;
 
       if (!this._config.parent) {
         this._addAriaAndCollapsedClass(this._element, this._triggerArray);
@@ -1384,7 +1384,7 @@
 
     _proto._getDimension = function _getDimension() {
       var hasWidth = $(this._element).hasClass(Dimension.WIDTH);
-      return hasWidth ? Dimension.WIDTH : Dimension.HEIGHT;
+      return hasWidth  Dimension.WIDTH : Dimension.HEIGHT;
     };
 
     _proto._getParent = function _getParent() {
@@ -1421,7 +1421,7 @@
 
     Collapse._getTargetFromElement = function _getTargetFromElement(element) {
       var selector = Util.getSelectorFromElement(element);
-      return selector ? document.querySelector(selector) : null;
+      return selector  document.querySelector(selector) : null;
     };
 
     Collapse._jQueryInterface = function _jQueryInterface(config) {
@@ -1429,7 +1429,7 @@
         var $this = $(this);
         var data = $this.data(DATA_KEY$3);
 
-        var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config  config : {});
 
         if (!data && _config.toggle && /show|hide/.test(config)) {
           _config.toggle = false;
@@ -1483,7 +1483,7 @@
     $(selectors).each(function () {
       var $target = $(this);
       var data = $target.data(DATA_KEY$3);
-      var config = data ? 'toggle' : $trigger.data();
+      var config = data  'toggle' : $trigger.data();
 
       Collapse._jQueryInterface.call($target, config);
     });
@@ -1841,7 +1841,7 @@
       return this.each(function () {
         var data = $(this).data(DATA_KEY$4);
 
-        var _config = typeof config === 'object' ? config : null;
+        var _config = typeof config === 'object'  config : null;
 
         if (!data) {
           data = new Dropdown(this, _config);
@@ -1930,7 +1930,7 @@
       //  - If key is other than escape
       //    - If key is not up or down => not a dropdown command
       //    - If trigger inside the menu => not a dropdown command
-      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $(event.target).closest(Selector$4.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
+      if (/input|textarea/i.test(event.target.tagName)  event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $(event.target).closest(Selector$4.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
       }
 
@@ -2110,7 +2110,7 @@
 
     // Public
     _proto.toggle = function toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget);
+      return this._isShown  this.hide() : this.show(relatedTarget);
     };
 
     _proto.show = function show(relatedTarget) {
@@ -2363,7 +2363,7 @@
     _proto._showBackdrop = function _showBackdrop(callback) {
       var _this8 = this;
 
-      var animate = $(this._element).hasClass(ClassName$5.FADE) ? ClassName$5.FADE : '';
+      var animate = $(this._element).hasClass(ClassName$5.FADE)  ClassName$5.FADE : '';
 
       if (this._isShown && this._config.backdrop) {
         this._backdrop = document.createElement('div');
@@ -2493,7 +2493,7 @@
       $(fixedContent).each(function (index, element) {
         var padding = $(element).data('padding-right');
         $(element).removeData('padding-right');
-        element.style.paddingRight = padding ? padding : '';
+        element.style.paddingRight = padding  padding : '';
       }); // Restore sticky content
 
       var elements = [].slice.call(document.querySelectorAll("" + Selector$5.STICKY_CONTENT));
@@ -2507,7 +2507,7 @@
 
       var padding = $(document.body).data('padding-right');
       $(document.body).removeData('padding-right');
-      document.body.style.paddingRight = padding ? padding : '';
+      document.body.style.paddingRight = padding  padding : '';
     };
 
     _proto._getScrollbarWidth = function _getScrollbarWidth() {
@@ -2525,7 +2525,7 @@
       return this.each(function () {
         var data = $(this).data(DATA_KEY$5);
 
-        var _config = _objectSpread({}, Default$3, $(this).data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread({}, Default$3, $(this).data(), typeof config === 'object' && config  config : {});
 
         if (!data) {
           data = new Modal(this, _config);
@@ -2575,7 +2575,7 @@
       target = document.querySelector(selector);
     }
 
-    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _objectSpread({}, $(target).data(), $(this).data());
+    var config = $(target).data(DATA_KEY$5)  'toggle' : _objectSpread({}, $(target).data(), $(this).data());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
@@ -2657,14 +2657,14 @@
      */
 
   };
-  var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:/?#]*(?:[/?#]|$))/gi;
+  var SAFE_URL_PATTERN = /^(:(:https|mailto|ftp|tel|file):|[^&:/#]*(:[/#]|$))/gi;
   /**
    * A pattern that matches safe data URLs. Only matches image, video and audio types.
    *
    * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
    */
 
-  var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+/]+=*$/i;
+  var DATA_URL_PATTERN = /^data:(:image\/(:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(:mpeg|mp4|ogg|webm)|audio\/(:mp3|oga|ogg|opus));base64,[a-z0-9+/]+=*$/i;
 
   function allowedAttribute(attr, allowedAttributeList) {
     var attrName = attr.nodeName.toLowerCase();
@@ -2935,7 +2935,7 @@
       if (this.isWithContent() && this._isEnabled) {
         $(this.element).trigger(showEvent);
         var shadowRoot = Util.findShadowRoot(this.element);
-        var isInTheDom = $.contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
+        var isInTheDom = $.contains(shadowRoot !== null  shadowRoot : this.element.ownerDocument.documentElement, this.element);
 
         if (showEvent.isDefaultPrevented() || !isInTheDom) {
           return;
@@ -2951,7 +2951,7 @@
           $(tip).addClass(ClassName$6.FADE);
         }
 
-        var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
+        var placement = typeof this.config.placement === 'function'  this.config.placement.call(this, tip, this.element) : this.config.placement;
 
         var attachment = this._getAttachment(placement);
 
@@ -3129,7 +3129,7 @@
       var title = this.element.getAttribute('data-original-title');
 
       if (!title) {
-        title = typeof this.config.title === 'function' ? this.config.title.call(this.element) : this.config.title;
+        title = typeof this.config.title === 'function'  this.config.title.call(this.element) : this.config.title;
       }
 
       return title;
@@ -3179,8 +3179,8 @@
             return _this4.toggle(event);
           });
         } else if (trigger !== Trigger.MANUAL) {
-          var eventIn = trigger === Trigger.HOVER ? _this4.constructor.Event.MOUSEENTER : _this4.constructor.Event.FOCUSIN;
-          var eventOut = trigger === Trigger.HOVER ? _this4.constructor.Event.MOUSELEAVE : _this4.constructor.Event.FOCUSOUT;
+          var eventIn = trigger === Trigger.HOVER  _this4.constructor.Event.MOUSEENTER : _this4.constructor.Event.FOCUSIN;
+          var eventOut = trigger === Trigger.HOVER  _this4.constructor.Event.MOUSELEAVE : _this4.constructor.Event.FOCUSOUT;
           $(_this4.element).on(eventIn, _this4.config.selector, function (event) {
             return _this4._enter(event);
           }).on(eventOut, _this4.config.selector, function (event) {
@@ -3223,7 +3223,7 @@
       }
 
       if (event) {
-        context._activeTrigger[event.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
+        context._activeTrigger[event.type === 'focusin'  Trigger.FOCUS : Trigger.HOVER] = true;
       }
 
       if ($(context.getTipElement()).hasClass(ClassName$6.SHOW) || context._hoverState === HoverState.SHOW) {
@@ -3256,7 +3256,7 @@
       }
 
       if (event) {
-        context._activeTrigger[event.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
+        context._activeTrigger[event.type === 'focusout'  Trigger.FOCUS : Trigger.HOVER] = false;
       }
 
       if (context._isWithActiveTrigger()) {
@@ -3295,7 +3295,7 @@
           delete dataAttributes[dataAttr];
         }
       });
-      config = _objectSpread({}, this.constructor.Default, dataAttributes, typeof config === 'object' && config ? config : {});
+      config = _objectSpread({}, this.constructor.Default, dataAttributes, typeof config === 'object' && config  config : {});
 
       if (typeof config.delay === 'number') {
         config.delay = {
@@ -3559,7 +3559,7 @@
       return this.each(function () {
         var data = $(this).data(DATA_KEY$7);
 
-        var _config = typeof config === 'object' ? config : null;
+        var _config = typeof config === 'object'  config : null;
 
         if (!data && /dispose|hide/.test(config)) {
           return;
@@ -3696,7 +3696,7 @@
       var _this = this;
 
       this._element = element;
-      this._scrollElement = element.tagName === 'BODY' ? window : element;
+      this._scrollElement = element.tagName === 'BODY'  window : element;
       this._config = this._getConfig(config);
       this._selector = this._config.target + " " + Selector$8.NAV_LINKS + "," + (this._config.target + " " + Selector$8.LIST_ITEMS + ",") + (this._config.target + " " + Selector$8.DROPDOWN_ITEMS);
       this._offsets = [];
@@ -3718,9 +3718,9 @@
     _proto.refresh = function refresh() {
       var _this2 = this;
 
-      var autoMethod = this._scrollElement === this._scrollElement.window ? OffsetMethod.OFFSET : OffsetMethod.POSITION;
-      var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
-      var offsetBase = offsetMethod === OffsetMethod.POSITION ? this._getScrollTop() : 0;
+      var autoMethod = this._scrollElement === this._scrollElement.window  OffsetMethod.OFFSET : OffsetMethod.POSITION;
+      var offsetMethod = this._config.method === 'auto'  autoMethod : this._config.method;
+      var offsetBase = offsetMethod === OffsetMethod.POSITION  this._getScrollTop() : 0;
       this._offsets = [];
       this._targets = [];
       this._scrollHeight = this._getScrollHeight();
@@ -3769,7 +3769,7 @@
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$6, typeof config === 'object' && config ? config : {});
+      config = _objectSpread({}, Default$6, typeof config === 'object' && config  config : {});
 
       if (typeof config.target !== 'string') {
         var id = $(config.target).attr('id');
@@ -3787,7 +3787,7 @@
     };
 
     _proto._getScrollTop = function _getScrollTop() {
-      return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
+      return this._scrollElement === window  this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
     };
 
     _proto._getScrollHeight = function _getScrollHeight() {
@@ -3795,7 +3795,7 @@
     };
 
     _proto._getOffsetHeight = function _getOffsetHeight() {
-      return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingClientRect().height;
+      return this._scrollElement === window  window.innerHeight : this._scrollElement.getBoundingClientRect().height;
     };
 
     _proto._process = function _process() {
@@ -4008,7 +4008,7 @@
       var selector = Util.getSelectorFromElement(this._element);
 
       if (listElement) {
-        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? Selector$9.ACTIVE_UL : Selector$9.ACTIVE;
+        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL'  Selector$9.ACTIVE_UL : Selector$9.ACTIVE;
         previous = $.makeArray($(listElement).find(itemSelector));
         previous = previous[previous.length - 1];
       }
@@ -4063,7 +4063,7 @@
     _proto._activate = function _activate(element, container, callback) {
       var _this2 = this;
 
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $(container).find(Selector$9.ACTIVE_UL) : $(container).children(Selector$9.ACTIVE);
+      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL')  $(container).find(Selector$9.ACTIVE_UL) : $(container).children(Selector$9.ACTIVE);
       var active = activeElements[0];
       var isTransitioning = callback && active && $(active).hasClass(ClassName$9.FADE);
 
@@ -4303,7 +4303,7 @@
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
+      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config  config : {});
       Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
       return config;
     };

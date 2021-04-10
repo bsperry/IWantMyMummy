@@ -87,6 +87,7 @@ namespace IWantMyMummy
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }

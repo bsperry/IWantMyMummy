@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWantMyMummy.Migrations.Mummy
 {
     [DbContext(typeof(MummyContext))]
-    [Migration("20210409220402_BurialModels4")]
-    partial class BurialModels4
+    [Migration("20210409235907_BurialModels5")]
+    partial class BurialModels5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,11 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(1)
                         .IsUnicode(false);
 
-                    b.Property<bool>("AgeMethodSkull")
+                    b.Property<bool?>("AgeMethodSkull")
                         .HasColumnName("age_method_skull")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ArtifactFound")
+                    b.Property<bool?>("ArtifactFound")
                         .HasColumnName("artifact_found")
                         .HasColumnType("bit");
 
@@ -49,31 +49,31 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<bool>("BasilarSuture")
+                    b.Property<bool?>("BasilarSuture")
                         .HasColumnName("basilar_suture")
                         .HasColumnType("bit");
 
-                    b.Property<double>("BasionBregmaHeight")
+                    b.Property<double?>("BasionBregmaHeight")
                         .HasColumnName("basion_bregma_height")
                         .HasColumnType("float");
 
-                    b.Property<double>("BasionNasion")
+                    b.Property<double?>("BasionNasion")
                         .HasColumnName("basion_nasion")
                         .HasColumnType("float");
 
-                    b.Property<double>("BasionProsthionLength")
+                    b.Property<double?>("BasionProsthionLength")
                         .HasColumnName("basion_prosthion_length")
                         .HasColumnType("float");
 
-                    b.Property<double>("BizygomaticDiameter")
+                    b.Property<double?>("BizygomaticDiameter")
                         .HasColumnName("bizygomatic_diameter")
                         .HasColumnType("float");
 
-                    b.Property<bool>("BoneTaken")
+                    b.Property<bool?>("BoneTaken")
                         .HasColumnName("bone_taken")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("BurialAdult")
+                    b.Property<bool?>("BurialAdult")
                         .HasColumnName("burial_adult")
                         .HasColumnType("bit");
 
@@ -122,7 +122,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(13)
                         .IsUnicode(false);
 
-                    b.Property<DateTime>("DateFound")
+                    b.Property<DateTime?>("DateFound")
                         .HasColumnName("date_found")
                         .HasColumnType("datetime");
 
@@ -132,35 +132,35 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<int>("DorsalPitting")
+                    b.Property<int?>("DorsalPitting")
                         .HasColumnName("dorsal_pitting")
                         .HasColumnType("int");
 
-                    b.Property<bool>("EpiphysealUnion")
+                    b.Property<bool?>("EpiphysealUnion")
                         .HasColumnName("epiphyseal_union")
                         .HasColumnType("bit");
 
-                    b.Property<double>("EstimateAge")
+                    b.Property<double?>("EstimateAge")
                         .HasColumnName("estimate_age")
                         .HasColumnType("float");
 
-                    b.Property<double>("EstimateLivingStature")
+                    b.Property<double?>("EstimateLivingStature")
                         .HasColumnName("estimate_living_stature")
                         .HasColumnType("float");
 
-                    b.Property<double>("FemurHead")
+                    b.Property<double?>("FemurHead")
                         .HasColumnName("femur_head")
                         .HasColumnType("float");
 
-                    b.Property<double>("FemurLength")
+                    b.Property<double?>("FemurLength")
                         .HasColumnName("femur_length")
                         .HasColumnType("float");
 
-                    b.Property<double>("ForemanMagnum")
+                    b.Property<double?>("ForemanMagnum")
                         .HasColumnName("foreman_magnum")
                         .HasColumnType("float");
 
-                    b.Property<double>("GeFunctionTotal")
+                    b.Property<double?>("GeFunctionTotal")
                         .HasColumnName("GE_function_total")
                         .HasColumnType("float");
 
@@ -177,7 +177,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(1)
                         .IsUnicode(false);
 
-                    b.Property<int>("Gonian")
+                    b.Property<int?>("Gonian")
                         .HasColumnName("gonian")
                         .HasColumnType("int");
 
@@ -187,7 +187,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<bool>("HairTaken")
+                    b.Property<bool?>("HairTaken")
                         .HasColumnName("hair_taken")
                         .HasColumnType("bit");
 
@@ -197,15 +197,15 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(1)
                         .IsUnicode(false);
 
-                    b.Property<double>("HumerusHead")
+                    b.Property<double?>("HumerusHead")
                         .HasColumnName("humerus_head")
                         .HasColumnType("float");
 
-                    b.Property<double>("HumerusLength")
+                    b.Property<double?>("HumerusLength")
                         .HasColumnName("humerus_length")
                         .HasColumnType("float");
 
-                    b.Property<double>("InterorbitalBreadth")
+                    b.Property<double?>("InterorbitalBreadth")
                         .HasColumnName("interorbital_breadth")
                         .HasColumnType("float");
 
@@ -213,39 +213,39 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("length_of_remains")
                         .HasColumnType("int");
 
-                    b.Property<double>("MaximumCranialBreadth")
+                    b.Property<double?>("MaximumCranialBreadth")
                         .HasColumnName("maximum_cranial_breadth")
                         .HasColumnType("float");
 
-                    b.Property<double>("MaximumCranialLength")
+                    b.Property<double?>("MaximumCranialLength")
                         .HasColumnName("maximum_cranial_length")
                         .HasColumnType("float");
 
-                    b.Property<double>("MaximumNasalBreadth")
+                    b.Property<double?>("MaximumNasalBreadth")
                         .HasColumnName("maximum_nasal_breadth")
                         .HasColumnType("float");
 
-                    b.Property<int>("MedialIpRamus")
+                    b.Property<int?>("MedialIpRamus")
                         .HasColumnName("medial_IP_ramus")
                         .HasColumnType("int");
 
-                    b.Property<double>("NasionProsthion")
+                    b.Property<double?>("NasionProsthion")
                         .HasColumnName("nasion_prosthion")
                         .HasColumnType("float");
 
-                    b.Property<int>("NuchalCrest")
+                    b.Property<int?>("NuchalCrest")
                         .HasColumnName("nuchal_crest")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrbitEdge")
+                    b.Property<int?>("OrbitEdge")
                         .HasColumnName("orbit_edge")
                         .HasColumnType("int");
 
-                    b.Property<int>("Osteophytosis")
+                    b.Property<int?>("Osteophytosis")
                         .HasColumnName("osteophytosis")
                         .HasColumnType("int");
 
-                    b.Property<int>("ParietalBossing")
+                    b.Property<int?>("ParietalBossing")
                         .HasColumnName("parietal_bossing")
                         .HasColumnType("int");
 
@@ -255,23 +255,23 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<int>("PreaurSulcus")
+                    b.Property<int?>("PreaurSulcus")
                         .HasColumnName("preaur_sulcus")
                         .HasColumnType("int");
 
-                    b.Property<int>("PreservationIndex")
+                    b.Property<int?>("PreservationIndex")
                         .HasColumnName("preservation_index")
                         .HasColumnType("int");
 
-                    b.Property<int>("PubicBone")
+                    b.Property<int?>("PubicBone")
                         .HasColumnName("pubic_bone")
                         .HasColumnType("int");
 
-                    b.Property<int>("PubicSymphysis")
+                    b.Property<int?>("PubicSymphysis")
                         .HasColumnName("pubic_symphysis")
                         .HasColumnType("int");
 
-                    b.Property<int>("Robust")
+                    b.Property<int?>("Robust")
                         .HasColumnName("robust")
                         .HasColumnType("int");
 
@@ -279,7 +279,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("sample_number")
                         .HasColumnType("int");
 
-                    b.Property<int>("SciaticNotch")
+                    b.Property<int?>("SciaticNotch")
                         .HasColumnName("sciatic_notch")
                         .HasColumnType("int");
 
@@ -287,7 +287,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("sex_method_skull")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("SoftTissueTaken")
+                    b.Property<bool?>("SoftTissueTaken")
                         .HasColumnName("soft_tissue_taken")
                         .HasColumnType("bit");
 
@@ -299,23 +299,23 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("south_to_head")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubpubicAngle")
+                    b.Property<int?>("SubpubicAngle")
                         .HasColumnName("subpubic_angle")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupraorbitalRidges")
+                    b.Property<int?>("SupraorbitalRidges")
                         .HasColumnName("supraorbital_ridges")
                         .HasColumnType("int");
 
-                    b.Property<bool>("TextileTaken")
+                    b.Property<bool?>("TextileTaken")
                         .HasColumnName("textile_taken")
                         .HasColumnType("bit");
 
-                    b.Property<double>("TibiaLength")
+                    b.Property<double?>("TibiaLength")
                         .HasColumnName("tibia_length")
                         .HasColumnType("float");
 
-                    b.Property<int>("ToothAttrition")
+                    b.Property<int?>("ToothAttrition")
                         .HasColumnName("tooth_attrition")
                         .HasColumnType("int");
 
@@ -325,11 +325,11 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<bool>("ToothTaken")
+                    b.Property<bool?>("ToothTaken")
                         .HasColumnName("tooth_taken")
                         .HasColumnType("bit");
 
-                    b.Property<int>("VentralArc")
+                    b.Property<int?>("VentralArc")
                         .HasColumnName("ventral_arc")
                         .HasColumnType("int");
 
@@ -341,7 +341,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("west_to_head")
                         .HasColumnType("int");
 
-                    b.Property<int>("ZygomaticCrest")
+                    b.Property<int?>("ZygomaticCrest")
                         .HasColumnName("zygomatic_crest")
                         .HasColumnType("int");
 
@@ -675,7 +675,9 @@ namespace IWantMyMummy.Migrations.Mummy
                     b.HasOne("IWantMyMummy.Models.Burial", "Burial")
                         .WithMany("Image")
                         .HasForeignKey("BurialId")
-                        .HasConstraintName("FK_BURIAL3");
+                        .HasConstraintName("FK_BURIAL3")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("IWantMyMummy.Models.BurialSquare", "BurialSquare")
                         .WithMany("Image")
@@ -685,7 +687,9 @@ namespace IWantMyMummy.Migrations.Mummy
                     b.HasOne("IWantMyMummy.Models.CranialSample", "Cranial")
                         .WithMany("Image")
                         .HasForeignKey("CranialId")
-                        .HasConstraintName("FK_CRANIAL");
+                        .HasConstraintName("FK_CRANIAL")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("IWantMyMummy.Models.BurialQuadrant", "BurialS")
                         .WithMany("Image")

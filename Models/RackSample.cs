@@ -18,7 +18,7 @@ namespace IWantMyMummy.Models
         public string RackNumber { get; set; }
         public bool IsBag { get; set; }
         public int BurialId { get; set; }
-        public int? TubeNumber { get; set; }
+        public int TubeNumber { get; set; }
         public string RankDescription { get; set; }
         public int MlSize { get; set; }
         public int Foci { get; set; }
@@ -28,7 +28,7 @@ namespace IWantMyMummy.Models
         public int _14cCalendarDay { get; set; }
         public int Calibrated95CalendarDateMax { get; set; }
         public int Calibrated95CalendarDateMin { get; set; }
-        public int? Calibrated95CalendarDateSpan { get; set; }
+        public int Calibrated95CalendarDateSpan { get; set; }
         public string Calibrated95CalendarDateAvg { get; set; }
         public string Category { get; set; }
         public string Notes { get; set; }

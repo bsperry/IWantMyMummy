@@ -273,7 +273,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("robust")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SampleNumber")
+                    b.Property<int>("SampleNumber")
                         .HasColumnName("sample_number")
                         .HasColumnType("int");
 
@@ -423,19 +423,19 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double?>("BasionBregmaHeight")
+                    b.Property<double>("BasionBregmaHeight")
                         .HasColumnName("basion_bregma_height")
                         .HasColumnType("float");
 
-                    b.Property<double?>("BasionNasion")
+                    b.Property<double>("BasionNasion")
                         .HasColumnName("basion_nasion")
                         .HasColumnType("float");
 
-                    b.Property<double?>("BasionProsthionLength")
+                    b.Property<double>("BasionProsthionLength")
                         .HasColumnName("basion_prosthion_length")
                         .HasColumnType("float");
 
-                    b.Property<double?>("BizgomaticDiameter")
+                    b.Property<double>("BizgomaticDiameter")
                         .HasColumnName("bizgomatic_diameter")
                         .HasColumnType("float");
 
@@ -443,23 +443,23 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("burial_id")
                         .HasColumnType("int");
 
-                    b.Property<double?>("InterobitalBreadth")
+                    b.Property<double>("InterobitalBreadth")
                         .HasColumnName("interobital_breadth")
                         .HasColumnType("float");
 
-                    b.Property<double?>("MaxCranialBreadth")
+                    b.Property<double>("MaxCranialBreadth")
                         .HasColumnName("max_cranial_breadth")
                         .HasColumnType("float");
 
-                    b.Property<double?>("MaxCranialLength")
+                    b.Property<double>("MaxCranialLength")
                         .HasColumnName("max_cranial_length")
                         .HasColumnType("float");
 
-                    b.Property<double?>("MaxNasalBreadth")
+                    b.Property<double>("MaxNasalBreadth")
                         .HasColumnName("max_nasal_breadth")
                         .HasColumnType("float");
 
-                    b.Property<double?>("NasionProsthion")
+                    b.Property<double>("NasionProsthion")
                         .HasColumnName("nasion_prosthion")
                         .HasColumnType("float");
 
@@ -475,7 +475,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(2)
                         .IsUnicode(false);
 
-                    b.Property<int?>("SampleNumber")
+                    b.Property<int>("SampleNumber")
                         .HasColumnName("sample_number")
                         .HasColumnType("int");
 
@@ -497,7 +497,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BurialId")
+                    b.Property<int>("BurialId")
                         .HasColumnName("burial_id")
                         .HasColumnType("int");
 
@@ -513,7 +513,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(2)
                         .IsUnicode(false);
 
-                    b.Property<int?>("CranialId")
+                    b.Property<int>("CranialId")
                         .HasColumnName("cranial_id")
                         .HasColumnType("int");
 
@@ -572,7 +572,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("calibrated_95_calendar_date_MIN")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Calibrated95CalendarDateSpan")
+                    b.Property<int>("Calibrated95CalendarDateSpan")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnName("calibrated_95_calendar_date_SPAN")
                         .HasColumnType("int")
@@ -625,7 +625,7 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<int?>("TubeNumber")
+                    b.Property<int>("TubeNumber")
                         .HasColumnName("tube_number")
                         .HasColumnType("int");
 
@@ -673,7 +673,9 @@ namespace IWantMyMummy.Migrations.Mummy
                     b.HasOne("IWantMyMummy.Models.Burial", "Burial")
                         .WithMany("Image")
                         .HasForeignKey("BurialId")
-                        .HasConstraintName("FK_BURIAL3");
+                        .HasConstraintName("FK_BURIAL3")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("IWantMyMummy.Models.BurialSquare", "BurialSquare")
                         .WithMany("Image")
@@ -683,7 +685,9 @@ namespace IWantMyMummy.Migrations.Mummy
                     b.HasOne("IWantMyMummy.Models.CranialSample", "Cranial")
                         .WithMany("Image")
                         .HasForeignKey("CranialId")
-                        .HasConstraintName("FK_CRANIAL");
+                        .HasConstraintName("FK_CRANIAL")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("IWantMyMummy.Models.BurialQuadrant", "BurialS")
                         .WithMany("Image")

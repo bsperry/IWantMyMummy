@@ -10,10 +10,10 @@ namespace IWantMyMummy.Models
     public partial class Image
     {
         public int ImageId { get; set; }
-        public int? BurialId { get; set; }
+        public int BurialId { get; set; }
         public string BurialSquareId { get; set; }
         public string BurialSubplot { get; set; }
-        public int? CranialId { get; set; }
+        public int CranialId { get; set; }
         public byte[] Image1 { get; set; }
         public string ImageDescription { get; set; }
 
