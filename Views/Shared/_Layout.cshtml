@@ -17,7 +17,7 @@
 <body class="test">
     <div class="containing-element">
         <byu-header>
-            <span slot="site-title">I Want My Mummy</span>
+            <span slot="site-title">Fag El-Gamous</span>
             <byu-user-info slot="user">
                 <partial name="_LoginPartial" />
             </byu-user-info>
@@ -65,7 +65,10 @@
 
                 <!--dropdown burialQuadrant (researcher and admin)-->
                 <div style="margin-left: 15px;" class="dropdown">
+
                     <button class="dropdown-btn">Quadrants</button>
+
+
                     <div class="dropdown-child">
                         <a asp-controller="BurialQuadrants" asp-action="Index">View Burial Quadrants</a>
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
@@ -76,6 +79,15 @@
 
                     </div>
                 </div>
+                <!--dropdown Images (all)-->
+                <div style="margin-left: 15px;" class="dropdown">
+                    <button class="dropdown-btn">Image</button>
+                    <div class="dropdown-child">
+                        <a asp-controller="Images" asp-action="Index">View Images</a>
+                        <a asp-controller="Images" asp-action="Create">Add Image</a>
+
+                    </div>
+                </div>
 
                 <a asp-controller="Home" asp-action="MummyJokes">Mummy Jokes</a>
 
@@ -83,8 +95,10 @@
 
         </byu-header>
 
-
-        @RenderBody()
+        <div class="page-content">
+            @RenderBody()
+        </div>
+        
 
         <byu-footer>
             <byu-footer-column>

@@ -5,72 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Test</h1>
+<div class="container viewContainer">
+    <h1 class="text-center">Add Burial</h1>
+    <br /><br />
+    <div class="row addBurialRow">
+        <!--CREATE WITH QUADRANT-->
+        <div class="col withQuad">
+            <h2 class="text-center">Create With Quadrant</h2>
+            <br /><br />
+            <form asp-action="CreateWith" method="get">
+                    <div class="form-group">
+                        <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
 
-<h4>Burial</h4>
-<hr />
-<h2>CreateWith</h2>
-<div class="row">
-    <form asp-action="CreateWith" method="get">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
-
-                <select asp-for="SelectedSquareId" class="form-control">
-                    <option value="0">Select a Square</option>
-                    @foreach (var Sid in Model.BurialSquare)
-                    {
-                        <option>@Sid.BurialSquareId</option>
-                    }
-                </select>
-                <p>
-                    <a asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
-                </p>
-            </div>
+                        <select asp-for="SelectedSquareId" class="form-control">
+                            <option value="0">Select a Square</option>
+                            @foreach (var Sid in Model.BurialSquare)
+                            {
+                                <option>@Sid.BurialSquareId</option>
+                            }
+                        </select>
+                        <br />
+                        <p>
+                            <input type="submit" value="Continue With Quadrant" class="btn btn-primary" />
+                            <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
+                        </p>
+                    </div>
+            </form>
         </div>
 
-        <div class="form-group">
-            <!--button to go to subplot-->
-            <input type="submit" value="Continue With Subplot" class="btn btn-primary" />
-            <p>
-                <a asp-controller="BurialQuadrants" asp-action="Create">Create New Subplot</a>
-            </p>
+        <!--CREATE WITHOUT QUADRANT-->
+        <div class="col withoutQuad">
+            <h2 class="text-center">Create Without Quadrant</h2>
+            <br /><br />
+            <form asp-action="CreateWithout" method="get">
+                <div class="form-group">
+                    <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+
+                    <select asp-for="SelectedSquareId" class="form-control">
+                        <option value="0">Select a Square</option>
+                        @foreach (var Sid in Model.BurialSquare)
+                        {
+                            <option>@Sid.BurialSquareId</option>
+                        }
+                    </select>
+                    <br />
+                    <p>
+                        <input type="submit" value="Continue Without Quadrant" class="btn btn-primary" />
+                        <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
+                    </p>
+                </div>
+            </form>
         </div>
-    </form>
-
-    <!--make this as two columns one side for creating with subplot and one for without-->
-
-    <br />
-    <h2>CreateWithout</h2>
-    <form asp-action="CreateWithout" method="get">
-        <div class="form-group">
-            <label asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
-
-            <select asp-for="SelectedSquareId" class="form-control">
-                <option value="0">Select a Square</option>
-                @foreach (var Sid in Model.BurialSquare)
-                {
-                    <option>@Sid.BurialSquareId</option>
-                }
-            </select>
-
-        </div>
-        <div class="form-group">
-            <!--button to go without subplot-->
-            <input type="submit" value="Continue Without Subplot" class="btn btn-primary" />
-            <p>
-                <a asp-controller="BurialQuadrants" asp-action="Create">Create New Subplot</a>
-            </p>
-        </div>
-
-    </form>
-
-
+    </div>
+    <div>
+        <a asp-action="Index">Back to Burials</a>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

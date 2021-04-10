@@ -1,0 +1,59 @@
+﻿@model ImageViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Image</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+    <h3>Add Image for </h3>
+    <p>@ViewBag.Burial @ViewBag.Subplot #@ViewBag.Num</p>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div id="hidden">
+        <input type="hidden" value="@ViewBag.Id" asp-for="@Model.Image.BurialId" />
+        <input type="hidden" value="@ViewBag.Burial" asp-for="@Model.Image.BurialSquareId" />
+        <input type="hidden" value="@ViewBag.Subplot" asp-for="@Model.Image.BurialSubplot" />
+    </div>
+
+
+    @*<div class="form-group">
+            <label asp-for="@Model.Image.CranialId" class="control-label"></label>
+            <select asp-for="@Model.Image.CranialId" class ="form-control" asp-items="ViewBag.CranialId"></select>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="@Model.Image.Image1" class="control-label">New Image</label>
+            <div id="uploadImage">
+                <input type="file" asp-for="@Model.Image.Image1" class="form-control" id="oFile" runat="server" name="oFile" />
+                <asp:button id="btnUpload" type="submit" text="Upload" runat="server"></asp:button>
+                <asp:Panel ID="frmConfirmation" Visible="False" Runat="server">
+                    <asp:Label id="lblUploadResult" Runat="server"></asp:Label>
+                </asp:Panel>
+            </div>
+
+            <span asp-validation-for="@Model.Image.Image1" class="text-danger"></span>
+        </div>
+    <div class="form-group">
+        <label asp-for="@Model.Image.ImageDescription" class="control-label"></label>
+        <input asp-for="@Model.Image.ImageDescription" class="form-control" />
+        <span asp-validation-for="@Model.Image.ImageDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

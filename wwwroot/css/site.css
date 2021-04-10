@@ -228,3 +228,16 @@ input[type=text], select {
 .viewContainer{
     margin-top:50px;
 }
+
+.withQuad{
+    border-right:solid;
+}
+
+.createSquare{
+    position:absolute;
+    right:16px;
+}
+
+.addBurialRow{
+    margin-bottom:50px;
+}
