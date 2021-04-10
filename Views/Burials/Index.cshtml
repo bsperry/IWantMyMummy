@@ -24,56 +24,10 @@
 
     <div class="col joke">
         <a class="btn btn-primary" data-toggle="collapse" href="#filter2" role="button" aria-expanded="false" aria-controls="filter2">
-            Gender
+            Filter By Gender
         </a>
         <div class="collapse" id="filter2">
-            <label>Gender</label>
-            <select onchange="this.form.submit()" name="filter">
-                @if (ViewBag.FilterLoc.Gender == "all")
-                {
-                    <option selected value="all">All</option>
-                }
-                else
-                {
-                    <option value="all">All</option>
-                }
-                @foreach (var item in ViewBag.Gender)
-                {
-                    @if (ViewBag.FilterLoc.Gender == item)
-                    {
-                        @if (item == "M")
-
-                        {
-                            <option value="@item" selected>Male</option>
-                        }
-                        else if (item == "F")
-                        {
-                            <option value="@item" selected>Female</option>
-                        }
-                        else
-                        {
-                            <option value="@item" selected>Unidentified</option>
-                        }
-                    }
-                    else
-                    {
-                        @if (item == "M")
-
-                        {
-                            <option value="@item">Male</option>
-                        }
-                        else if (item == "F")
-                        {
-                            <option value="@item">Female</option>
-                        }
-                        else
-                        {
-                            <option value="@item">Unidentified</option>
-                        }
-                    }
-
-                }
-            </select>
+            <partial name="_BurialFilterOtherPartialView" />
         </div>
     </div>
 
