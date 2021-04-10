@@ -11,6 +11,8 @@ namespace IWantMyMummy.Models.ViewModels
         public int CurrentPage { get; set; }
         public int TotalNumItems { get; set; }
 
+        public string Query { get; set; }
+
         //calculate num pages
 
         public int NumPages => (int)(Math.Ceiling((decimal)TotalNumItems / NumItemsPerPage));

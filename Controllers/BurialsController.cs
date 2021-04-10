@@ -75,6 +75,7 @@ namespace IWantMyMummy.Controllers
 
 
             var filterLoc = new FilterLocation(filterId);
+            ViewBag.FilterString = filterId;
             ViewBag.FilterLoc = filterLoc;
             ViewBag.LocationNStemp = _context.BurialSquare
                                       .Select(b => b.BurialLocationNs)
@@ -84,6 +85,23 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.LowPairNs)
                                       .Distinct()
                                       .ToList();
+            ViewBag.HighPairNs = _context.BurialSquare
+                                      .Select(b => b.HighPairNs)
+                                      .Distinct()
+                                      .ToList();
+            ViewBag.LocationEw = _context.BurialSquare
+                                      .Select(b => b.BurialLocationEw)
+                                      .Distinct()
+                                      .ToList();
+            ViewBag.LowPairEw = _context.BurialSquare
+                                      .Select(b => b.LowPairEw)
+                                      .Distinct()
+                                      .ToList();
+            ViewBag.HighPairEw = _context.BurialSquare
+                                      .Select(b => b.HighPairEw)
+                                      .Distinct()
+                                      .ToList();
+
 
 
             if (filterLoc.HasLocationNs)
@@ -94,6 +112,24 @@ namespace IWantMyMummy.Controllers
             if (filterLoc.HasLowPairNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.LowPairNs.ToString() == filterLoc.LowPairNs);
+            }
+
+            if (filterLoc.HasHighPairNs)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairNs.ToString() == filterLoc.HighPairNs);
+            }
+
+            if (filterLoc.HasLocationEw)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationEw == filterLoc.LocationEw);
+            }
+            if (filterLoc.HasLowPairEw)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.LowPairEw.ToString() == filterLoc.LowPairEw);
+            }
+            if (filterLoc.HasHighPairEw)
+            {
+                queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairEw.ToString() == filterLoc.HighPairEw);
             }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
@@ -110,6 +146,7 @@ namespace IWantMyMummy.Controllers
                 {
                     NumItemsPerPage = pageSize,
                     CurrentPage = pageNum,
+                    Query = filterId,
 
                     TotalNumItems = queryFilter.Count()
                 },
