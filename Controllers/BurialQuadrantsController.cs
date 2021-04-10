@@ -58,6 +58,15 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(burialQuadrant);
         }
 
@@ -72,6 +81,14 @@ namespace IWantMyMummy.Controllers
             ViewBag.AvailPlots = AvailableSubplots;
             //List<string> uniqueList = new List<string> { };
             //ViewBag.UniqueList = uniqueList;
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(new BurialInformationViewModel
             {
@@ -97,6 +114,15 @@ namespace IWantMyMummy.Controllers
                 _context.Add(burialQuadrant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
             }
             return View(burialQuadrant);
         }
@@ -124,6 +150,15 @@ namespace IWantMyMummy.Controllers
             string strFid = id.Replace("/", "F");
             ViewBag.Fid = strFid;
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(burialQuadrant);
         }
 
@@ -137,11 +172,29 @@ namespace IWantMyMummy.Controllers
             var burialQuadrant = _context.BurialQuadrant.Where(x => x.BurialSquareId == id && x.BurialSubplot == subid).First();
             _context.BurialQuadrant.Remove(burialQuadrant);
             await _context.SaveChangesAsync();
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool BurialQuadrantExists(string id)
         {
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return _context.BurialQuadrant.Any(e => e.BurialSubplot == id);
         }
     }
