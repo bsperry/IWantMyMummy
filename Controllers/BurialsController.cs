@@ -62,9 +62,7 @@ namespace IWantMyMummy.Controllers
             //                     .ToList();
 
             var queryFilter = (from b in _context.Burial
-                               join bsquare in _context.BurialSquare
-
-                               on b.BurialSquareId equals bsquare.BurialSquareId
+                               join bsquare in _context.BurialSquare on b.BurialSquareId equals bsquare.BurialSquareId
                                select new JoinBurialSquareViewModel
                                {
                                    Burials = b,

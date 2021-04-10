@@ -155,12 +155,37 @@
             {
                 @if (ViewBag.FilterLoc.Gender == item)
                 {
-                    <option selected>@item</option>
+                    @if (item == "M")
+
+                    {
+                        <option value="@item" selected>Male</option>
+                    }
+                    else if (item == "F")
+                    {
+                        <option value="@item" selected>Female</option>
+                    }
+                    else
+                    {
+                        <option value="@item" selected>Unidentified</option>
+                    }
                 }
                 else
                 {
-                    <option>@item</option>
+                    @if (item == "M")
+
+                    {
+                        <option value="@item">Male</option>
+                    }
+                    else if (item == "F")
+                    {
+                        <option value="@item">Female</option>
+                    }
+                    else
+                    {
+                        <option value="@item">Unidentified</option>
+                    }
                 }
+
             }
         </select>
 
