@@ -51,7 +51,7 @@ namespace IWantMyMummy.Controllers
 
         // POST: BurialSquares/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/LinkId=317598.
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BurialSquareId,BurialLocationNs,BurialLocationEw,LowPairNs,HighPairNs,LowPairEw,HighPairEw")] BurialSquare burialSquare)
