@@ -4,7 +4,6 @@
 @{
 }
 
-<form asp-controller="Burials" asp-action="FilterLoc" method="post" class="burialForm form-inline">
     <label>Gender</label>
     <select onchange="this.form.submit()" name="filter">
         @if (ViewBag.FilterLoc.Gender == "all")
@@ -52,4 +51,3 @@
 
         }
     </select>
-</form>
