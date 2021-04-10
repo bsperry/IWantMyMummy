@@ -16,10 +16,12 @@ namespace IWantMyMummy.Models
         public string LowPairEw { get; set; }
         public string HighPairEw { get; set; }
 
+        public string Gender { get; set; }
+
 
         public FilterLocation (string filterstring)
         {
-            FilterString = filterstring ?? "all-all-all-all-all-all";
+            FilterString = filterstring ?? "all-all-all-all-all-all-all";
             string[] filters = FilterString.Split("-");
             LocationNs = filters[0];
             LowPairNs = filters[1];
@@ -27,6 +29,9 @@ namespace IWantMyMummy.Models
             LocationEw = filters[3];
             LowPairEw = filters[4];
             HighPairEw = filters[5];
+
+            //Other filters (I'd prefer to add them to a different class, but for time issues, let's not overcomplicate things)
+            Gender = filters[6];
         }
 
         public bool HasLocationNs => LocationNs.ToLower() != "all";
@@ -35,6 +40,8 @@ namespace IWantMyMummy.Models
         public bool HasLocationEw => LocationEw.ToLower() != "all";
         public bool HasLowPairEw => LowPairEw.ToLower() != "all";
         public bool HasHighPairEw => HighPairEw.ToLower() != "all";
+
+        public bool HasGender => Gender.ToLower() != "all";
 
     }
 }

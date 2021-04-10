@@ -140,5 +140,29 @@
             }
         </select>
 
+
+        <label>Gender</label>
+        <select onchange="this.form.submit()" name="filter">
+            @if (ViewBag.FilterLoc.Gender == "all")
+            {
+                <option selected value="all">All</option>
+            }
+            else
+            {
+                <option value="all">All</option>
+            }
+            @foreach (var item in ViewBag.Gender)
+            {
+                @if (ViewBag.FilterLoc.Gender == item)
+                {
+                    <option selected>@item</option>
+                }
+                else
+                {
+                    <option>@item</option>
+                }
+            }
+        </select>
+
     </form>
 </div>

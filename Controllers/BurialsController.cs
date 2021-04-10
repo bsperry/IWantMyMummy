@@ -33,7 +33,7 @@ namespace IWantMyMummy.Controllers
         // GET: Burials
         public IActionResult Index(string filterId, int pageNum = 1)
         {
-            int pageSize = 2;
+            int pageSize = 5;
             //ViewBag.LocationNS = locationNS;
 
             var role = wantContext.UserRoles
@@ -102,7 +102,10 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.HighPairEw)
                                       .Distinct()
                                       .ToList();
-
+            ViewBag.Gender = _context.Burial
+                                      .Select(b => b.GenderGe)
+                                      .Distinct()
+                                      .ToList();
 
 
             if (filterLoc.HasLocationNs)
@@ -132,6 +135,10 @@ namespace IWantMyMummy.Controllers
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairEw.ToString() == filterLoc.HighPairEw);
             }
+            if (filterLoc.HasGender)
+            {
+                queryFilter = queryFilter.Where(b => b.Burials.GenderGe == filterLoc.Gender);
+            }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
             ViewBag.mummy = mummyContext
@@ -152,27 +159,8 @@ namespace IWantMyMummy.Controllers
                     TotalNumItems = queryFilter.Count()
                 },
 
-                //LocationNS = locationNS,
             }
                 );
-            //return View(new BurialsViewModel
-            //                {   Burials = _context.Burial
-            //                                .Skip((pageNum - 1) * pageSize)
-            //                                .Take(pageSize)
-            //                                .ToList(),
-
-            //                    PageNumberingInfo = new PageNumberingInfo
-            //                    {
-            //                        NumItemsPerPage = pageSize,
-            //                        CurrentPage = pageNum,
-
-            //                        TotalNumItems = _context.Burial.Count()
-            //                    },
-
-            //                    LocationNS = locationNS,
-
-
-            //                });
         }
 
         //FILTERING
