@@ -205,7 +205,7 @@ html, body {
 
 }
 
-input[type=text], select {
+/*input[type=text], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -214,7 +214,7 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+*/
 /*input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
@@ -252,7 +252,7 @@ input[type=text], select {
 
 }
 
-.btn {
+.btn-primary{
     background-color: #002E5D !important;
     border:none !important;
 }
@@ -260,3 +260,64 @@ input[type=text], select {
     .btn:hover {
         background-color: #004d99 !important;
     }
+
+/*    .burialForm{
+        width:10% !important;
+        
+    }
+*/
+
+
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.form-inline label {
+    margin: 5px 10px 5px 0;
+    
+}
+
+.form-inline input {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.form-inline button {
+    padding: 10px 20px;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: white;
+    cursor: pointer;
+}
+
+    .form-inline button:hover {
+        background-color: royalblue;
+    }
+
+
+.form-inline {
+    flex-direction: column;
+    align-items: stretch;
+    
+}
+
+.burialForm select {
+    width: 80px;
+    padding: 7px 5px;
+    margin: 20px 20px 20px 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+}
+
+.burialForm label {
+    
+
+}
+

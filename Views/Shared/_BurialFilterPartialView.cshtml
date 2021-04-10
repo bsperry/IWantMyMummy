@@ -4,9 +4,10 @@
 @{
 }
 
+
+
 <!--filtering-->
-<div class="row">
-    <form asp-controller="Burials" asp-action="FilterLoc" method="post">
+    <form asp-controller="Burials" asp-action="FilterLoc" method="post" class="burialForm form-inline">
         <label>Location N/S</label>
         <select onchange="this.form.submit()" name="filter">
             @if (ViewBag.FilterLoc.LocationNs == "all")
@@ -141,4 +142,3 @@
         </select>
 
     </form>
-</div>
