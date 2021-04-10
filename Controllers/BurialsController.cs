@@ -87,56 +87,20 @@ namespace IWantMyMummy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult Create1(string SelectedSquareId, string BurialSubplot, int BurialNumber,
             int BurialDepth, int SouthToHead, int SouthToFeet, int WestToHead, int WestToFeet, string BurialSituation,
             string BurialWrapping, string BurialWrappingMaterial, bool BurialAdult, int LengthOfRemains, int SampleNumber,
-            string GenderGe, bool SexMethodSkull, double GeFunctionTotal, string HeadDirection)
+            string GenderGe, bool SexMethodSkull, double GeFunctionTotal, string HeadDirection, string GenderBodyCol, bool BasilarSuture,
+            int VentralArc, int SubpubicAngle, int SciaticNotch, int PubicBone, int PreaurSulcus, int MedialIpRamus, int DorsalPitting,
+            double ForemanMagnum, double FemurHead, double HumerusHead, int Osteophytosis, int PubicSymphysis, double FemurLength,
+            double HumerusLength, double TibiaLength, int Robust, int SupraorbitalRidges, int OrbitEdge, int ParietalBossing, int Gonian,
+            int NuchalCrest, int ZygomaticCrest, string CranialSuture, double MaximumCranialLength, double MaximumCranialBreadth,
+            double BasionBregmaHeight, double BasionNasion, double BasionProsthionLength, double BizygomaticDiameter, double NasionProsthion,
+            double MaximumNasalBreadth, double InterorbitalBreadth, string ArtifactsDescription, string HairColor, int PreservationIndex,
+            bool HairTaken, bool SoftTissueTaken, bool BoneTaken, bool ToothTaken, bool TextileTaken, string DescriptionOfTaken, bool ArtifactFound,
+            double EstimateAge, double EstimateLivingStature, int ToothAttrition, string ToothEruption, string PathologyAnomalies, bool EpiphysealUnion,
+            DateTime DateFound, string AgeAtDeath, bool AgeMethodSkull)
         {
-            BurialInformationViewModel viewModel = new BurialInformationViewModel
-            {
-                BurialSquare = _context.BurialSquare.ToList(),
-                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
-                Burial = new Burial {
-                    BurialSquareId = SelectedSquareId,
-                    BurialSubplot = BurialSubplot,
-                    BurialNumber = BurialNumber,
-                    BurialDepth = BurialDepth,
-                    SouthToHead = SouthToHead,
-                    SouthToFeet = SouthToFeet,
-                    WestToHead = WestToHead,
-                    WestToFeet = WestToFeet,
-                    BurialSituation = BurialSituation,
-                    BurialWrapping = BurialWrapping,
-                    BurialWrappingMaterial = BurialWrappingMaterial,
-                    BurialAdult = BurialAdult,
-                    LengthOfRemains = LengthOfRemains,
-                    SampleNumber = SampleNumber,
-                    GenderGe = GenderGe,
-                    SexMethodSkull = SexMethodSkull,
-                    GeFunctionTotal = GeFunctionTotal,
-                    HeadDirection = HeadDirection,
-                },
-                //SelectedSquareId = SelectedSquareId,
-                //BurialSubplot = BurialSubplot,
-                //BurialNumber = BurialNumber,
-                //BurialDepth = BurialDepth,
-                //SouthToHead = SouthToHead,
-                //SouthToFeet = SouthToFeet,
-                //WestToHead = WestToHead,
-                //WestToFeet = WestToFeet,
-                //BurialSituation = BurialSituation,
-                //BurialWrapping = BurialWrapping,
-                //BurialWrappingMaterial = BurialWrappingMaterial,
-                //BurialAdult = BurialAdult,
-                //LengthOfRemains = LengthOfRemains,
-                //SampleNumber = SampleNumber,
-                //GenderGe = GenderGe,
-                //SexMethodSkull = SexMethodSkull,
-                //GeFunctionTotal = GeFunctionTotal,
-                //HeadDirection = HeadDirection,
-            }; 
-
             Burial burial = new Burial
             {
                 BurialSquareId = SelectedSquareId,
@@ -157,10 +121,65 @@ namespace IWantMyMummy.Controllers
                 SexMethodSkull = SexMethodSkull,
                 GeFunctionTotal = GeFunctionTotal,
                 HeadDirection = HeadDirection,
+                GenderBodyCol = GenderBodyCol,
+                BasilarSuture = BasilarSuture,
+                VentralArc = VentralArc,
+                SubpubicAngle = SubpubicAngle,
+                SciaticNotch = SciaticNotch,
+                PubicBone = PubicBone,
+                PreaurSulcus = PreaurSulcus,
+                MedialIpRamus = MedialIpRamus,
+                DorsalPitting = DorsalPitting,
+                ForemanMagnum = ForemanMagnum,
+                FemurHead = FemurHead,
+                HumerusHead = HumerusHead,
+                Osteophytosis = Osteophytosis,
+                PubicSymphysis = PubicSymphysis,
+                FemurLength = FemurLength,
+                HumerusLength = HumerusLength,
+                TibiaLength = TibiaLength,
+                Robust = Robust,
+                SupraorbitalRidges = SupraorbitalRidges,
+                OrbitEdge = OrbitEdge,
+                ParietalBossing = ParietalBossing,
+                Gonian = Gonian,
+                NuchalCrest = NuchalCrest,
+                ZygomaticCrest = ZygomaticCrest,
+                CranialSuture = CranialSuture,
+                MaximumCranialLength = MaximumCranialLength,
+                MaximumCranialBreadth = MaximumCranialBreadth,
+                BasionBregmaHeight = BasionBregmaHeight,
+                BasionNasion = BasionNasion,
+                BasionProsthionLength = BasionProsthionLength,
+                BizygomaticDiameter = BizygomaticDiameter,
+                NasionProsthion = NasionProsthion,
+                MaximumNasalBreadth = MaximumNasalBreadth,
+                InterorbitalBreadth = InterorbitalBreadth,
+                ArtifactsDescription = ArtifactsDescription,
+                HairColor = HairColor,
+                PreservationIndex = PreservationIndex,
+                HairTaken = HairTaken,
+                SoftTissueTaken = SoftTissueTaken,
+                BoneTaken = BoneTaken,
+                ToothTaken = ToothTaken,
+                TextileTaken = TextileTaken,
+                DescriptionOfTaken = DescriptionOfTaken,
+                ArtifactFound = ArtifactFound,
+                EstimateAge = EstimateAge,
+                EstimateLivingStature = EstimateLivingStature,
+                ToothAttrition = ToothAttrition,
+                ToothEruption = ToothEruption,
+                PathologyAnomalies = PathologyAnomalies,
+                EpiphysealUnion = EpiphysealUnion,
+                DateFound = DateFound,
+                AgeAtDeath = AgeAtDeath,
+                AgeMethodSkull = AgeMethodSkull
             };
-                       
+
             return RedirectToAction("Create", burial);
         }
+
+
         //Create new burial WITH a subplot
         public IActionResult CreateWith(string SelectedSquareId)
         {

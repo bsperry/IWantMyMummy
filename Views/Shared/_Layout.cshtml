@@ -65,7 +65,10 @@
 
                 <!--dropdown burialQuadrant (researcher and admin)-->
                 <div style="margin-left: 15px;" class="dropdown">
+
                     <button class="dropdown-btn">Quadrants</button>
+
+
                     <div class="dropdown-child">
                         <a asp-controller="BurialQuadrants" asp-action="Index">View Burial Quadrants</a>
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
@@ -73,6 +76,15 @@
                             <a asp-controller="BurialQuadrants" asp-action="Create">Add Burial Quadrant</a>
                             <a asp-controller="BurialQuadrants" asp-action="Index">My Burials</a>
                         }
+
+                    </div>
+                </div>
+                <!--dropdown Images (all)-->
+                <div style="margin-left: 15px;" class="dropdown">
+                    <button class="dropdown-btn">Image</button>
+                    <div class="dropdown-child">
+                        <a asp-controller="Images" asp-action="Index">View Images</a>
+                        <a asp-controller="Images" asp-action="Create">Add Image</a>
 
                     </div>
                 </div>
