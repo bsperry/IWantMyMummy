@@ -527,6 +527,9 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasMaxLength(5000)
                         .IsUnicode(false);
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ImageId");
 
                     b.HasIndex("BurialId");

@@ -11,9 +11,9 @@ using System.Web.UI.HtmlControls;
 using System.IO;
 namespace ** ApplicationName** {
 /// <summary>
-/// Summary description for WebForm1.
+/// Summary description for .
 /// </summary>
-public class WebForm1 : System.Web.UI.Page
+public class Imagesave : System.Web.UI.Page
 {
     protected System.Web.UI.WebControls.Button btnUpload;
     protected System.Web.UI.WebControls.Label lblUploadResult;

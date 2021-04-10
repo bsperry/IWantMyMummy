@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWantMyMummy.Migrations.Mummy
 {
     [DbContext(typeof(MummyContext))]
-    [Migration("20210410031735_BurialModels5")]
+    [Migration("20210410150355_BurialModels5")]
     partial class BurialModels5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -528,6 +528,9 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnType("varchar(5000)")
                         .HasMaxLength(5000)
                         .IsUnicode(false);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("varchar(2000)");
 
                     b.HasKey("ImageId");
 
