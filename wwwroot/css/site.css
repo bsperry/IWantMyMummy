@@ -160,6 +160,7 @@ html, body {
 .bgImage {
     background-image: url(../img/pyramids-2159286_1920.jpg);
     height: 800px;
+    width: 100%;
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
