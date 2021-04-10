@@ -1,91 +1,96 @@
-﻿@model IWantMyMummy.Models.CranialSample
+﻿@model CranialBurialViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>CranialSample</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BurialId" class="control-label"></label>
-                <select asp-for="BurialId" class ="form-control" asp-items="ViewBag.BurialId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="SampleNumber" class="control-label"></label>
-                <input asp-for="SampleNumber" class="form-control" />
-                <span asp-validation-for="SampleNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RackShelf" class="control-label"></label>
-                <select asp-for="RackShelf" class ="form-control" asp-items="ViewBag.RackShelf"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="RackNumber" class="control-label"></label>
-                <select asp-for="RackNumber" class ="form-control" asp-items="ViewBag.RackNumber"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxCranialLength" class="control-label"></label>
-                <input asp-for="MaxCranialLength" class="form-control" />
-                <span asp-validation-for="MaxCranialLength" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxCranialBreadth" class="control-label"></label>
-                <input asp-for="MaxCranialBreadth" class="form-control" />
-                <span asp-validation-for="MaxCranialBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionBregmaHeight" class="control-label"></label>
-                <input asp-for="BasionBregmaHeight" class="form-control" />
-                <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionNasion" class="control-label"></label>
-                <input asp-for="BasionNasion" class="form-control" />
-                <span asp-validation-for="BasionNasion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionProsthionLength" class="control-label"></label>
-                <input asp-for="BasionProsthionLength" class="form-control" />
-                <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BizgomaticDiameter" class="control-label"></label>
-                <input asp-for="BizgomaticDiameter" class="form-control" />
-                <span asp-validation-for="BizgomaticDiameter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NasionProsthion" class="control-label"></label>
-                <input asp-for="NasionProsthion" class="form-control" />
-                <span asp-validation-for="NasionProsthion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxNasalBreadth" class="control-label"></label>
-                <input asp-for="MaxNasalBreadth" class="form-control" />
-                <span asp-validation-for="MaxNasalBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InterobitalBreadth" class="control-label"></label>
-                <input asp-for="InterobitalBreadth" class="form-control" />
-                <span asp-validation-for="InterobitalBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container viewContainer">
+    <h1>Create Cranial Sample</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <h3>Add Cranial Sample for @ViewBag.Burial @ViewBag.Subplot #@ViewBag.Num</h3>
+                    <div id="hidden">
+                        <input type="hidden" value="@ViewBag.Id" asp-for="@Model.CranialSample.BurialId" />
+                    </div>
+                </div>
+                <div id="removed">
+                    @*<div class="form-group">
+                        <label asp-for="@Model.CranialSample.SampleNumber" class="control-label"></label>
+                        <input asp-for="@Model.CranialSample.SampleNumber" class="form-control" />
+                        <span asp-validation-for="@Model.CranialSample.SampleNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CranialSample.RackShelf" class="control-label"></label>
+                            <select asp-for="@Model.CranialSample.RackShelf" class ="form-control" asp-items="ViewBag.RackShelf"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CranialSample.RackNumber" class="control-label"></label>
+                            <select asp-for="@Model.CranialSample.RackNumber" class ="form-control" asp-items="ViewBag.RackNumber"></select>
+                        </div>*@
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.MaxCranialLength" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.MaxCranialLength" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.MaxCranialLength" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.MaxCranialBreadth" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.MaxCranialBreadth" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.MaxCranialBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.BasionBregmaHeight" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.BasionBregmaHeight" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.BasionBregmaHeight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.BasionNasion" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.BasionNasion" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.BasionNasion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.BasionProsthionLength" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.BasionProsthionLength" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.BasionProsthionLength" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.BizgomaticDiameter" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.BizgomaticDiameter" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.BizgomaticDiameter" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.NasionProsthion" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.NasionProsthion" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.NasionProsthion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.MaxNasalBreadth" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.MaxNasalBreadth" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.MaxNasalBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.CranialSample.InterobitalBreadth" class="control-label"></label>
+                    <input asp-for="@Model.CranialSample.InterobitalBreadth" class="form-control" />
+                    <span asp-validation-for="@Model.CranialSample.InterobitalBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

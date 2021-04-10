@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
+using IWantMyMummy.Models.ViewModels;
+
 
 namespace IWantMyMummy.Controllers
 {
@@ -46,11 +48,29 @@ namespace IWantMyMummy.Controllers
         }
 
         // GET: CranialSamples/Create
-        public IActionResult Create()
+        public IActionResult Create(int BurialId, string Burial, string Subplot, int Num)
         {
+            if (BurialId <= 0)
+            {
+                return NotFound();
+            }
+            ViewBag.Id = BurialId;
+            ViewBag.Burial = Burial;
+            ViewBag.Subplot = Subplot;
+            ViewBag.Num = Num;
+            CranialBurialViewModel viewModel = new CranialBurialViewModel
+            {
+                BurialId = BurialId,
+                CranialSample = new CranialSample
+                {
+                    BurialId = BurialId,
+                },
+                BurialList = _context.Burial.Where(x=>x.BurialId==BurialId).ToList(),
+            };
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping");
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf");
-            return View();
+            return View(viewModel);
         }
 
         // POST: CranialSamples/Create

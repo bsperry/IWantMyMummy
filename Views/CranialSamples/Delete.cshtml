@@ -5,90 +5,94 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CranialSample</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SampleNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SampleNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxCranialLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxCranialLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxCranialBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxCranialBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionBregmaHeight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionBregmaHeight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionNasion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionNasion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BasionProsthionLength)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BasionProsthionLength)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BizgomaticDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BizgomaticDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NasionProsthion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NasionProsthion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxNasalBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxNasalBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InterobitalBreadth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InterobitalBreadth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Burial)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Burial.BurialWrapping)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rack)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rack.RackShelf)
-        </dd class>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="CranialId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="container">
+    <h1>Delete Cranial</h1>
+    <br /><br />
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Cranial</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SampleNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SampleNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MaxCranialLength)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MaxCranialLength)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MaxCranialBreadth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MaxCranialBreadth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BasionBregmaHeight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BasionBregmaHeight)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BasionNasion)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BasionNasion)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BasionProsthionLength)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BasionProsthionLength)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BizgomaticDiameter)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BizgomaticDiameter)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NasionProsthion)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NasionProsthion)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MaxNasalBreadth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MaxNasalBreadth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InterobitalBreadth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InterobitalBreadth)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Burial)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Burial.BurialWrapping)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Rack)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rack.RackShelf)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="CranialId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
 </div>
