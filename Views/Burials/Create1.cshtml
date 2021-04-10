@@ -8,10 +8,10 @@
 <div class="container viewContainer">
     <h1 class="text-center">Add Burial</h1>
     <br /><br />
-    <div class="row">
+    <div class="row addBurialRow">
         <!--CREATE WITH QUADRANT-->
         <div class="col withQuad">
-            <h2 class="text-center">Create With</h2>
+            <h2 class="text-center">Create With Quadrant</h2>
             <br /><br />
             <form asp-action="CreateWith" method="get">
                     <div class="form-group">
@@ -26,7 +26,7 @@
                         </select>
                         <br />
                         <p>
-                            <input type="submit" value="Continue With Subplot" class="btn btn-primary" />
+                            <input type="submit" value="Continue With Quadrant" class="btn btn-primary" />
                             <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
                         </p>
                     </div>
@@ -35,7 +35,7 @@
 
         <!--CREATE WITHOUT QUADRANT-->
         <div class="col withoutQuad">
-            <h2 class="text-center">Create Without</h2>
+            <h2 class="text-center">Create Without Quadrant</h2>
             <br /><br />
             <form asp-action="CreateWithout" method="get">
                 <div class="form-group">
@@ -50,7 +50,7 @@
                     </select>
                     <br />
                     <p>
-                        <input type="submit" value="Continue Without Subplot" class="btn btn-primary" />
+                        <input type="submit" value="Continue Without Quadrant" class="btn btn-primary" />
                         <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
                     </p>
                 </div>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Back to Burials</a>
     </div>
 </div>
 
