@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
+using IWantMyMummy.Models.ViewModels;
+
 
 namespace IWantMyMummy.Views
 {
@@ -21,6 +23,7 @@ namespace IWantMyMummy.Views
         // GET: Images
         public async Task<IActionResult> Index()
         {
+
             var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
             return View(await mummyContext.ToListAsync());
         }
@@ -48,13 +51,30 @@ namespace IWantMyMummy.Views
         }
 
         // GET: Images/Create
-        public IActionResult Create()
+        public IActionResult Create(int BurialId, string Burial, string Subplot, int Num)
         {
+            ViewBag.Id = BurialId;
+            ViewBag.Burial = Burial;
+            ViewBag.Subplot = Subplot;
+            ViewBag.Num = Num;
+
+
+            ImageViewModel viewModel = new ImageViewModel
+            {
+                BurialId = BurialId,
+                BurialList = _context.Burial.Where(x=>x.BurialId ==BurialId).ToList(),
+                Image = new Image
+                {
+                    BurialId = BurialId,
+
+                }
+            };
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping");
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
             ViewData["CranialId"] = new SelectList(_context.CranialSample, "CranialId", "CranialId");
-            return View();
+            return View(viewModel);
         }
 
         // POST: Images/Create
