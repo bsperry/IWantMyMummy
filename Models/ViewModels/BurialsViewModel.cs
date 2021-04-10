@@ -7,8 +7,11 @@ namespace IWantMyMummy.Models.ViewModels
 {
     public class BurialsViewModel
     {
-        public List<Burial> Burials { get; set; }
+
+        public List<JoinBurialSquareViewModel> JoinBurialSquareViewModel { get; set; }
         public PageNumberingInfo PageNumberingInfo { get; set; }
+
+        public string LocationNS { get; set; }
 
     }
 }

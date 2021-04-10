@@ -25,5 +25,10 @@ namespace IWantMyMummy.Models
 
         public virtual ICollection<Burial> Burial { get; set; }
         public virtual ICollection<Image> Image { get; set; }
+
+        public static implicit operator List<object>(BurialSquare v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

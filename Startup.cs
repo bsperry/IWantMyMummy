@@ -25,7 +25,7 @@ namespace IWantMyMummy
 
 
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
 
 
@@ -82,6 +82,14 @@ namespace IWantMyMummy
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("locationns",
+                    "{locationns}",
+                    new { Controller = "Burials", action = "Index", pageNum = 1 }
+                    );
+                endpoints.MapControllerRoute("pageNum",
+                    "All/{pageNum}",
+                    new { Controller = "Burials", action = "Index" });
+                    
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

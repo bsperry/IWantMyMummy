@@ -7,32 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
 using Microsoft.AspNetCore.Identity;
-using IWantMyMummy.Areas.Identity.Data;
 using IWantMyMummy.Data;
 using IWantMyMummy.Models.ViewModels;
-
+using IWantMyMummy.Areas.Identity.Data;
 
 namespace IWantMyMummy.Controllers
 {
     public class BurialsController : Controller
     {
-        private MummyContext _context { get; set; }
+        private MummyContext context { get; set; }
         private IWantMyMummyContext wantContext;
         private UserManager<IWantMyMummyUser> userManager;
 
 
 
-        public BurialsController(MummyContext context, UserManager<IWantMyMummyUser> tempUser, IWantMyMummyContext con)
+        public BurialsController(MummyContext ctx, UserManager<IWantMyMummyUser> tempUser, IWantMyMummyContext con)
         {
-            _context = context;
+            context = ctx;
             userManager = tempUser;
             wantContext = con;
         }
 
         // GET: Burials
-        public IActionResult Index(int pageNum = 0)
-        {
+        public IActionResult Index(string locationNS, int pageNum = 1)
+        { 
             int pageSize = 2;
+            ViewBag.LocationNS = locationNS;
             
             
             var role = wantContext.UserRoles
@@ -44,20 +44,55 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
+            var partialResult = (from b in context.Burial
+                                 join bsquare in context.BurialSquare
 
+                                 on b.BurialSquareId equals bsquare.BurialSquareId
+                                 select new JoinBurialSquareViewModel
+                                 {
+                                    Burials = b,
+                                    BurialSquare = bsquare,
+                                 })
+                                 .Where(x => x.BurialSquare.BurialLocationNs == locationNS || locationNS == null)
+                                 .Skip((pageNum - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToList();
 
-            var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
+            var mummyContext = context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
+            ViewBag.mummy = mummyContext.ToList();
+            
             return View(new BurialsViewModel
-                            { 
-                                PageNumberingInfo = new PageNumberingInfo
-                                {
-                                    NumItemsPerPage = pageSize,
-                                    CurrentPage = pageNum,
+            {
+                JoinBurialSquareViewModel = partialResult,
+                PageNumberingInfo = new PageNumberingInfo
+                {
+                    NumItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
 
-                                    TotalNumItems = _context.Burial.Count()
-                                }
-                            }
-                );;
+                    TotalNumItems = context.Burial.Count()
+                },
+
+                LocationNS = locationNS,
+            }
+                );
+            //return View(new BurialsViewModel
+            //                {   Burials = _context.Burial
+            //                                .Skip((pageNum - 1) * pageSize)
+            //                                .Take(pageSize)
+            //                                .ToList(),
+
+            //                    PageNumberingInfo = new PageNumberingInfo
+            //                    {
+            //                        NumItemsPerPage = pageSize,
+            //                        CurrentPage = pageNum,
+
+            //                        TotalNumItems = _context.Burial.Count()
+            //                    },
+
+            //                    LocationNS = locationNS,
+
+                                
+            //                });
         }
 
         // GET: Burials/Details/5
@@ -78,10 +113,11 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await _context.Burial
+            var burial = await context.Burial
                 .Include(b => b.BurialS)
                 .Include(b => b.BurialSquare)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
+
             if (burial == null)
             {
                 return NotFound();
@@ -102,8 +138,8 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
-            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
+            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId");
             return View();
         }
 
@@ -136,8 +172,8 @@ namespace IWantMyMummy.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(burial);
-                await _context.SaveChangesAsync();
+                context.Add(burial);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -155,13 +191,13 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
-            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
+            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId");
 
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = _context.BurialSquare.ToList(),
-                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
+                BurialSquare = context.BurialSquare.ToList(),
+                BurialQuadrantsList = context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
             };
 
@@ -178,8 +214,8 @@ namespace IWantMyMummy.Controllers
         {
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = _context.BurialSquare.ToList(),
-                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
+                BurialSquare = context.BurialSquare.ToList(),
+                BurialQuadrantsList = context.BurialQuadrant.ToList(),
                 Burial = new Burial {
                     BurialSquareId = SelectedSquareId,
                     BurialSubplot = BurialSubplot,
@@ -251,8 +287,8 @@ namespace IWantMyMummy.Controllers
             ViewBag.Sid = SelectedSquareId;
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = _context.BurialSquare.ToList(),
-                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
+                BurialSquare = context.BurialSquare.ToList(),
+                BurialQuadrantsList = context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
             };
             return View(viewModel);
@@ -294,8 +330,8 @@ namespace IWantMyMummy.Controllers
 
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
-                BurialSquare = _context.BurialSquare.ToList(),
-                BurialQuadrantsList = _context.BurialQuadrant.ToList(),
+                BurialSquare = context.BurialSquare.ToList(),
+                BurialQuadrantsList = context.BurialQuadrant.ToList(),
                 Burial = new Burial { },
                 SelectedSquareId = SelectedSquareId,
                 BurialSubplot = BurialSubplot,
@@ -335,13 +371,13 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await _context.Burial.FindAsync(id);
+            var burial = await context.Burial.FindAsync(id);
             if (burial == null)
             {
                 return NotFound();
             }
-            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
-            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
+            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
+            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
             return View(burial);
         }
 
@@ -370,8 +406,8 @@ namespace IWantMyMummy.Controllers
             {
                 try
                 {
-                    _context.Update(burial);
-                    await _context.SaveChangesAsync();
+                    context.Update(burial);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -386,8 +422,8 @@ namespace IWantMyMummy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
-            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
+            ViewData["BurialSubplot"] = new SelectList(context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
+            ViewData["BurialSquareId"] = new SelectList(context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
             return View(burial);
         }
 
@@ -408,7 +444,7 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
-            var burial = await _context.Burial
+            var burial = await context.Burial
                 .Include(b => b.BurialS)
                 .Include(b => b.BurialSquare)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
@@ -425,9 +461,9 @@ namespace IWantMyMummy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var burial = await _context.Burial.FindAsync(id);
-            _context.Burial.Remove(burial);
-            await _context.SaveChangesAsync();
+            var burial = await context.Burial.FindAsync(id);
+            context.Burial.Remove(burial);
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -442,7 +478,7 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            return _context.Burial.Any(e => e.BurialId == id);
+            return context.Burial.Any(e => e.BurialId == id);
         }
     }
 }

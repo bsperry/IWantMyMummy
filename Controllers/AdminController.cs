@@ -93,8 +93,6 @@ namespace IWantMyMummy.Controllers
                 ViewBag.UserId = u.UserId;
                 ViewBag.UserRole = u.RoleId;
 
-
-
             }
 
 

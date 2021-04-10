@@ -98,5 +98,7 @@ namespace IWantMyMummy.Models
         public virtual ICollection<CranialSample> CranialSample { get; set; }
         public virtual ICollection<Image> Image { get; set; }
         public virtual ICollection<RackSample> RackSample { get; set; }
+
+
     }
 }
