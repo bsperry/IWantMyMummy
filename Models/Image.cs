@@ -15,6 +15,7 @@ namespace IWantMyMummy.Models
         public string BurialSubplot { get; set; }
         public int? CranialId { get; set; }
         public byte[] Image1 { get; set; }
+        public string ImagePath { get; set; }
         public string ImageDescription { get; set; }
 
         public virtual Burial Burial { get; set; }

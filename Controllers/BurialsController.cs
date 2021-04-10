@@ -23,6 +23,7 @@ namespace IWantMyMummy.Controllers
         // GET: Burials
         public async Task<IActionResult> Index()
         {
+
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
             return View(await mummyContext.ToListAsync());
         }
