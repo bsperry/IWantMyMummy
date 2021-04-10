@@ -67,9 +67,8 @@ namespace IWantMyMummy.Controllers
                                {
                                    Burials = b,
                                    BurialSquare = bsquare,
-                               })
-                                             .Skip((pageNum - 1) * pageSize)
-                                             .Take(pageSize);
+                               });
+                                             
 
             var test = _context.Burial;
 
@@ -88,11 +87,15 @@ namespace IWantMyMummy.Controllers
             }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            ViewBag.mummy = mummyContext.ToList();
+            ViewBag.mummy = mummyContext
+                            .ToList();
             
             return View(new BurialsViewModel
             {
-                JoinBurialSquareViewModel = queryFilter.ToList(),
+                JoinBurialSquareViewModel = queryFilter
+                                            .Skip((pageNum - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList(),
                 PageNumberingInfo = new PageNumberingInfo
                 {
                     NumItemsPerPage = pageSize,
