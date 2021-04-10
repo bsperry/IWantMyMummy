@@ -6,18 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
+using Microsoft.AspNetCore.Identity;
+using IWantMyMummy.Data;
 using IWantMyMummy.Models.ViewModels;
-
+using IWantMyMummy.Areas.Identity.Data;
 
 namespace IWantMyMummy.Controllers
 {
     public class BurialsController : Controller
     {
-        private readonly MummyContext _context;
+        private MummyContext _context { get; set; }
+        private IWantMyMummyContext wantContext;
+        private UserManager<IWantMyMummyUser> userManager;
 
-        public BurialsController(MummyContext context)
+
+
+        public BurialsController(MummyContext ctx, UserManager<IWantMyMummyUser> tempUser, IWantMyMummyContext con)
         {
-            _context = context;
+            _context = ctx;
+            userManager = tempUser;
+            wantContext = con;
         }
 
         // GET: Burials
@@ -88,12 +96,69 @@ namespace IWantMyMummy.Controllers
             }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            return View(await mummyContext.ToListAsync());
+            ViewBag.mummy = mummyContext
+                            .ToList();
+            
+            return View(new BurialsViewModel
+            {
+                JoinBurialSquareViewModel = queryFilter
+                                            .Skip((pageNum - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToList(),
+                PageNumberingInfo = new PageNumberingInfo
+                {
+                    NumItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+
+                    TotalNumItems = queryFilter.Count()
+                },
+
+                //LocationNS = locationNS,
+            }
+                );
+            //return View(new BurialsViewModel
+            //                {   Burials = _context.Burial
+            //                                .Skip((pageNum - 1) * pageSize)
+            //                                .Take(pageSize)
+            //                                .ToList(),
+
+            //                    PageNumberingInfo = new PageNumberingInfo
+            //                    {
+            //                        NumItemsPerPage = pageSize,
+            //                        CurrentPage = pageNum,
+
+            //                        TotalNumItems = _context.Burial.Count()
+            //                    },
+
+            //                    LocationNS = locationNS,
+
+                                
+            //                });
+        }
+
+
+        //FILTERING
+        [HttpPost]
+        public IActionResult FilterLoc(string[] filter)
+        {
+            string filterId = string.Join('-', filter);
+            int pageNum = 1;
+            return RedirectToAction("Index", new { filterId, pageNum });
         }
 
         // GET: Burials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -103,6 +168,7 @@ namespace IWantMyMummy.Controllers
                 .Include(b => b.BurialS)
                 .Include(b => b.BurialSquare)
                 .FirstOrDefaultAsync(m => m.BurialId == id);
+
             if (burial == null)
             {
                 return NotFound();
@@ -111,6 +177,25 @@ namespace IWantMyMummy.Controllers
             return View(burial);
         }
 
+        // GET: Burials/Create
+        public IActionResult Create()
+        {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         //POST: Burials/Create
        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,6 +212,15 @@ namespace IWantMyMummy.Controllers
             "BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateAge,EstimateLivingStature,ToothAttrition," +
             "ToothEruption,PathologyAnomalies,EpiphysealUnion,DateFound,AgeAtDeath,AgeMethodSkull")] Burial burial)
         {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(burial);
@@ -139,6 +233,18 @@ namespace IWantMyMummy.Controllers
         //on get for create1 (will be deleteing Create Actions and using Create1,2,3 etc)
         public IActionResult Create1()
         {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
+            ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
+            ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
+
             BurialInformationViewModel viewModel = new BurialInformationViewModel
             {
                 BurialSquare = _context.BurialSquare.ToList(),
@@ -263,6 +369,7 @@ namespace IWantMyMummy.Controllers
         {
             SelectedSquareId = SelectedSquareId.Replace("%2F", "/");
             ViewBag.Sid = SelectedSquareId;
+
             return View();
         }
 
@@ -320,6 +427,15 @@ namespace IWantMyMummy.Controllers
         // GET: Burials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -342,6 +458,15 @@ namespace IWantMyMummy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BurialId,BurialNumber,BurialSubplot,BurialSquareId,BurialDepth,SouthToHead,SouthToFeet,WestToHead,WestToFeet,BurialSituation,BurialWrapping,BurialWrappingMaterial,BurialAdult,LengthOfRemains,SampleNumber,GenderGe,SexMethodSkull,GeFunctionTotal,GenderBodyCol,HeadDirection,BasilarSuture,VentralArc,SubpubicAngle,SciaticNotch,PubicBone,PreaurSulcus,MedialIpRamus,DorsalPitting,ForemanMagnum,FemurHead,HumerusHead,Osteophytosis,PubicSymphysis,FemurLength,HumerusLength,TibiaLength,Robust,SupraorbitalRidges,OrbitEdge,ParietalBossing,Gonian,NuchalCrest,ZygomaticCrest,CranialSuture,MaximumCranialLength,MaximumCranialBreadth,BasionBregmaHeight,BasionNasion,BasionProsthionLength,BizygomaticDiameter,NasionProsthion,MaximumNasalBreadth,InterorbitalBreadth,ArtifactsDescription,HairColor,PreservationIndex,HairTaken,SoftTissueTaken,BoneTaken,ToothTaken,TextileTaken,DescriptionOfTaken,ArtifactFound,EstimateAge,EstimateLivingStature,ToothAttrition,ToothEruption,PathologyAnomalies,EpiphysealUnion,DateFound,AgeAtDeath,AgeMethodSkull")] Burial burial)
         {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             if (id != burial.BurialId)
             {
                 return NotFound();
@@ -375,6 +500,15 @@ namespace IWantMyMummy.Controllers
         // GET: Burials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var role = wantContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            } 
+
             if (id == null)
             {
                 return NotFound();
@@ -405,6 +539,15 @@ namespace IWantMyMummy.Controllers
 
         private bool BurialExists(int id)
         {
+            var role = wantContext.UserRoles
+               .Where(r => r.UserId == userManager.GetUserId(User))
+               .FirstOrDefault();
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return _context.Burial.Any(e => e.BurialId == id);
         }
     }
