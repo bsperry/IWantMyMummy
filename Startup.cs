@@ -82,14 +82,20 @@ namespace IWantMyMummy
 
             app.UseEndpoints(endpoints =>
             {
+                //filter and page
+                endpoints.MapControllerRoute("filterId",
+                   "/{filterId}",
+                   new { Controller = "Home", action = "Index" });
                 endpoints.MapControllerRoute("locationns",
                     "{locationns}",
                     new { Controller = "Burials", action = "Index", pageNum = 1 }
                     );
                 endpoints.MapControllerRoute("pageNum",
-                    "All/{pageNum}",
+                    "Burials/All/Page{pageNum}",
                     new { Controller = "Burials", action = "Index" });
-                    
+                endpoints.MapControllerRoute("pageNum",
+                    "Burials/All/Page{pageNum}/{filterId}",
+                    new { Controller = "Burials", action = "Index" });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

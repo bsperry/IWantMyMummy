@@ -43,7 +43,7 @@
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
                         {
                             <a asp-controller="Burials" asp-action="Create1">Add Burial Development</a>
-                            <a asp-controller="Burials" asp-action="Index">My Burials</a>
+
                         }
 
                     </div>
@@ -57,7 +57,7 @@
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
                         {
                             <a asp-controller="BurialSquares" asp-action="Create">Add Burial Square</a>
-                            <a asp-controller="BurialSquares" asp-action="Index">My Burials</a>
+
                         }
 
                     </div>
@@ -74,22 +74,25 @@
                         @if ((ViewBag.Role == 2) || (ViewBag.Role == 3))
                         {
                             <a asp-controller="BurialQuadrants" asp-action="Create">Add Burial Quadrant</a>
-                            <a asp-controller="BurialQuadrants" asp-action="Index">My Burials</a>
+
                         }
 
                     </div>
                 </div>
                 <!--dropdown Images (all)-->
                 <div style="margin-left: 15px;" class="dropdown">
-                    <button class="dropdown-btn">Image</button>
+                    <button class="dropdown-btn">Additional</button>
                     <div class="dropdown-child">
                         <a asp-controller="Images" asp-action="Index">View Images</a>
-                        <a asp-controller="Images" asp-action="Create">Add Image</a>
+                        <a asp-controller="CranialSample" asp-action="Index">View Cranial Samples</a>
+                        <a asp-controller="RackSample" asp-action="Index">View Rack Samples</a>
 
                     </div>
                 </div>
 
+                <a href="https://byu.maps.arcgis.com/apps/CEWebViewer/viewer.html?3dWebScene=b97ad484af45498cacabc2bb9d43390b">Walkthrough</a>
                 <a asp-controller="Home" asp-action="MummyJokes">Mummy Jokes</a>
+
 
             </byu-menu>
 
@@ -104,35 +107,24 @@
             <byu-footer-column>
                 <span slot="header">Contact</span>
                 <p>
-                    BYU Speeches
-                    <br> 701 East University Parkway
-                    <br> Provo, Utah 84602
-                    <br> 888-888-8888
+                    Dr. Kerry Muhlestein
+                    <br> Ancient Scripture
+                    <br> ancientegypt@byu.edu
+                    <br> (555)-555-5555
                 </p>
-                <byu-footer-action-button>
-                    <a href="https://www.google.com" class="text-white" slot="actiontext">GIVE to Speeches</a>
-                </byu-footer-action-button>
-            </byu-footer-column>
-            <byu-footer-column>
-                <span slot="header">Affiliated Speeches</span>
-                <a href="https://www.byui.edu">BYU-Idaho Speeches</a>
-                <a href="https://www.byuh.edu">BYU-Hawaii Speeches</a>
-                <a href="https://womensconference.byu.edu">Women's Conference</a>
-                <a href="https://kennedy.byu.edu/lectures">Kennedy Center Lectures</a>
-                <a href="https://wheatley.byu.edu/">Wheatley Institution</a>
             </byu-footer-column>
             <byu-footer-column>
                 <span slot="header">Related Links</span>
+                <a href="https://religion.byu.edu/event/egyptian-excavation-exhibit">BYU Egypt Excavation</a>
+                <a href="https://www.byu.edu/">BYU</a>
                 <a href="https://www.churchofjesuschrist.org/">Church of Jesus Christ</a>
-                <a href="https://alumni.byu.edu/">BYU Alumni</a>
-                <a href="https://today.byu.edu/">BYU Today</a>
                 <a href="https://magazine.byu.edu/">BYU Magazine</a>
             </byu-footer-column>
             <byu-footer-column>
                 <span slot="header">Connect With Us</span>
                 <a>Feedback</a>
                 <a>Help</a>
-                <a>Follow BYU Speeches</a>
+                <a>Follow BYU</a>
                 <byu-social-media-links>
                     <!--Note: These all have text that will be hidden. The text should be there to help screen readers.-->
                     <a class="facebook" href="https://www.facebook.com">Facebook</a>

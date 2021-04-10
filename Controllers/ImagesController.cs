@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
 using IWantMyMummy.Models.ViewModels;
 using IWantMyMummy.Data;
+
 using IWantMyMummy.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
-
 
 namespace IWantMyMummy.Views
 {
@@ -25,7 +25,6 @@ namespace IWantMyMummy.Views
             _context = context;
             mummyContext = con;
             userManager = tempUser;
-
         }
 
         // GET: BurialSquares
@@ -39,6 +38,7 @@ namespace IWantMyMummy.Views
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
+
             var mumCon = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
             return View(await mumCon.ToListAsync());
         }
@@ -60,6 +60,16 @@ namespace IWantMyMummy.Views
             if (image == null)
             {
                 return NotFound();
+            }
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
             return View(image);
@@ -93,6 +103,16 @@ namespace IWantMyMummy.Views
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot");
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId");
             ViewData["CranialId"] = new SelectList(_context.CranialSample, "CranialId", "CranialId");
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(viewModel);
         }
 
@@ -113,6 +133,16 @@ namespace IWantMyMummy.Views
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", image.BurialSubplot);
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", image.BurialSquareId);
             ViewData["CranialId"] = new SelectList(_context.CranialSample, "CranialId", "CranialId", image.CranialId);
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(image);
         }
 
@@ -133,6 +163,16 @@ namespace IWantMyMummy.Views
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", image.BurialSubplot);
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", image.BurialSquareId);
             ViewData["CranialId"] = new SelectList(_context.CranialSample, "CranialId", "CranialId", image.CranialId);
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(image);
         }
 
@@ -172,6 +212,16 @@ namespace IWantMyMummy.Views
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", image.BurialSubplot);
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", image.BurialSquareId);
             ViewData["CranialId"] = new SelectList(_context.CranialSample, "CranialId", "CranialId", image.CranialId);
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(image);
         }
 
@@ -194,6 +244,16 @@ namespace IWantMyMummy.Views
                 return NotFound();
             }
 
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(image);
         }
 
@@ -205,11 +265,31 @@ namespace IWantMyMummy.Views
             var image = await _context.Image.FindAsync(id);
             _context.Image.Remove(image);
             await _context.SaveChangesAsync();
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool ImageExists(int id)
         {
+
+            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            var role = (mumContext.UserRoles
+    .Where(r => r.UserId == userManager.GetUserId(User))
+    .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return _context.Image.Any(e => e.ImageId == id);
         }
     }
