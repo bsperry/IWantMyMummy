@@ -21,7 +21,7 @@ namespace IWantMyMummy.Models
 
         public FilterLocation (string filterstring)
         {
-            FilterString = filterstring ?? "all-all-all-all-all-all-all-all";
+            FilterString = filterstring ?? "all-all-all-all-all-all-all";
             string[] filters = FilterString.Split("-");
             LocationNs = filters[0];
             LowPairNs = filters[1];
