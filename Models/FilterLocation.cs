@@ -31,7 +31,7 @@ namespace IWantMyMummy.Models
             HighPairEw = filters[5];
 
             //Other filters (I'd prefer to add them to a different class, but for time issues, let's not overcomplicate things)
-            Gender = filters[7];
+            Gender = filters[6];
         }
 
         public bool HasLocationNs => LocationNs.ToLower() != "all";
