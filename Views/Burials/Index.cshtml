@@ -17,7 +17,7 @@
 <div class="container">
     <h1>Burials</h1>
     <br /><br />
-    
+
     <partial name="_BurialFilterPartialView" />
 
     <p>
@@ -69,93 +69,99 @@
         <tbody>
             @foreach (var item in Model.JoinBurialSquareViewModel)
             {
-            <tr>
+                <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialDepth)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialDepth)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialSituation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialWrapping)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialAdult)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.LengthOfRemains)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.GenderGe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.HeadDirection)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialSituation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialWrapping)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialAdult)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.LengthOfRemains)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.GenderGe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.HeadDirection)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burials.BurialSubplot)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialSquare.BurialSquareId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Burials.BurialId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Burials.BurialId">Details</a> |
-                    <a asp-controller="Images" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
-                       asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Image</a> |
-
-
-
-                    <a asp-controller="CranialSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Cranial Data</a> |
-                    <a asp-controller="RackSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Rack Sample</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#@(item.Burials.GenderGe + item.Burials.BurialId)">Open Modal</button>
-
-
-                    <!-- Modal -->
-                    <div id="@(item.Burials.GenderGe + item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Burials.BurialSubplot)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialSquare.BurialSquareId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Burials.BurialId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Burials.BurialId">Details</a> |
+                        <a asp-controller="Images" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                           asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Image</a> |
 
 
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Burial# @item.Burials.BurialNumber</h4>
-                                    <button type="button" class="close" data-dismiss="modal"></button>
-                                    <span aria-hidden="true">&times;</span>
+                        <a asp-controller="CranialSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Cranial Data</a> |
+                        <a asp-controller="RackSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Rack Sample</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#@(item.Burials.GenderGe + item.Burials.BurialId)">Open Modal</button>
+
+
+                        <!-- Modal -->
+                        <div id="@(item.Burials.GenderGe + item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+
+
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Burial# @item.Burials.BurialNumber</h4>
+                                        <button type="button" class="close" data-dismiss="modal"></button>
+                                        <span aria-hidden="true">&times;</span>
+                                    </div>
+                                    <img src="~/img/pyramids-2159286_1920.jpg" />
+                                    <div class="modal-body">
+                                        <p>Depth: @item.Burials.BurialDepth</p>
+                                        <p>Situation: @item.Burials.BurialSituation</p>
+                                        <p>Wrapping: @item.Burials.BurialWrapping</p>
+                                        <p>Adult: @item.Burials.BurialAdult</p>
+                                        <p>Length of Remains: @item.Burials.LengthOfRemains</p>
+                                        <p>Gender: @item.Burials.GenderGe</p>
+                                        <p>Head Direction: @item.Burials.HeadDirection</p>
+                                        <p>Subplot: @item.Burials.BurialSubplot</p>
+                                        <p>Square: @item.Burials.BurialSquareId</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-                                <img src="~/img/pyramids-2159286_1920.jpg" />
-                                <div class="modal-body">
-                                    <p>Depth: @item.Burials.BurialDepth</p>
-                                    <p>Situation: @item.Burials.BurialSituation</p>
-                                    <p>Wrapping: @item.Burials.BurialWrapping</p>
-                                    <p>Adult: @item.Burials.BurialAdult</p>
-                                    <p>Length of Remains: @item.Burials.LengthOfRemains</p>
-                                    <p>Gender: @item.Burials.GenderGe</p>
-                                    <p>Head Direction: @item.Burials.HeadDirection</p>
-                                    <p>Subplot: @item.Burials.BurialSubplot</p>
-                                    <p>Square: @item.Burials.BurialSquareId</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                </td>
+                    </td>
 
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
-    <div class="btn-group pull-right m-1" page-info="@Model.PageNumberingInfo" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
+
+    @if (ViewBag.FilterString != null) {
+        <div class="btn-group pull-right m-1" page-info="@(Model.PageNumberingInfo)" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
+    } else
+    {
+        <div class="btn-group pull-right m-1" page-info="@(Model.PageNumberingInfo)" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
+    }
 
 </div>
 
