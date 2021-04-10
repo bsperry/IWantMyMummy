@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
 using IWantMyMummy.Models.ViewModels;
+using IWantMyMummy.Data;
+using IWantMyMummy.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace IWantMyMummy.Views
@@ -14,18 +17,30 @@ namespace IWantMyMummy.Views
     public class ImagesController : Controller
     {
         private readonly MummyContext _context;
+        private IWantMyMummyContext mummyContext;
+        private UserManager<IWantMyMummyUser> userManager;
 
-        public ImagesController(MummyContext context)
+        public ImagesController(MummyContext context, IWantMyMummyContext con, UserManager<IWantMyMummyUser> tempUser)
         {
             _context = context;
+            mummyContext = con;
+            userManager = tempUser;
+
         }
 
-        // GET: Images
+        // GET: BurialSquares
         public async Task<IActionResult> Index()
         {
+            var role = (mummyContext.UserRoles
+            .Where(r => r.UserId == userManager.GetUserId(User))
+            .FirstOrDefault());
 
-            var mummyContext = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
-            return View(await mummyContext.ToListAsync());
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+            var mumCon = _context.Image.Include(i => i.Burial).Include(i => i.BurialS).Include(i => i.BurialSquare).Include(i => i.Cranial);
+            return View(await mumCon.ToListAsync());
         }
 
         // GET: Images/Details/5
@@ -53,6 +68,10 @@ namespace IWantMyMummy.Views
         // GET: Images/Create
         public IActionResult Create(int BurialId, string Burial, string Subplot, int Num)
         {
+            if (BurialId <= 0)
+            {
+                return NotFound();
+            }
             ViewBag.Id = BurialId;
             ViewBag.Burial = Burial;
             ViewBag.Subplot = Subplot;

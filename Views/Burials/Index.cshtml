@@ -108,11 +108,10 @@
                     <a asp-action="Details" asp-route-id="@item.Burials.BurialId">Details</a> |
                     <a asp-controller="Images" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
                        asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Image</a> |
-
-
-
-                    <a asp-controller="CranialSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Cranial Data</a> |
-                    <a asp-controller="RackSamples" asp-action="Create" asp-route-id="@item.Burials.BurialId">Add Rack Sample</a> |
+                    <a asp-controller="CranialSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                       asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Cranial Data</a> |
+                    <a asp-controller="RackSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                       asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Rack Sample</a> |
                     <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#@(item.Burials.GenderGe + item.Burials.BurialId)">Open Modal</button>
 

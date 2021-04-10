@@ -5,122 +5,78 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container viewContainer">
+    <div class="text-center">
+        <h1>Rack</h1> 
+    </div>
+    <br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IsBag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TubeNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RankDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MlSize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foci)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Questions)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Conventional14cAgeBp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model._14cCalendarDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calibrated95CalendarDateMax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calibrated95CalendarDateMin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calibrated95CalendarDateSpan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calibrated95CalendarDateAvg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsBag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TubeNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RankDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MlSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foci)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocationNotes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Questions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conventional14cAgeBp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item._14cCalendarDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateSpan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateAvg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialWrapping)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <table class="table table-bordered table-striped table-hover squareTable">
+        <caption>All Racks</caption>
+
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Burial Id
+                </th>
+                <th>
+                    Rack Number : Shelf
+                </th>
+                <th>
+                    Rank Description
+                </th>
+                <th>
+                    TubeNumber
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Location Notes
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RackNumber):@Html.DisplayFor(modelItem => item.RackShelf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RankDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TubeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationNotes)
+                </td>
+
+                @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Edit</a> |
+                        <a asp-action="Details" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Details</a> |
+                        <a asp-action="Delete" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Delete</a>
+                    </td>
+                }
+                @if (ViewBag.Role == 1 || ViewBag.Role == null)
+                {
+                    <a asp-action="Details" asp-route-RackNumber="@item.RackNumber" asp-route-RackShelf="@item.RackShelf">Details</a>
+
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

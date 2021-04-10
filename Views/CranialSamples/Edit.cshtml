@@ -4,92 +4,81 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container viewContainer">
 
-<h1>Edit</h1>
+    <h1>Edit Cranial Sample</h1>
 
-<h4>CranialSample</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CranialId" />
-            <div class="form-group">
-                <label asp-for="BurialId" class="control-label"></label>
-                <select asp-for="BurialId" class="form-control" asp-items="ViewBag.BurialId"></select>
-                <span asp-validation-for="BurialId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SampleNumber" class="control-label"></label>
-                <input asp-for="SampleNumber" class="form-control" />
-                <span asp-validation-for="SampleNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RackShelf" class="control-label"></label>
-                <select asp-for="RackShelf" class="form-control" asp-items="ViewBag.RackShelf"></select>
-                <span asp-validation-for="RackShelf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RackNumber" class="control-label"></label>
-                <select asp-for="RackNumber" class="form-control" asp-items="ViewBag.RackNumber"></select>
-                <span asp-validation-for="RackNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxCranialLength" class="control-label"></label>
-                <input asp-for="MaxCranialLength" class="form-control" />
-                <span asp-validation-for="MaxCranialLength" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxCranialBreadth" class="control-label"></label>
-                <input asp-for="MaxCranialBreadth" class="form-control" />
-                <span asp-validation-for="MaxCranialBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionBregmaHeight" class="control-label"></label>
-                <input asp-for="BasionBregmaHeight" class="form-control" />
-                <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionNasion" class="control-label"></label>
-                <input asp-for="BasionNasion" class="form-control" />
-                <span asp-validation-for="BasionNasion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasionProsthionLength" class="control-label"></label>
-                <input asp-for="BasionProsthionLength" class="form-control" />
-                <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BizgomaticDiameter" class="control-label"></label>
-                <input asp-for="BizgomaticDiameter" class="form-control" />
-                <span asp-validation-for="BizgomaticDiameter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NasionProsthion" class="control-label"></label>
-                <input asp-for="NasionProsthion" class="form-control" />
-                <span asp-validation-for="NasionProsthion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxNasalBreadth" class="control-label"></label>
-                <input asp-for="MaxNasalBreadth" class="form-control" />
-                <span asp-validation-for="MaxNasalBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InterobitalBreadth" class="control-label"></label>
-                <input asp-for="InterobitalBreadth" class="form-control" />
-                <span asp-validation-for="InterobitalBreadth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CranialId" />
+                <div class="form-group">
+                    <input type="hidden" asp-for="BurialId" class="form-control" value="@Model.BurialId" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SampleNumber" class="control-label"></label>
+                    <input asp-for="SampleNumber" class="form-control" />
+                    <span asp-validation-for="SampleNumber" class="text-danger"></span>
+                </div>                
+                <div class="form-group">
+                    <label asp-for="MaxCranialLength" class="control-label"></label>
+                    <input asp-for="MaxCranialLength" class="form-control" />
+                    <span asp-validation-for="MaxCranialLength" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxCranialBreadth" class="control-label"></label>
+                    <input asp-for="MaxCranialBreadth" class="form-control" />
+                    <span asp-validation-for="MaxCranialBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BasionBregmaHeight" class="control-label"></label>
+                    <input asp-for="BasionBregmaHeight" class="form-control" />
+                    <span asp-validation-for="BasionBregmaHeight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BasionNasion" class="control-label"></label>
+                    <input asp-for="BasionNasion" class="form-control" />
+                    <span asp-validation-for="BasionNasion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BasionProsthionLength" class="control-label"></label>
+                    <input asp-for="BasionProsthionLength" class="form-control" />
+                    <span asp-validation-for="BasionProsthionLength" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BizgomaticDiameter" class="control-label"></label>
+                    <input asp-for="BizgomaticDiameter" class="form-control" />
+                    <span asp-validation-for="BizgomaticDiameter" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NasionProsthion" class="control-label"></label>
+                    <input asp-for="NasionProsthion" class="form-control" />
+                    <span asp-validation-for="NasionProsthion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxNasalBreadth" class="control-label"></label>
+                    <input asp-for="MaxNasalBreadth" class="form-control" />
+                    <span asp-validation-for="MaxNasalBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InterobitalBreadth" class="control-label"></label>
+                    <input asp-for="InterobitalBreadth" class="form-control" />
+                    <span asp-validation-for="InterobitalBreadth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
