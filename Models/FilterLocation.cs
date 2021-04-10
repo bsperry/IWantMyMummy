@@ -18,7 +18,6 @@ namespace IWantMyMummy.Models
             string[] filters = FilterString.Split("-");
             LocationNs = filters[0];
             LowPairNs = filters[1];
-
         }
 
         public bool HasLocationNs => LocationNs.ToLower() != "all";
