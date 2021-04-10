@@ -14,22 +14,22 @@
             <h2 class="text-center">Create With Quadrant</h2>
             <br /><br />
             <form asp-action="CreateWith" method="get">
-                    <div class="form-group">
-                        <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+                <div class="form-group">
+                    <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
 
-                        <select asp-for="SelectedSquareId" class="form-control">
-                            <option value="0">Select a Square</option>
-                            @foreach (var Sid in Model.BurialSquare)
-                            {
-                                <option>@Sid.BurialSquareId</option>
-                            }
-                        </select>
-                        <br />
-                        <p>
-                            <input type="submit" value="Continue With Quadrant" class="btn btn-primary" />
-                            <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
-                        </p>
-                    </div>
+                    <select asp-for="SelectedSquareId" class="form-control">
+                        <option value="0">Select a Square</option>
+                        @foreach (var Sid in Model.BurialSquare)
+                        {
+                            <option>@Sid.BurialSquareId</option>
+                        }
+                    </select>
+                    <br />
+                    <p>
+                        <input type="submit" value="Continue With Quadrant" class="btn btn-primary withandwithoutbtn" />
+                        @*<a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>*@
+                    </p>
+                </div>
             </form>
         </div>
 
@@ -50,15 +50,16 @@
                     </select>
                     <br />
                     <p>
-                        <input type="submit" value="Continue Without Quadrant" class="btn btn-primary" />
-                        <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
+                        <input type="submit" value="Continue Without Quadrant" class="btn btn-primary withandwithoutbtn" />
+
                     </p>
                 </div>
             </form>
         </div>
     </div>
+    <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
     <div>
-        <a asp-action="Index">Back to Burials</a>
+        <a class="backLink" asp-action="Index">Back to Burials</a>
     </div>
 </div>
 
