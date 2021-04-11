@@ -39,11 +39,12 @@ namespace IWantMyMummy.Controllers
 
             var viewModel =
                     from user in context.Users
-                    join userrole in context.UserRoles on user.Id equals userrole.UserId
-                    join roledef in context.Roles on userrole.RoleId equals roledef.Id
-                    orderby user.LastName
+                    join userrole in context.UserRoles on user.Id equals userrole.UserId into ps
+                    from userrole in ps.DefaultIfEmpty()
+                    join roledef in context.Roles on userrole.RoleId equals roledef.Id into rd
+                    from roledef in rd.DefaultIfEmpty()
+                    // orderby user.LastName
                     select new UsersRolesViewModel { mummyUser = user, identityUserRole = userrole, identityRole = roledef };
-
 
             return View(viewModel);
         }
