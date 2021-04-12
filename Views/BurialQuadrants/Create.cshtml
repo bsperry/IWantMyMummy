@@ -6,89 +6,103 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (ViewBag.Role == 2 || ViewBag.Role == 3)
+{
+    <div class="container viewContainer">
+        <h1>Create Burial Quadrant</h1>
+        <div class="row">
+            <div class="col-md-4 col-centered">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model.BurialQuadrant.BurialSquareId" class="control-label">Burial Square ID</label>
+                        <select asp-for="@Model.BurialQuadrant.BurialSquareId" class="form-control">
+                            @foreach (var SquareID in Model.BurialSquare)
+                            {
+                                <option>@SquareID.BurialSquareId</option>
+                            }
 
-<div class="container viewContainer">
-    <h1>Create Burial Quadrant</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="@Model.BurialQuadrant.BurialSquareId" class="control-label">Burial Square ID</label>
-                    <select asp-for="@Model.BurialQuadrant.BurialSquareId" class="form-control">
-                        @foreach (var SquareID in Model.BurialSquare)
-                        {
-                            <option>@SquareID.BurialSquareId</option>
-                        }
+                        </select>
                         <br />
+                        <p>
+                            <a class="btn btn-primary" asp-controller="BurialSquares" asp-action="Create">Create New Burial Square</a>
+                        </p>
 
-                    </select>
-                    <p>
-                        <a class="btn btn-primary" asp-controller="BurialSquares" asp-action="Create">Create New Burial Square</a>
-                    </p>
+                        <span asp-validation-for="@Model.BurialQuadrant.BurialSquareId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.BurialQuadrant.BurialSubplot" class="control-label">Burial Quadrant</label>
+                        <select asp-for="@Model.BurialQuadrant.BurialSubplot" class="form-control">
+                            <option></option>
+                            <option>NE</option>
+                            <option>NW</option>
+                            <option>SE</option>
+                            <option>SW</option>
+                        </select>
 
-                    <span asp-validation-for="@Model.BurialQuadrant.BurialSquareId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.BurialQuadrant.BurialSubplot" class="control-label">Burial Quadrant</label>
-                    <select asp-for="@Model.BurialQuadrant.BurialSubplot" class="form-control">
-                        <option></option>
-                        <option>NE</option>
-                        <option>NW</option>
-                        <option>SE</option>
-                        <option>SW</option>
-                    </select>
-
-                    @*@foreach (var subid in Model.BurialQuadrantsList)
+                        @*@foreach (var subid in Model.BurialQuadrantsList)
+                {
+                    if (@subid.BurialSubplot != @ViewBag.AvailPlots[0])
+                    {
+                        if (Model.Subplots.Contains(subid.BurialSubplot) == false)
                         {
-                            if (@subid.BurialSubplot != @ViewBag.AvailPlots[0])
-                            {
-                                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
-                                {
-                                    Model.Subplots.Add(@subid.BurialSubplot);
-                                }
-                            }
-                            if (@subid.BurialSubplot != @ViewBag.AvailPlots[1])
-                            {
-                                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
-                                {
-                                    Model.Subplots.Add(@subid.BurialSubplot);
-                                }
-                            }
-                            if (@subid.BurialSubplot != @ViewBag.AvailPlots[2])
-                            {
-                                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
-                                {
-                                    Model.Subplots.Add(@subid.BurialSubplot);
-                                }
-                            }
-                            if (@subid.BurialSubplot != @ViewBag.AvailPlots[3])
-                            {
-                                if (Model.Subplots.Contains(subid.BurialSubplot) == false)
-                                {
-                                    Model.Subplots.Add(@subid.BurialSubplot);
-                                }
-                            }
+                            Model.Subplots.Add(@subid.BurialSubplot);
                         }
-                        @foreach (var subid in Model.BurialQuadrant.BurialSubplot)
+                    }
+                    if (@subid.BurialSubplot != @ViewBag.AvailPlots[1])
+                    {
+                        if (Model.Subplots.Contains(subid.BurialSubplot) == false)
                         {
-                            <option>@subid</option>
-                        }</select>*@
+                            Model.Subplots.Add(@subid.BurialSubplot);
+                        }
+                    }
+                    if (@subid.BurialSubplot != @ViewBag.AvailPlots[2])
+                    {
+                        if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                        {
+                            Model.Subplots.Add(@subid.BurialSubplot);
+                        }
+                    }
+                    if (@subid.BurialSubplot != @ViewBag.AvailPlots[3])
+                    {
+                        if (Model.Subplots.Contains(subid.BurialSubplot) == false)
+                        {
+                            Model.Subplots.Add(@subid.BurialSubplot);
+                        }
+                    }
+                }
+                @foreach (var subid in Model.BurialQuadrant.BurialSubplot)
+                {
+                    <option>@subid</option>
+                }</select>*@
 
 
-                    <span asp-validation-for="@Model.BurialQuadrant.BurialSubplot" class="text-danger"></span>
+                        <span asp-validation-for="@Model.BurialQuadrant.BurialSubplot" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create Burial Quadrant" class="btn btn-primary" />
+                    </div>
+                </form>
+                <div>
+                    <a asp-action="Index">Back to Quadrants</a>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create Burial Quadrant" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
+
         </div>
-    </div>
 
-    <div>
-        <a asp-action="Index">Back to Quadrants</a>
+
     </div>
-</div>
+}
+
+else
+{
+    <div class="container text-center">
+        <h1>Sorry you do not have permission to view this page. <img class="mummyImage" src="~/img/noun_Mummy_3417443 (2).png" /></h1>
+    </div>
+}
+
+
+
 
 
 @section Scripts {

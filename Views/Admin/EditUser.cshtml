@@ -6,41 +6,56 @@
 @model IWantMyMummy.Areas.Identity.Data.IWantMyMummyUser
 
 
+@if (ViewBag.Role == 3)
+{
 
     <div class="container viewContainer">
         <h1>Edit User</h1>
-              <form asp-controller="Admin" asp-action="EditUser" method="post">
-                  <label class="form-label" asp-for="Email">Email</label>
-                  <input class="form-control" type="email" asp-for="Email" value="@ViewBag.Email" />
+        <form asp-controller="Admin" asp-action="EditUser" method="post">
+            <label class="form-label" asp-for="Email">Email</label>
+            <input class="form-control" type="email" asp-for="Email" value="@ViewBag.Email" />
 
-                  <label class="form-label" asp-for="Firstname">First Name</label>
-                  <input class="form-control" type="text" asp-for="Firstname" value="@ViewBag.FirstName" />
+            <label class="form-label" asp-for="Firstname">First Name</label>
+            <input class="form-control" type="text" asp-for="Firstname" value="@ViewBag.FirstName" />
 
-                  <label class="form-label" asp-for="LastName">Last Name</label>
-                  <input class="form-control" type="text" asp-for="LastName" value="@ViewBag.LastName" />
+            <label class="form-label" asp-for="LastName">Last Name</label>
+            <input class="form-control" type="text" asp-for="LastName" value="@ViewBag.LastName" />
 
-                  <label class="form-label" asp-for="PhoneNumber">Phone Number</label>
-                  <input class="form-control" type="text" asp-for="PhoneNumber" value="@ViewBag.PhoneNumber" />
-                  <br />
-                  <label class="form-label">Role</label><br />
-                  <select class="form-select" style="border-color: lightgrey; padding: 7px; border-radius: 5px;" name="RoleId" id="RoleId" >
-                      @for (int i = 1; i <= 3; i++)
-                      {
-                          @if (ViewBag.UserRole == i.ToString())
-                          {
-                              <option value="@i" selected>@ViewBag.RoleList[i - 1]</option>
-                          }
-                          else
-                          {
-                              <option value="@i">@ViewBag.RoleList[i - 1]</option>
-                          }
-                      }
-                  </select>
+            <label class="form-label" asp-for="PhoneNumber">Phone Number</label>
+            <input class="form-control" type="text" asp-for="PhoneNumber" value="@ViewBag.PhoneNumber" />
+            <br />
+            <label class="form-label">Role</label><br />
+            <select class="form-select" style="border-color: lightgrey; padding: 7px; border-radius: 5px;" name="RoleId" id="RoleId">
+                @for (int i = 1; i <= 3; i++)
+                {
+                    @if (ViewBag.UserRole == i.ToString())
+                    {
+                        <option value="@i" selected>@ViewBag.RoleList[i - 1]</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@ViewBag.RoleList[i - 1]</option>
+                    }
+                }
+            </select>
 
-                  <br /><br />
-                  <input type="hidden" value="@ViewBag.UserId" name="Id" id="Id" />
-                  <input class="btn btn-primary" type="submit" value="Save" />
-              </form>
+            <br /><br />
+            <input type="hidden" value="@ViewBag.UserId" name="Id" id="Id" />
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </form>
     </div>
+
+}
+
+else
+{
+    <div class="container text-center">
+        <h1>Sorry you do not have permission to view this page. <img class="mummyImage" src="~/img/noun_Mummy_3417443 (2).png" /></h1>
+    </div>
+}
+
+
+
+
 
 

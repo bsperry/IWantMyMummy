@@ -9,7 +9,7 @@
     <h1>Create Burial without Quadrant</h1>
     <hr/>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-centered">
             <form asp-action="Create1">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div id="squareid/subplot2">
@@ -112,7 +112,7 @@
                 </div>
                 <div id="gender/sex3">
                     <div class="form-group">
-                        <label asp-for="@Model.GenderGe" class="control-label">GenderGe</label>
+                        <label asp-for="@Model.GenderGe" class="control-label">Gender</label>
                         <select asp-for="@Model.GenderGe" class="form-control">
                             <option>Select an Option</option>
                             <option value="M">Male</option>
@@ -132,7 +132,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label asp-for="@Model.GeFunctionTotal" class="control-label">Ge Function Total</label>
+                        <label asp-for="@Model.GeFunctionTotal" class="control-label">Gender Function Total</label>
                         <input asp-for="@Model.GeFunctionTotal" class="form-control" />
                         <span asp-validation-for="@Model.Burial.GeFunctionTotal" class="text-danger"></span>
                     </div>

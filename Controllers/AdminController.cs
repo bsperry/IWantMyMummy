@@ -37,16 +37,17 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-            var viewModel =
-                    from user in context.Users
-                    join userrole in context.UserRoles on user.Id equals userrole.UserId
-                    join roledef in context.Roles on userrole.RoleId equals roledef.Id
-                    orderby user.LastName
-                    select new UsersRolesViewModel { mummyUser = user, identityUserRole = userrole, identityRole = roledef };
+                var viewModel =
+        from user in context.Users
+        join userrole in context.UserRoles on user.Id equals userrole.UserId
+        join roledef in context.Roles on userrole.RoleId equals roledef.Id
+        orderby user.LastName
+        select new UsersRolesViewModel { mummyUser = user, identityUserRole = userrole, identityRole = roledef };
 
 
-            return View(viewModel);
-        }
+                return View(viewModel);
+            }
+
 
         [HttpGet("EditUser")]
         public IActionResult EditUser(string userId)
