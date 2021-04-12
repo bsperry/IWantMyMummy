@@ -322,3 +322,8 @@ html, body {
 
 }
 
+.burialFilter {
+    margin-top: 5px !important;
+    margin-bottom: 8px !important;
+    font-size: 14px;
+}

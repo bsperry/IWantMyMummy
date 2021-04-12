@@ -29,7 +29,7 @@ namespace IWantMyMummy.Controllers
         }
 
         // GET: Burials
-        public IActionResult Index(string filterId, int pageNum = 1)
+        public IActionResult Index(string sortorder, string filterId, int pageNum = 1)
         {
             int pageSize = 5;
             //ViewBag.LocationNS = locationNS;
@@ -96,6 +96,10 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.HighPairEw)
                                       .Distinct()
                                       .ToList();
+            ViewBag.SubPlotFilter = _context.BurialQuadrant
+                                        .Select(b => b.BurialSubplot)
+                                        .Distinct()
+                                        .ToList();
             ViewBag.Gender = _context.Burial
                                       .Select(b => b.GenderGe)
                                       .Distinct()
@@ -106,17 +110,14 @@ namespace IWantMyMummy.Controllers
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationNs == filterLoc.LocationNs);
             }
-
             if (filterLoc.HasLowPairNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.LowPairNs.ToString() == filterLoc.LowPairNs);
             }
-
             if (filterLoc.HasHighPairNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairNs.ToString() == filterLoc.HighPairNs);
             }
-
             if (filterLoc.HasLocationEw)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationEw == filterLoc.LocationEw);
@@ -128,6 +129,10 @@ namespace IWantMyMummy.Controllers
             if (filterLoc.HasHighPairEw)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairEw.ToString() == filterLoc.HighPairEw);
+            }
+            if (filterLoc.HasSubPlot)
+            {
+                queryFilter = queryFilter.Where(b => b.Burials.BurialSubplot == filterLoc.SubPlotFilter);
             }
             if (filterLoc.HasGender)
             {
@@ -162,7 +167,8 @@ namespace IWantMyMummy.Controllers
         {
             string filterId = string.Join('-', filter);
             int pageNum = 1;
-            return RedirectToAction("Index", new { filterId, pageNum });
+            string order = "";
+            return RedirectToAction("Index", new {order, filterId, pageNum });
         }
 
         // GET: Burials/Details/5
@@ -182,8 +188,8 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -256,9 +262,9 @@ namespace IWantMyMummy.Controllers
         public IActionResult Create1(string Addition, string SelectedSquareId, string BurialSubplot, int BurialNumber,
             int BurialDepth, int SouthToHead, int SouthToFeet, int WestToHead, int WestToFeet, string BurialSituation,
             string BurialWrapping, string BurialWrappingMaterial, bool BurialAdult, int LengthOfRemains, int SampleNumber, string GenderGe,
-            string HeadDirection, double GeFunctionTotal, 
+            string HeadDirection, double GeFunctionTotal, bool SexMethodSkull,
 
-            bool SexMethodSkull, string GenderBodyCol, bool BasilarSuture,
+            string GenderBodyCol, bool BasilarSuture,
             int VentralArc, int SubpubicAngle, int SciaticNotch, int PubicBone, int PreaurSulcus, int MedialIpRamus, int DorsalPitting,
             double ForemanMagnum, double FemurHead, double HumerusHead, int Osteophytosis, int PubicSymphysis, double FemurLength,
             double HumerusLength, double TibiaLength, int Robust, int SupraorbitalRidges, int OrbitEdge, int ParietalBossing, int Gonian,
@@ -288,6 +294,7 @@ namespace IWantMyMummy.Controllers
                 burial.BurialAdult = BurialAdult;
                 burial.LengthOfRemains = LengthOfRemains;
                 burial.SampleNumber = SampleNumber;
+                burial.SexMethodSkull = SexMethodSkull;
                 burial.GenderGe = GenderGe;
                 burial.HeadDirection = HeadDirection;
                 burial.GeFunctionTotal = GeFunctionTotal;
@@ -296,7 +303,7 @@ namespace IWantMyMummy.Controllers
                 if (Addition == "Additional")
                 {
 
-                    burial.SexMethodSkull = SexMethodSkull;
+                    
                     burial.GenderBodyCol = GenderBodyCol;
                     burial.BasilarSuture = BasilarSuture;
                     burial.VentralArc = VentralArc;
