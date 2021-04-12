@@ -43,8 +43,6 @@ namespace IWantMyMummy.Controllers
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
 
-
-
             //var partialResult = (from b in _context.Burial
             //                     join bsquare in _context.BurialSquare
 
@@ -155,8 +153,7 @@ namespace IWantMyMummy.Controllers
                     TotalNumItems = queryFilter.Count()
                 },
 
-            }
-                );
+            });
         }
 
         //FILTERING
@@ -259,8 +256,9 @@ namespace IWantMyMummy.Controllers
         public IActionResult Create1(string Addition, string SelectedSquareId, string BurialSubplot, int BurialNumber,
             int BurialDepth, int SouthToHead, int SouthToFeet, int WestToHead, int WestToFeet, string BurialSituation,
             string BurialWrapping, string BurialWrappingMaterial, bool BurialAdult, int LengthOfRemains, int SampleNumber, string GenderGe,
+            string HeadDirection, double GeFunctionTotal, 
 
-            bool SexMethodSkull, double GeFunctionTotal, string HeadDirection, string GenderBodyCol, bool BasilarSuture,
+            bool SexMethodSkull, string GenderBodyCol, bool BasilarSuture,
             int VentralArc, int SubpubicAngle, int SciaticNotch, int PubicBone, int PreaurSulcus, int MedialIpRamus, int DorsalPitting,
             double ForemanMagnum, double FemurHead, double HumerusHead, int Osteophytosis, int PubicSymphysis, double FemurLength,
             double HumerusLength, double TibiaLength, int Robust, int SupraorbitalRidges, int OrbitEdge, int ParietalBossing, int Gonian,
@@ -291,14 +289,14 @@ namespace IWantMyMummy.Controllers
                 burial.LengthOfRemains = LengthOfRemains;
                 burial.SampleNumber = SampleNumber;
                 burial.GenderGe = GenderGe;
+                burial.HeadDirection = HeadDirection;
+                burial.GeFunctionTotal = GeFunctionTotal;
                 
             
                 if (Addition == "Additional")
                 {
 
                     burial.SexMethodSkull = SexMethodSkull;
-                    burial.GeFunctionTotal = GeFunctionTotal;
-                    burial.HeadDirection = HeadDirection;
                     burial.GenderBodyCol = GenderBodyCol;
                     burial.BasilarSuture = BasilarSuture;
                     burial.VentralArc = VentralArc;
