@@ -38,13 +38,13 @@
                             <partial name="_BurialFilterGenderPartialView" />
                         </div>
                     </div>
-
                 </div>
                 <br /><br />
-                <!--Characteristics-->
                 <div class="row">
                     <br />
                     <div class="joke">
+                        <!--Characteristics-->
+
                         <a class="btn btn-primary" data-toggle="collapse" href="#characteristics" role="button" aria-expanded="false" aria-controls="filter2">
                             Filter by Characteristics
                         </a>
@@ -53,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <br /><br /><br />
                 <div class="row">
                     <div class="joke">
@@ -64,6 +65,7 @@
 
         <div class="col-10">
             <a class="btn btn-primary" asp-action="Create1">Create New Burial</a>
+            <br /><br />
             <table class="table table-bordered table-striped table-hover table-sm text-center align-top">
                 <thead class="thead-dark">
                     <tr>
@@ -239,8 +241,6 @@
                                     <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
                                 }
                             </td>
-                        }
-
                     </tr>
                     }
                 </tbody>
