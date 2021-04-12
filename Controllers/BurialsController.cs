@@ -105,6 +105,10 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.GenderGe)
                                       .Distinct()
                                       .ToList();
+            ViewBag.HeadDirection = _context.Burial
+                                        .Select(b => b.HeadDirection)
+                                        .Distinct()
+                                        .ToList();
 
 
             if (filterLoc.HasLocationNs)
@@ -138,6 +142,10 @@ namespace IWantMyMummy.Controllers
             if (filterLoc.HasGender)
             {
                 queryFilter = queryFilter.Where(b => b.Burials.GenderGe == filterLoc.Gender);
+            }
+            if (filterLoc.HasHeadDirection)
+            {
+                queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == filterLoc.HeadDirection);
             }
 
             var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);

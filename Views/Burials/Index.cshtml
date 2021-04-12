@@ -14,6 +14,7 @@
     <div class="row text-left">
         <div class="col-2">
             <!--Filter-->
+            <!--Location-->
             <form asp-controller="Burials" asp-action="FilterLoc" method="post" class="burialForm form-inline">
                 <div class="row">
                     <div class="joke">
@@ -28,12 +29,30 @@
                 <br /><br />
                 <div class="row">
                     <br />
+                    <!--Gender-->
                     <div class="joke">
                         <a class="btn btn-primary" data-toggle="collapse" href="#filter2" role="button" aria-expanded="false" aria-controls="filter2">
                             Filter by Gender
                         </a>
                         <div class="collapse" id="filter2">
                             <partial name="_BurialFilterGenderPartialView" />
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
+                <div class="row">
+                    <div class="joke">
+                        <a class="btn btn-secondary" asp-controller="Burials" asp-action="Index">Clear Filters</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="joke">
+                        <a class="btn btn-primary" data-toggle="collapse" href="#filter2" role="button" aria-expanded="false" aria-controls="filter2">
+                            Filter by Characteristics
+                        </a>
+                        <div class="collapse" id="filter2">
+                            <partial name="_BurialFilterCharacteristicsPartialView" />
                         </div>
                     </div>
                 </div>

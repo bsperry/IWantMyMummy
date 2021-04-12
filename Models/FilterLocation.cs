@@ -20,11 +20,12 @@ namespace IWantMyMummy.Models
         public string Gender { get; set; }
 
         //Mummy Characteristics
+        public string HeadDirection { get; set; }
 
 
         public FilterLocation (string filterstring)
         {
-            FilterString = filterstring ?? "all-all-all-all-all-all-all-all";
+            FilterString = filterstring ?? "all-all-all-all-all-all-all-all-all";
             string[] filters = FilterString.Split("-");
             LocationNs = filters[0];
             LowPairNs = filters[1];
@@ -36,6 +37,10 @@ namespace IWantMyMummy.Models
 
             //Other filters (I'd prefer to add them to a different class, but for time issues, let's not overcomplicate things)
             Gender = filters[7];
+
+            //Mummy Characteristics
+            HeadDirection = filters[8];
+
         }
 
         public bool HasLocationNs => LocationNs.ToLower() != "all";
@@ -47,6 +52,7 @@ namespace IWantMyMummy.Models
         public bool HasSubPlot => SubPlotFilter.ToLower() != "all";
 
         public bool HasGender => Gender.ToLower() != "all";
+        public bool HasHeadDirection => HeadDirection.ToLower() != "all";
 
     }
 }
