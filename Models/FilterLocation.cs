@@ -19,6 +19,8 @@ namespace IWantMyMummy.Models
 
         public string Gender { get; set; }
 
+        //Mummy Characteristics
+
 
         public FilterLocation (string filterstring)
         {

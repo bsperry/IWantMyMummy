@@ -28,8 +28,8 @@ namespace IWantMyMummy.Controllers
             wantContext = con;
         }
 
-        // GET: Burials
-        public IActionResult Index(string sortorder, string filterId, int pageNum = 1)
+        // GET: Burials (filters and sorts)
+        public IActionResult Index(string sortString, string filterId, int pageNum = 1)
         {
             int pageSize = 5;
             //ViewBag.LocationNS = locationNS;
@@ -57,6 +57,7 @@ namespace IWantMyMummy.Controllers
             //                     .Take(pageSize)
             //                     .ToList();
 
+
             var queryFilter = (from b in _context.Burial
                                join bsquare in _context.BurialSquare on b.BurialSquareId equals bsquare.BurialSquareId
                                select new JoinBurialSquareViewModel
@@ -65,9 +66,15 @@ namespace IWantMyMummy.Controllers
                                    BurialSquare = bsquare,
                                });
 
+            //sort
+            if (sortString != null)
+            {
+                queryFilter = queryFilter.OrderByDescending(b => b.Burials.BurialDepth);
+            }
 
             var test = _context.Burial;
 
+            //Filter
 
             var filterLoc = new FilterLocation(filterId);
             ViewBag.FilterString = filterId;
@@ -167,8 +174,18 @@ namespace IWantMyMummy.Controllers
         {
             string filterId = string.Join('-', filter);
             int pageNum = 1;
-            string order = "";
-            return RedirectToAction("Index", new {order, filterId, pageNum });
+            string sortString = "";
+            return RedirectToAction("Index", new {sortString, filterId, pageNum });
+        }
+
+        //SORTING
+        [HttpPost]
+        public IActionResult Sort(string sort)
+        {
+            string sortString = string.Join('-', sort);
+            int pageNum = 1;
+            string filterId = "";
+            return RedirectToAction("Index", new { sortString, filterId, pageNum });
         }
 
         // GET: Burials/Details/5
@@ -476,7 +493,7 @@ namespace IWantMyMummy.Controllers
             return View(viewModel);
         }
         // GET: Burials/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
@@ -489,8 +506,8 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -498,6 +515,7 @@ namespace IWantMyMummy.Controllers
             }
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
+            ViewBag.Subplot = burial.BurialSubplot;
             return View(burial);
         }
 
@@ -534,8 +552,8 @@ namespace IWantMyMummy.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {

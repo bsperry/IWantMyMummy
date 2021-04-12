@@ -13,6 +13,22 @@
     <br />
     <div class="row text-left">
         <div class="col-2">
+            <div class="row">
+                <div class="joke">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#sort" role="button" aria-expanded="false" aria-controls="filter1">
+                        Sort By
+                    </a>
+                    <div class="collapse" id="sort">
+                        <!--sort-->
+                        <form asp-controller="Burials" asp-action="Sort" method="post">
+                            <input onclick="this.form.submit()" id="sort" name="sort" type="checkbox" value="depth" />
+                            <label for="sortDepth">Depth</label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!--Filter-->
             <form asp-controller="Burials" asp-action="FilterLoc" method="post" class="burialForm form-inline">
                 <div class="row">
                     <div class="joke">
@@ -215,9 +231,12 @@
 
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Burials.BurialId">Edit</a>
+                                <a asp-action="Edit" asp-route-id="@item.Burials.BurialId" asp-route-sub="@item.Burials.BurialSubplot">Edit</a>
                                 <a asp-action="Details" asp-route-id="@item.Burials.BurialId">Details</a>
-                                <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
+                                @if (ViewBag.Role == 3)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
+                                }
                             </td>
                         }
 
