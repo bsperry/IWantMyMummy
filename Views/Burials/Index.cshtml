@@ -38,6 +38,7 @@
                             <partial name="_BurialFilterGenderPartialView" />
                         </div>
                     </div>
+
                 </div>
                 <br /><br />
                 <!--Characteristics-->
@@ -62,13 +63,9 @@
         </div>
 
         <div class="col-10">
-            @if (ViewBag.Role == 2 || ViewBag.Role == 3)
-            {
-                <a class="btn btn-primary" asp-action="Create1">Create New Burial</a>
-                <br /><br />
-            }
-
-            <table class="table table-bordered table-striped table-hover table-sm text-center align-top">
+            <a class="btn btn-primary" asp-action="Create1">Create New Burial</a>
+            <br /><br />
+            <table class="table table-bordered table-striped table-hover table-sm table-responsive text-center align-top">
                 <thead class="thead-dark">
                     <tr>
 
@@ -104,18 +101,15 @@
                             Square
                         </th>
                         <th>Quick View</th>
-                        @if (ViewBag.Role == 2 || ViewBag.Role == 3)
-                        {
-                            <th>Add</th>
-                            <th></th>
-                        }
-
+                        <th>Add</th>
+                        <th></th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.JoinBurialSquareViewModel)
                     {
+                     
                     <tr>
 
                         <td>
@@ -124,24 +118,34 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Burials.BurialDepth)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Burials.BurialWrapping)
-                        </td>
+
+                        @if (item.Burials.BurialWrapping == "B")
+                        {
+                            <td>Bones</td>
+                        }
+                        @if (item.Burials.BurialWrapping == "W")
+                        {
+                            <td>Wrapped</td>
+                        }
+
+                        @if (item.Burials.BurialWrapping == "H")
+                        {
+                            <td>Half Wrapped</td>
+                        }
+
+
 
                         @if (item.Burials.BurialAdult == true)
                         {
-                            <td>Adult</td>
-
+                            <td>Adult</td>               
                         }
                         @if (item.Burials.BurialAdult == false)
                         {
-                            <td>Child</td>
-
+                            <td>Child</td>               
                         }
                         @if (item.Burials.BurialAdult == null)
                         {
-                            <td></td>
-
+                            <td></td>                
                         }
                         <td>
                             @Html.DisplayFor(modelItem => item.Burials.LengthOfRemains)
@@ -178,7 +182,7 @@
                                             <button type="button" class="close" data-dismiss="modal"></button>
                                             <span aria-hidden="true">&times;</span>
                                         </div>
-                                        <img src="~/img/pyramids-2159286_1920.jpg" />
+                                        <img src="~/img/img@(item.Burials.BurialNumber).JPG" />
                                         <div class="modal-body">
                                             <p>Depth: @item.Burials.BurialDepth</p>
                                             <p>Situation: @item.Burials.BurialSituation</p>
@@ -198,37 +202,35 @@
                                 </div>
                             </div>
                         </td>
-                        @if (ViewBag.Role == 2 || ViewBag.Role == 3)
-                        {
-                            <td>
-                                <!--MODAL FOR ADDING IMAGES< CRANIAL AND RACK -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@(item.Burials.BurialWrapping + item.Burials.BurialId)">Add</button>
-                                <div id="@(item.Burials.BurialWrapping+ item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
+                        <td>
+                            <!--MODAL FOR ADDING IMAGES< CRANIAL AND RACK -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@(item.Burials.BurialWrapping + item.Burials.BurialId)">Add</button>
+                            <div id="@(item.Burials.BurialWrapping+ item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
 
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Burial# @item.Burials.BurialNumber</h4>
-                                                <button type="button" class="close" data-dismiss="modal"></button>
-                                                <span aria-hidden="true">&times;</span>
-                                            </div>
-                                            <img src="~/img/pyramids-2159286_1920.jpg" />
-                                            <a asp-controller="Images" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
-                                               asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Image</a>
-                                            <a asp-controller="CranialSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
-                                               asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Cranial Data</a>
-                                            <a asp-controller="RackSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
-                                               asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Rack Sample</a>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default text-white" data-dismiss="modal">Close</button>
-                                            </div>
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Burial# @item.Burials.BurialNumber</h4>
+                                            <button type="button" class="close" data-dismiss="modal"></button>
+                                            <span aria-hidden="true">&times;</span>
                                         </div>
+                                        <img src="~/img/pyramids-2159286_1920.jpg" />
+                                        <a asp-controller="Images" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                                           asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Image</a>
+                                        <a asp-controller="CranialSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                                           asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Cranial Data</a>
+                                        <a asp-controller="RackSamples" asp-action="Create" asp-route-BurialId="@item.Burials.BurialId" asp-route-Burial="@item.Burials.BurialSquareId"
+                                           asp-route-Subplot="@item.Burials.BurialSubplot" asp-route-Num="@item.Burials.BurialNumber">Add Rack Sample</a>
 
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default text-white" data-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
+                            </div>
+                            
                             </td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.Burials.BurialId" asp-route-sub="@item.Burials.BurialSubplot">Edit</a>
@@ -246,5 +248,8 @@
             </table>
             <div class="btn-group pull-right m-1" page-info="@(Model.PageNumberingInfo)" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
         </div>
+        
+        
     </div>
+    
 </div>
