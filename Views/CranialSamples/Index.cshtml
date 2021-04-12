@@ -5,98 +5,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container viewContainer">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SampleNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxCranialLength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxCranialBreadth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BasionBregmaHeight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BasionNasion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BasionProsthionLength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BizgomaticDiameter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NasionProsthion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxNasalBreadth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InterobitalBreadth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rack)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SampleNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxCranialLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxCranialBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionBregmaHeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionNasion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionProsthionLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BizgomaticDiameter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NasionProsthion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxNasalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InterobitalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialWrapping)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rack.RackShelf)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CranialId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CranialId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CranialId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-center">
+        <h1>Cranial Sample</h1>
+    </div>
+
+   <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Burial Id
+                </th>
+                <th>
+                    Max Cranial Length
+                </th>
+                <th>
+                    Basion Bregma Height
+                </th>
+                <th>
+                    Basion Nasion
+                </th> 
+                <th>
+                    Basion Prosthion Length
+                </th>
+                <th>
+                    Interobital Breadth
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxCranialLength)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionBregmaHeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionNasion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionProsthionLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterobitalBreadth)
+
+                </td>
+                @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CranialId">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.CranialId">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.CranialId">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.CranialId">Details</a> 
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

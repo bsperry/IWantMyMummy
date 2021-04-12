@@ -56,12 +56,29 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(burialSquare);
         }
 
         // GET: BurialSquares/Create
         public IActionResult Create()
         {
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View();
         }
 
@@ -86,6 +103,15 @@ namespace IWantMyMummy.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(burialSquare);
         }
 
@@ -105,7 +131,16 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
             string strFid = id.Replace("/", "F");
-            ViewBag.Fid = strFid; 
+            ViewBag.Fid = strFid;
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(burialSquare);
         }
@@ -146,6 +181,15 @@ namespace IWantMyMummy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var role = (mummyContext.UserRoles
+ .Where(r => r.UserId == userManager.GetUserId(User))
+ .FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(burialSquare);
         }
 
@@ -168,6 +212,15 @@ namespace IWantMyMummy.Controllers
             string strFid = id.Replace("/", "F");
             ViewBag.Fid = strFid;
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return View(burialSquare);
         }
 
@@ -180,11 +233,28 @@ namespace IWantMyMummy.Controllers
             var burialSquare = await _context.BurialSquare.FindAsync(id);
             _context.BurialSquare.Remove(burialSquare);
             await _context.SaveChangesAsync();
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool BurialSquareExists(string id)
         {
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return _context.BurialSquare.Any(e => e.BurialSquareId == id);
         }
     }

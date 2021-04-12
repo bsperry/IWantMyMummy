@@ -11,8 +11,9 @@ namespace IWantMyMummy.Models.ViewModels
     {
         public IWantMyMummyUser mummyUser { get; set; }
 
-        public IdentityUserRole<string> identityUserRole { get; set; }
+        public IdentityUserRole<string>? identityUserRole { get; set; }
+                                                                        
 
-        public IdentityRole<string> identityRole { get; set; }
+        public IdentityRole<string>? identityRole { get; set; }
     }
 }

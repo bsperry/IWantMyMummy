@@ -4,63 +4,71 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container viewContainer">
+    <div class="text-center">
+        <h1>Images</h1>
+    </div>
+    <br />
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Image1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialS)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BurialSquare)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cranial)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialWrapping)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialS.BurialSubplot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSquare.BurialSquareId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cranial.CranialId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-bordered table-striped table-hover squareTable">
+        <caption>All Images</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Image Description
+                </th>
+                <th>
+                    Square/Area
+                </th>
+                <th>
+                    Subplot
+                </th>
+                <th>
+                    Burial Id
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSquareId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialS.BurialSubplot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSquare.BurialSquareId)
+                </td>
+                @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                    </td>
+                }
+                @if (ViewBag.Role == 1 || ViewBag.Role == null)
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> 
+                    </td>
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

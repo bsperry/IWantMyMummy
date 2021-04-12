@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
+using IWantMyMummy.Models.ViewModels;
+
+
+
 
 namespace IWantMyMummy.Controllers
 {
@@ -13,10 +17,14 @@ namespace IWantMyMummy.Controllers
     {
         private readonly MummyContext _context;
 
+
+
         public CranialSamplesController(MummyContext context)
         {
             _context = context;
         }
+
+
 
         // GET: CranialSamples
         public async Task<IActionResult> Index()
@@ -25,6 +33,8 @@ namespace IWantMyMummy.Controllers
             return View(await mummyContext.ToListAsync());
         }
 
+
+
         // GET: CranialSamples/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -32,6 +42,8 @@ namespace IWantMyMummy.Controllers
             {
                 return NotFound();
             }
+
+
 
             var cranialSample = await _context.CranialSample
                 .Include(c => c.Burial)
@@ -42,16 +54,42 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+
+
             return View(cranialSample);
         }
 
+
+
         // GET: CranialSamples/Create
-        public IActionResult Create()
+        public IActionResult Create(int BurialId, string Burial, string Subplot, int Num)
         {
+            if (BurialId <= 0)
+            {
+                return NotFound();
+            }
+            ViewBag.Id = BurialId;
+            ViewBag.Burial = Burial;
+            ViewBag.Subplot = Subplot;
+            ViewBag.Num = Num;
+            CranialBurialViewModel viewModel = new CranialBurialViewModel
+            {
+                BurialId = BurialId,
+                CranialSample = new CranialSample
+                {
+                    BurialId = BurialId,
+                },
+                BurialList = _context.Burial.Where(x => x.BurialId == BurialId).ToList(),
+            };
+
+
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping");
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf");
-            return View();
+            return View(viewModel);
         }
+
+
 
         // POST: CranialSamples/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -71,6 +109,8 @@ namespace IWantMyMummy.Controllers
             return View(cranialSample);
         }
 
+
+
         // GET: CranialSamples/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -78,6 +118,8 @@ namespace IWantMyMummy.Controllers
             {
                 return NotFound();
             }
+
+
 
             var cranialSample = await _context.CranialSample.FindAsync(id);
             if (cranialSample == null)
@@ -88,6 +130,8 @@ namespace IWantMyMummy.Controllers
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf", cranialSample.RackShelf);
             return View(cranialSample);
         }
+
+
 
         // POST: CranialSamples/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -100,6 +144,8 @@ namespace IWantMyMummy.Controllers
             {
                 return NotFound();
             }
+
+
 
             if (ModelState.IsValid)
             {
@@ -126,6 +172,8 @@ namespace IWantMyMummy.Controllers
             return View(cranialSample);
         }
 
+
+
         // GET: CranialSamples/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -133,6 +181,8 @@ namespace IWantMyMummy.Controllers
             {
                 return NotFound();
             }
+
+
 
             var cranialSample = await _context.CranialSample
                 .Include(c => c.Burial)
@@ -143,8 +193,12 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+
+
             return View(cranialSample);
         }
+
+
 
         // POST: CranialSamples/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -156,6 +210,8 @@ namespace IWantMyMummy.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
 
         private bool CranialSampleExists(int id)
         {
