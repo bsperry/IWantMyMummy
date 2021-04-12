@@ -4,9 +4,8 @@
 @{
 }
 
-    <div class="form-group">
-        <label for="gender">Gender</label><br>
-        <select id="gender" style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
+        <span style="margin-top: 5px;">Gender<br></span>
+        <select style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
             @if (ViewBag.FilterLoc.Gender == "all")
             {
                 <option selected value="all">All</option>
@@ -52,5 +51,4 @@
 
             }
         </select>
-    </div>
     
