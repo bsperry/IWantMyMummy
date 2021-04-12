@@ -66,12 +66,6 @@ namespace IWantMyMummy.Controllers
                                    BurialSquare = bsquare,
                                });
 
-            //sort
-            if (sortString != null)
-            {
-                queryFilter = queryFilter.OrderByDescending(b => b.Burials.BurialDepth);
-            }
-
             var test = _context.Burial;
 
             //Filter
@@ -176,16 +170,6 @@ namespace IWantMyMummy.Controllers
             int pageNum = 1;
             string sortString = "";
             return RedirectToAction("Index", new {sortString, filterId, pageNum });
-        }
-
-        //SORTING
-        [HttpPost]
-        public IActionResult Sort(string sort)
-        {
-            string sortString = string.Join('-', sort);
-            int pageNum = 1;
-            string filterId = "";
-            return RedirectToAction("Index", new { sortString, filterId, pageNum });
         }
 
         // GET: Burials/Details/5
