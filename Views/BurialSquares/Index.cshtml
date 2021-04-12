@@ -47,7 +47,11 @@
                 <th>
                     High Pair (EW)
                 </th>
-                <th></th>
+                @if (ViewBag.Role == 2 || ViewBag.Role == 3)
+                {
+                    <th></th>
+                }
+
             </tr>
         </thead>
         <tbody>
