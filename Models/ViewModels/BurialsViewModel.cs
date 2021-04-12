@@ -11,7 +11,5 @@ namespace IWantMyMummy.Models.ViewModels
         public List<JoinBurialSquareViewModel> JoinBurialSquareViewModel { get; set; }
         public PageNumberingInfo PageNumberingInfo { get; set; }
 
-        public string LocationNS { get; set; }
-
     }
 }

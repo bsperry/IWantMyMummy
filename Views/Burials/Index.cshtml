@@ -64,8 +64,7 @@
 
         <div class="col-10">
             <a class="btn btn-primary" asp-action="Create1">Create New Burial</a>
-            <br /><br />
-            <table class="table table-bordered table-striped table-hover table-sm table-responsive text-center align-top">
+            <table class="table table-bordered table-striped table-hover table-sm text-center align-top">
                 <thead class="thead-dark">
                     <tr>
 
@@ -246,7 +245,7 @@
                     }
                 </tbody>
             </table>
-            <div class="btn-group pull-right m-1" page-info="@(Model.PageNumberingInfo)" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
+            <div class="btn-group pull-right m-1" page-info="@Model.PageNumberingInfo" page-class="btn" page-class-normal="btn-outline-dark" page-classes-enabled="true" page-class-selected="btn-primary"></div>
         </div>
         
         
