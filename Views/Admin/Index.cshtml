@@ -28,7 +28,14 @@
                 <tr>
                     <td>@user.mummyUser.Firstname</td>
                     <td>@user.mummyUser.LastName</td>
-                    <td>@user.identityRole.Name</td>
+                    @if(user.identityRole != null) 
+                    {
+                        <td>@user.identityRole.Name</td>
+                    }
+                    else 
+                    {
+                        <td>public</td>
+                    }
                     <td>
                         <form asp-action="EditUser" asp-controller="Admin" method="get">
                             <input type="hidden" value="@user.mummyUser.Id" name="userId" id="userId" />

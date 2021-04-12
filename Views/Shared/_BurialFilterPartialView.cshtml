@@ -8,136 +8,154 @@
 
 <!--filtering-->
 
-        <label>Location N/S</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.LocationNs == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.LocationNStemp)
-            {
-                @if (ViewBag.FilterLoc.LocationNs == item)
+        <div class="form-group">
+            <label for="locationns">Location N/S</label>
+            <select style="margin-top: 5px;" id="locationns" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LocationNs == "all")
                 {
-                    <option selected>@item</option>
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
-        <label>Low Pair N/S</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.LowPairNs.ToString() == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.LowPairNs)
-            {
-                @if (ViewBag.FilterLoc.LowPairNs.ToString() == item.ToString())
+                @foreach (var item in ViewBag.LocationNStemp)
                 {
-                    <option selected>@item</option>
+                    @if (ViewBag.FilterLoc.LocationNs == item)
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="lowpairns">Low Pair N/S</label>
+            <select style="margin-top: 5px;" id="lowpairns" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LowPairNs.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
-        <label>High Pair N/S</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.HighPairNs.ToString() == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.HighPairNs)
-            {
-                @if (ViewBag.FilterLoc.HighPairNs.ToString() == item.ToString())
+                @foreach (var item in ViewBag.LowPairNs)
                 {
-                    <option selected>@item</option>
+                    @if (ViewBag.FilterLoc.LowPairNs.ToString() == item.ToString())
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="highpairns">High Pair N/S</label>
+            <select id="highpairns" style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.HighPairNs.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
-        <label>Location E/W</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.LocationEw.ToString() == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.LocationEw)
-            {
-                @if (ViewBag.FilterLoc.LocationEw == item)
+                @foreach (var item in ViewBag.HighPairNs)
                 {
-                    <option selected>@item</option>
+                    @if (ViewBag.FilterLoc.HighPairNs.ToString() == item.ToString())
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="locationew">Location E/W</label>
+            <select id="locationew" style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LocationEw.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
-        <label>Low Pair N/S</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.LowPairEw.ToString() == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.LowPairEw)
-            {
-                @if (ViewBag.FilterLoc.LowPairEw.ToString() == item.ToString())
+                @foreach (var item in ViewBag.LocationEw)
                 {
-                    <option selected>@item</option>
+                    @if (ViewBag.FilterLoc.LocationEw == item)
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="lowpairew">Low Pair E/W</label>
+            <select id="lowpairew" style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.LowPairEw.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
-        <label>High Pair N/S</label>
-        <select onchange="this.form.submit()" name="filter">
-            @if (ViewBag.FilterLoc.HighPairEw.ToString() == "all")
-            {
-                <option selected value="all">All</option>
-            }
-            else
-            {
-                <option value="all">All</option>
-            }
-            @foreach (var item in ViewBag.HighPairEw)
-            {
-                @if (ViewBag.FilterLoc.HighPairEw.ToString() == item.ToString())
+                @foreach (var item in ViewBag.LowPairEw)
                 {
-                    <option selected>@item</option>
+                    @if (ViewBag.FilterLoc.LowPairEw.ToString() == item.ToString())
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="highpairew">High Pair E/W</label>
+            <select id="highpairew" style="margin-top: 5px;" onchange="this.form.submit()" name="filter">
+                @if (ViewBag.FilterLoc.HighPairEw.ToString() == "all")
+                {
+                    <option selected value="all">All</option>
                 }
                 else
                 {
-                    <option>@item</option>
+                    <option value="all">All</option>
                 }
-            }
-        </select>
+                @foreach (var item in ViewBag.HighPairEw)
+                {
+                    @if (ViewBag.FilterLoc.HighPairEw.ToString() == item.ToString())
+                    {
+                        <option selected>@item</option>
+                    }
+                    else
+                    {
+                        <option>@item</option>
+                    }
+                }
+            </select>
+        </div>
+        
 
