@@ -220,7 +220,7 @@
                             <td>
                                 <!--MODAL FOR ADDING IMAGES< CRANIAL AND RACK -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@(item.Burials.BurialWrapping + item.Burials.BurialId)">Add</button>
-                                <div id="@(item.Burials.BurialWrapping+ item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
+                                <div id="@(item.Burials.BurialWrapping + item.Burials.BurialId)" class="modal fade" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
 
                                         <!-- Modal content-->
@@ -257,6 +257,7 @@
                                     <a asp-action="Delete" asp-route-id="@item.Burials.BurialId">Delete</a>
                                 }
                             </td>
+                        }
                     </tr>
                     }
                 </tbody>
