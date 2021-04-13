@@ -6,9 +6,7 @@
 }
 
 <div class="container">
-    <h1>Create</h1>
-
-    <h4>Burial Without</h4>
+    <h1>Create Without Quadrant</h1>
     <hr />
     <div class="row">
         <div class="col-md-4 col-centered">
@@ -16,7 +14,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div id="squareid/subplot2">
                     <div class="form-group">
-                        <label asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+                        <label asp-for="@Model.Burial.BurialSquareId" class="control-label">Burial Square ID</label>
                         <input type="hidden" value="@ViewBag.Sid" asp-for="@Model.Burial.BurialSquareId" />
                         <input type="hidden" value="@ViewBag.Sid" asp-for="@Model.SelectedSquareId" />
 
@@ -123,10 +121,10 @@
                         </select>
                         <span asp-validation-for="@Model.Burial.GenderGe" class="text-danger"></span>
                     </div>
-                    <div class="form-group form-check">
-                        <label asp-for="@Model.SexMethodSkull" class="form-check-label">Sex Method Skull</label>
-                        <select class="form-check-input" asp-for="@Model.SexMethodSkull">
-                            <option value="">Select an Option</option>
+                    <div class="form-group">
+                        <label asp-for="@Model.SexMethodSkull" class="control-label">Sex Method Skull</label>
+                        <select required asp-for="@Model.SexMethodSkull" class="form-control">
+                            <option>Select an Option</option>
                             <option value="True">Skull</option>
                             <option value="False">Pelvis</option>
                         </select>
