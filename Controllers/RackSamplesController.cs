@@ -72,7 +72,16 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mummyContext.UserRoles
+           .Where(r => r.UserId == userManager.GetUserId(User))
+           .FirstOrDefault());
 
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(rackSample);
         }
@@ -100,6 +109,17 @@ namespace IWantMyMummy.Controllers
                 BurialList = _context.Burial.Where(x => x.BurialId == BurialId).ToList(),
             };
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping");
             return View(viewModel);
         }
@@ -118,6 +138,17 @@ namespace IWantMyMummy.Controllers
                 _context.Add(rackSample);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
             }
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", rackSample.BurialId);
             return View(rackSample);
@@ -142,6 +173,17 @@ namespace IWantMyMummy.Controllers
             if (rackSample == null)
             {
                 return NotFound();
+            }
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
             }
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", rackSample.BurialId);
             return View(rackSample);
@@ -183,6 +225,17 @@ namespace IWantMyMummy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", rackSample.BurialId);
             return View(rackSample);
         }
@@ -208,7 +261,16 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
 
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(rackSample);
         }
@@ -232,7 +294,16 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
 
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             _context.RackSample.Remove(rackSample);
             await _context.SaveChangesAsync();
@@ -243,6 +314,16 @@ namespace IWantMyMummy.Controllers
 
         private bool RackSampleExists(string id)
         {
+            var role = (mummyContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return _context.RackSample.Any(e => e.RackShelf == id);
         }
     }

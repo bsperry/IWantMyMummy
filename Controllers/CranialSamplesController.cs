@@ -7,21 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IWantMyMummy.Models;
 using IWantMyMummy.Models.ViewModels;
-
-
-
+using IWantMyMummy.Data;
+using Microsoft.AspNetCore.Identity;
+using IWantMyMummy.Areas.Identity.Data;
 
 namespace IWantMyMummy.Controllers
 {
     public class CranialSamplesController : Controller
     {
         private readonly MummyContext _context;
+        private IWantMyMummyContext mumContext;
+        private UserManager<IWantMyMummyUser> userManager;
 
 
 
-        public CranialSamplesController(MummyContext context)
+        public CranialSamplesController(MummyContext context, IWantMyMummyContext con, UserManager<IWantMyMummyUser> tempUser)
         {
             _context = context;
+            mumContext = con;
+            userManager = tempUser;
         }
 
 
@@ -30,6 +34,14 @@ namespace IWantMyMummy.Controllers
         public async Task<IActionResult> Index()
         {
             var mummyContext = _context.CranialSample.Include(c => c.Burial).Include(c => c.Rack);
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
             return View(await mummyContext.ToListAsync());
         }
 
@@ -54,7 +66,14 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
 
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(cranialSample);
         }
@@ -82,7 +101,14 @@ namespace IWantMyMummy.Controllers
                 BurialList = _context.Burial.Where(x => x.BurialId == BurialId).ToList(),
             };
 
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
 
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping");
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf");
@@ -103,6 +129,15 @@ namespace IWantMyMummy.Controllers
                 _context.Add(cranialSample);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
             }
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", cranialSample.BurialId);
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf", cranialSample.RackShelf);
@@ -126,6 +161,16 @@ namespace IWantMyMummy.Controllers
             {
                 return NotFound();
             }
+
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", cranialSample.BurialId);
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf", cranialSample.RackShelf);
             return View(cranialSample);
@@ -167,6 +212,16 @@ namespace IWantMyMummy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             ViewData["BurialId"] = new SelectList(_context.Burial, "BurialId", "BurialWrapping", cranialSample.BurialId);
             ViewData["RackShelf"] = new SelectList(_context.RackSample, "RackShelf", "RackShelf", cranialSample.RackShelf);
             return View(cranialSample);
@@ -193,7 +248,14 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
 
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
 
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
 
             return View(cranialSample);
         }
@@ -208,6 +270,16 @@ namespace IWantMyMummy.Controllers
             var cranialSample = await _context.CranialSample.FindAsync(id);
             _context.CranialSample.Remove(cranialSample);
             await _context.SaveChangesAsync();
+
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -215,6 +287,15 @@ namespace IWantMyMummy.Controllers
 
         private bool CranialSampleExists(int id)
         {
+            var role = (mumContext.UserRoles
+.Where(r => r.UserId == userManager.GetUserId(User))
+.FirstOrDefault());
+
+            if (!(role is null))
+            {
+                ViewBag.Role = Int32.Parse(role.RoleId);
+            }
+
             return _context.CranialSample.Any(e => e.CranialId == id);
         }
     }
