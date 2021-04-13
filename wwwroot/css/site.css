@@ -383,3 +383,8 @@ h1{
 .card {
     color: #002E5D;
 }
+
+.required:after {
+    content: " *";
+    color: red;
+}
