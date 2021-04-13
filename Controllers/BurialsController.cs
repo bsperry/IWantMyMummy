@@ -154,12 +154,10 @@ namespace IWantMyMummy.Controllers
                 if (filterLoc.HeadDirection == "blank")
                 {
                     queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == null);
-
                 } 
                 else
                 {
                     queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == filterLoc.HeadDirection);
-
                 }
             }
             if (filterLoc.HasAdultChild)
