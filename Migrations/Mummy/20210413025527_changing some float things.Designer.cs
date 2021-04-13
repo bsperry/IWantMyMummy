@@ -4,14 +4,16 @@ using IWantMyMummy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IWantMyMummy.Migrations.Mummy
 {
     [DbContext(typeof(MummyContext))]
-    partial class MummyContextModelSnapshot : ModelSnapshot
+    [Migration("20210413025527_changing some float things")]
+    partial class changingsomefloatthings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
