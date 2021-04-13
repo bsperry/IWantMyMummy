@@ -43,6 +43,7 @@ namespace IWantMyMummy
             });
             services.AddMvc();
 
+            //services.AddDbContext<MummyContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));
             services.AddDbContext<MummyContext>(options =>
                options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
         }

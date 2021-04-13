@@ -11,9 +11,15 @@ namespace IWantMyMummy.Data
 {
     public class IWantMyMummyContext : IdentityDbContext<IWantMyMummyUser>
     {
-        public IWantMyMummyContext(DbContextOptions<IWantMyMummyContext> options)
-            : base(options)
+        public IWantMyMummyContext(DbContextOptions<IWantMyMummyContext> options) : base(options) { }
+        //public IWantMyMummyContext() : base(GetRDSConnectionString()) { }
+
+        public IWantMyMummyContext()
         {
+        }
+        public static IWantMyMummyContext Create() //Add this change
+        {
+            return new IWantMyMummyContext();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
