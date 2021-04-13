@@ -10,6 +10,14 @@
         {
             <option value="all">All</option>
         }
+        @if (ViewBag.FilterLoc.HeadDirection == "blank")
+        {
+            <option selected value="blank">Not Entered</option>
+        }
+        else
+        {
+            <option value="blank">Not Entered</option>
+        }
         @foreach (var item in ViewBag.HeadDirection)
         {
             @if (ViewBag.FilterLoc.HeadDirection == item)
@@ -20,6 +28,53 @@
             {
                 <option>@item</option>
             }
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="adultchild">Adult/Child</label>
+    <select class="burialFilter" id="adultchild" onchange="this.form.submit()" name="filter">
+        @if (ViewBag.FilterLoc.AdultChild == "all")
+        {
+            <option selected value="all">All</option>
+        }
+        else
+        {
+            <option value="all">All</option>
+        }
+        @foreach (var item in ViewBag.AdultChild)
+        {
+            @if (item != null)
+            {
+                @if (item.ToString() == "True")
+                {
+
+                    @if (ViewBag.FilterLoc.AdultChild == "True")
+                    {
+                        <option selected value="@item">Adult</option>
+
+                    }
+                    else
+                    {
+                        <option value="@item">Adult</option>
+                    }
+                }
+                else
+                {
+                    @if (ViewBag.FilterLoc.AdultChild == "False")
+                    {
+                        <option selected value="@item">Child</option>
+
+                    }
+                    else
+                    {
+                        <option value="@item">Child</option>
+
+                    }
+                }
+            }
+
         }
     </select>
 </div>

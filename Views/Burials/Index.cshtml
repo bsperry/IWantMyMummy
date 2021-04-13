@@ -234,7 +234,7 @@
                             
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Burials.BurialId" asp-route-sub="@item.Burials.BurialSubplot">Edit</a>
+                                <a asp-action="Edit" asp-route-id="@item.Burials.BurialId" asp-route-BurialSquareId="@item.Burials.BurialSquareId" asp-route-sub="@item.Burials.BurialSubplot">Edit</a>
                                 <a asp-action="Details" asp-route-id="@item.Burials.BurialId">Details</a>
                                 @if (ViewBag.Role == 3)
                                 {

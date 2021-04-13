@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label asp-for="@Model.HeadDirection" class="control-label"></label>
                         <select asp-for="@Model.HeadDirection" class="form-control">
-                            <option>Select an Option</option>
+                            <option value="">Select an Option</option>
                             <option>N</option>
                             <option>S</option>
                             <option>E</option>
@@ -88,8 +88,8 @@
                 <div id="Wrapping2">
                     <div class="form-group">
                         <label asp-for="@Model.BurialWrapping" class="control-label"></label>
-                        <select asp-for="@Model.BurialWrapping" class="form-control">
-                            <option>Select an option</option>
+                        <select required asp-for="@Model.BurialWrapping" class="form-control">
+                            <option value="">Select an option</option>
                             <option value="B">Bones</option>
                             <option value="H">Half Wrapped</option>
                             <option value="W">Well Wrapped</option>
@@ -106,7 +106,7 @@
                 <div id="adult1" class="form-group">
                     <label asp-for="@Model.BurialAdult" class="control-label"></label>
                     <select asp-for="@Model.BurialAdult" class="form-control">
-                        <option>Select an Option</option>
+                        <option value="">Select an Option</option>
                         <option value="True">Adult</option>
                         <option value="False">Child</option>
                     </select>
@@ -115,8 +115,8 @@
                 <div id="gender/sex3">
                     <div class="form-group">
                         <label asp-for="@Model.GenderGe" class="control-label">Gender</label>
-                        <select asp-for="@Model.GenderGe" class="form-control">
-                            <option>Select an Option</option>
+                        <select required asp-for="@Model.GenderGe" class="form-control">
+                            <option value="">Select an Option</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                             <option value="U">Undetermined/Subadult</option>
@@ -126,7 +126,7 @@
                     <div class="form-group form-check">
                         <label asp-for="@Model.SexMethodSkull" class="form-check-label">
                             <select class="form-check-input" asp-for="@Model.SexMethodSkull">
-                                <option>Select an Option</option>
+                                <option value="">Select an Option</option>
                                 <option value="True">Skull</option>
                                 <option value="False">Pelvis</option>
                             </select>

@@ -134,8 +134,8 @@ namespace IWantMyMummy.Controllers
             ViewBag.Fid = strFid;
 
             var role = (mummyContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                .Where(r => r.UserId == userManager.GetUserId(User))
+                .FirstOrDefault());
 
             if (!(role is null))
             {

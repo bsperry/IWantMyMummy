@@ -21,11 +21,12 @@ namespace IWantMyMummy.Models
 
         //Mummy Characteristics
         public string HeadDirection { get; set; }
+        public string AdultChild { get; set; }
 
 
         public FilterLocation (string filterstring)
         {
-            FilterString = filterstring ?? "all-all-all-all-all-all-all-all-all";
+            FilterString = filterstring ?? "all-all-all-all-all-all-all-all-all-all";
             string[] filters = FilterString.Split("-");
             LocationNs = filters[0];
             LowPairNs = filters[1];
@@ -40,6 +41,7 @@ namespace IWantMyMummy.Models
 
             //Mummy Characteristics
             HeadDirection = filters[8];
+            AdultChild = filters[9];
 
         }
 
@@ -53,6 +55,7 @@ namespace IWantMyMummy.Models
 
         public bool HasGender => Gender.ToLower() != "all";
         public bool HasHeadDirection => HeadDirection.ToLower() != "all";
+        public bool HasAdultChild => AdultChild.ToString().ToLower() != "all";
 
     }
 }
