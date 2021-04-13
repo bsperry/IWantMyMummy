@@ -148,9 +148,9 @@ namespace IWantMyMummy.Controllers
                 queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == filterLoc.HeadDirection);
             }
 
-            var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            ViewBag.mummy = mummyContext
-                            .ToList();
+            //var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
+            //ViewBag.mummy = mummyContext
+            //                .ToList();
 
             return View(new BurialsViewModel
             {
