@@ -402,6 +402,11 @@ namespace IWantMyMummy.Controllers
         //Create new burial WITH a subplot
         public IActionResult CreateWith(string SelectedSquareId)
         {
+            if(SelectedSquareId == "0")
+            {
+                return NotFound();
+            }
+
             SelectedSquareId = SelectedSquareId.Replace("%2F", "/");
             ViewBag.Sid = SelectedSquareId;
             ViewBag.CreateParam = "NoAdditional";
@@ -425,6 +430,10 @@ namespace IWantMyMummy.Controllers
         //Create new burial WITHOUT a subplot
         public IActionResult CreateWithout(string SelectedSquareId)
         {
+            if (SelectedSquareId == "0")
+            {
+                return NotFound();
+            }
             SelectedSquareId = SelectedSquareId.Replace("%2F", "/");
             ViewBag.CreateParam = "NoAdditional";
 
@@ -556,7 +565,7 @@ namespace IWantMyMummy.Controllers
                 try
                 {
                     _context.Update(burial);
-                    _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

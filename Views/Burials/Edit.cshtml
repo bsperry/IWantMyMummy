@@ -15,7 +15,7 @@
                 <input type="hidden" asp-for="@Model.Burial.BurialId" />
                 @if (Model.Burial.BurialSubplot == null)
                 {
-                    <p>IMPORTANT: You can either change the Square or the Subplot</p>
+                    <p>IMPORTANT: You can either change the Square or the Subplot, not both</p>
                     <div class="form-group">
                         <label asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
                         <select asp-for="@Model.Burial.BurialSquareId" class="form-control" asp-items="ViewBag.BurialSquareId">Burial Square Id</select>
