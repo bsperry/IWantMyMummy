@@ -16,10 +16,12 @@ namespace IWantMyMummy.Data
         public IWantMyMummyContext(DbContextOptions<IWantMyMummyContext> options) : base(options) { }
         //public IWantMyMummyContext() : base(GetRDSConnectionString()) { }
 
-
-
         public IWantMyMummyContext()
         {
+        }
+        public static IWantMyMummyContext Create() //Add this change
+        {
+            return new IWantMyMummyContext();
         }
         public static IWantMyMummyContext Create() //Add this change
         {

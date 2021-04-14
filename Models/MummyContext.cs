@@ -9,20 +9,18 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace IWantMyMummy.Models
 {
     public partial class MummyContext : DbContext
-    {
+    {        
+        public MummyContext(DbContextOptions<MummyContext> options): base(options)
+        {
+        }
         public MummyContext()
         {
         }
-
-        public MummyContext(DbContextOptions<MummyContext> options)
-            : base(options)
-        {
-        }
-
         public static MummyContext Create() //Add this change
         {
-            return new MummyContext();
+            return new MummyContext();s
         }
+
 
         public virtual DbSet<Burial> Burial { get; set; }
         public virtual DbSet<BurialQuadrant> BurialQuadrant { get; set; }
@@ -35,6 +33,7 @@ namespace IWantMyMummy.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLExpress;AttachDbFilename=C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\DATA\\Mummy.mdf;Database=Mummy;Trusted_Connection=Yes;");
             }
         }
