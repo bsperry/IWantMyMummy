@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IWantMyMummy.Data;
 using IWantMyMummy.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,8 @@ namespace IWantMyMummy
 
             //services.AddDbContext<MummyContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));
             services.AddDbContext<MummyContext>(options =>
+               options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
+            services.AddDbContext<IWantMyMummyContext>(options =>
                options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
         }
 
