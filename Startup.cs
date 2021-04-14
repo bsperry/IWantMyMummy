@@ -38,17 +38,21 @@ namespace IWantMyMummy
 
 
 
+
+
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
             });
             services.AddMvc();
 
+
+
+            //services.AddDbContext<MummyContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));
             services.AddDbContext<MummyContext>(options =>
                options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
-
             services.AddDbContext<IWantMyMummyContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
+               options.UseSqlServer(Configuration["ConnectionStrings:IWantMyMummyContextConnection"]));
         }
 
 

@@ -19,7 +19,7 @@ namespace IWantMyMummy.Models
         {
         }
 
-        public static MummyContext Create()
+        public static MummyContext Create() //Add this change
         {
             return new MummyContext();
         }
