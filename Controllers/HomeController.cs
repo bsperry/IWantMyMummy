@@ -45,6 +45,11 @@ namespace IWantMyMummy.Controllers
 
 
         }
+
+        public IActionResult Analytics()
+        {
+            return View();
+        }
         public IActionResult BurialList()
         {
             

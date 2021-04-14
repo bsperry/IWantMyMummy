@@ -19,6 +19,11 @@ namespace IWantMyMummy.Models
         {
         }
 
+        public static MummyContext Create()
+        {
+            return new MummyContext();
+        }
+
         public virtual DbSet<Burial> Burial { get; set; }
         public virtual DbSet<BurialQuadrant> BurialQuadrant { get; set; }
         public virtual DbSet<BurialSquare> BurialSquare { get; set; }
@@ -30,7 +35,6 @@ namespace IWantMyMummy.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.\\SQLExpress;AttachDbFilename=C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\DATA\\Mummy.mdf;Database=Mummy;Trusted_Connection=Yes;");
             }
         }
