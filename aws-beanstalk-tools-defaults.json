@@ -1,0 +1,17 @@
+
+{
+    "region" : "us-east-2",
+    "configuration" : "Debug",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "IWantMyMummy",
+    "environment"    : "Iwantmymummy-env",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "",
+    "proxy-server"         : "nginx",
+    "profile"              : "default",
+    "solution-stack"       : "64bit Windows Server 2019 v2.6.4 running IIS 10.0",
+    "iis-website"          : "Default Web Site",
+    "app-path"             : "/"
+}

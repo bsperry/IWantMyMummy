@@ -6,21 +6,19 @@
 }
 
 <div class="container">
-    <h1>Create</h1>
-
-    <h4>Burial Without</h4>
+    <h1>Create Without Quadrant</h1>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-centered">
             <form asp-action="Create1">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div id="squareid/subplot2">
                     <div class="form-group">
-                        <label asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+                        <label asp-for="@Model.Burial.BurialSquareId" class="control-label">Burial Square ID</label>
                         <input type="hidden" value="@ViewBag.Sid" asp-for="@Model.Burial.BurialSquareId" />
                         <input type="hidden" value="@ViewBag.Sid" asp-for="@Model.SelectedSquareId" />
 
-                        <p>@ViewBag.Sid</p>
+                        <p class="font-weight-bold">@ViewBag.Sid</p>
                     </div>
 
                     <div class="form-group">
@@ -30,37 +28,37 @@
                     </div>
                 </div>
                 <div id="burialNum" class="form-group">
-                    <label asp-for="@Model.BurialNumber" class="control-label"></label>
+                    <label asp-for="@Model.BurialNumber" class="control-label required">Burial Number</label>
                     <input asp-for="@Model.BurialNumber" class="form-control" />
                     <span asp-validation-for="@Model.Burial.BurialNumber" class="text-danger"></span>
                 </div>
                 <div id="burialPosition4">
                     <div class="form-group">
-                        <label asp-for="@Model.SouthToHead" class="control-label"></label>
+                        <label asp-for="@Model.SouthToHead" class="control-label required">South To Head</label>
                         <input asp-for="@Model.SouthToHead" class="form-control" />
                         <span asp-validation-for="@Model.Burial.SouthToHead" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.SouthToFeet" class="control-label"></label>
+                        <label asp-for="@Model.SouthToFeet" class="control-label required">South To Feet</label>
                         <input asp-for="@Model.SouthToFeet" class="form-control" />
                         <span asp-validation-for="@Model.Burial.SouthToFeet" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.WestToHead" class="control-label"></label>
+                        <label asp-for="@Model.WestToHead" class="control-label required">West To Head</label>
                         <input asp-for="@Model.WestToHead" class="form-control" />
                         <span asp-validation-for="@Model.Burial.WestToHead" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.WestToFeet" class="control-label"></label>
+                        <label asp-for="@Model.WestToFeet" class="control-label required">West To Feet</label>
                         <input asp-for="@Model.WestToFeet" class="form-control" />
                         <span asp-validation-for="@Model.Burial.WestToFeet" class="text-danger"></span>
                     </div>
                 </div>
                 <div id="direction/depth/length3">
                     <div class="form-group">
-                        <label asp-for="@Model.HeadDirection" class="control-label"></label>
+                        <label asp-for="@Model.HeadDirection" class="control-label">Head Direction</label>
                         <select asp-for="@Model.HeadDirection" class="form-control">
-                            <option>Select an Option</option>
+                            <option value="">Select an Option</option>
                             <option>N</option>
                             <option>S</option>
                             <option>E</option>
@@ -70,26 +68,26 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.BurialDepth" class="control-label"></label>
+                        <label asp-for="@Model.BurialDepth" class="control-label required">Burial Depth</label>
                         <input asp-for="@Model.BurialDepth" class="form-control" />
                         <span asp-validation-for="@Model.Burial.BurialDepth" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.LengthOfRemains" class="control-label"></label>
+                        <label asp-for="@Model.LengthOfRemains" class="control-label required">Length Of Remains</label>
                         <input asp-for="@Model.LengthOfRemains" class="form-control" />
                         <span asp-validation-for="@Model.Burial.LengthOfRemains" class="text-danger"></span>
                     </div>
                 </div>
                 <div id="Situation1" class="form-group">
-                    <label asp-for="@Model.BurialSituation" class="control-label"></label>
+                    <label asp-for="@Model.BurialSituation" class="control-label">Burial Situation</label>
                     <input asp-for="@Model.BurialSituation" class="form-control" />
                     <span asp-validation-for="@Model.Burial.BurialSituation" class="text-danger"></span>
                 </div>
                 <div id="Wrapping2">
                     <div class="form-group">
-                        <label asp-for="@Model.BurialWrapping" class="control-label"></label>
-                        <select asp-for="@Model.BurialWrapping" class="form-control">
-                            <option>Select an option</option>
+                        <label asp-for="@Model.BurialWrapping" class="control-label required">Burial Wrapping</label>
+                        <select required asp-for="@Model.BurialWrapping" class="form-control">
+                            <option value="">Select an option</option>
                             <option value="B">Bones</option>
                             <option value="H">Half Wrapped</option>
                             <option value="W">Well Wrapped</option>
@@ -98,15 +96,15 @@
                         <span asp-validation-for="@Model.Burial.BurialWrapping" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.BurialWrappingMaterial" class="control-label"></label>
+                        <label asp-for="@Model.BurialWrappingMaterial" class="control-label">Burial Wrapping Material</label>
                         <input asp-for="@Model.BurialWrappingMaterial" class="form-control" />
                         <span asp-validation-for="@Model.Burial.BurialWrappingMaterial" class="text-danger"></span>
                     </div>
                 </div>
                 <div id="adult1" class="form-group">
-                    <label asp-for="@Model.BurialAdult" class="control-label"></label>
+                    <label asp-for="@Model.BurialAdult" class="control-label required">Adult/Child</label>
                     <select asp-for="@Model.BurialAdult" class="form-control">
-                        <option>Select an Option</option>
+                        <option value="">Select an Option</option>
                         <option value="True">Adult</option>
                         <option value="False">Child</option>
                     </select>
@@ -114,47 +112,46 @@
                 </div>
                 <div id="gender/sex3">
                     <div class="form-group">
-                        <label asp-for="@Model.GenderGe" class="control-label"></label>
-                        <select asp-for="@Model.GenderGe" class="form-control">
-                            <option>Select an Option</option>
+                        <label asp-for="@Model.GenderGe" class="control-label required">Gender</label>
+                        <select required asp-for="@Model.GenderGe" class="form-control">
+                            <option value="">Select an Option</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                             <option value="U">Undetermined/Subadult</option>
                         </select>
                         <span asp-validation-for="@Model.Burial.GenderGe" class="text-danger"></span>
                     </div>
-                    <div class="form-group form-check">
-                        <label asp-for="@Model.SexMethodSkull" class="form-check-label">
-                            <select class="form-check-input" asp-for="@Model.SexMethodSkull">
-                                <option>Select an Option</option>
-                                <option value="True">Skull</option>
-                                <option value="False">Pelvis</option>
-                            </select>
-                        </label>
+                    <div class="form-group">
+                        <label asp-for="@Model.SexMethodSkull" class="control-label">Sex Method Skull</label>
+                        <select required asp-for="@Model.SexMethodSkull" class="form-control">
+                            <option>Select an Option</option>
+                            <option value="True">Skull</option>
+                            <option value="False">Pelvis</option>
+                        </select>
+
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.GeFunctionTotal" class="control-label"></label>
+                        <label asp-for="@Model.GeFunctionTotal" class="control-label required">Gender Function Total</label>
                         <input asp-for="@Model.GeFunctionTotal" class="form-control" />
                         <span asp-validation-for="@Model.Burial.GeFunctionTotal" class="text-danger"></span>
                     </div>
                 </div>
                 <div id="sampleNum1" class="form-group">
-                    <label asp-for="@Model.SampleNumber" class="control-label"></label>
+                    <label asp-for="@Model.SampleNumber" class="control-label required">Sample Number</label>
                     <input asp-for="@Model.SampleNumber" class="form-control" />
                     <span asp-validation-for="@Model.Burial.SampleNumber" class="text-danger"></span>
                 </div>
 
-            <!--just save-->
-            <div class="form-group">
-                <input asp-action="Create1" method="post" type="submit" value="Create" class="btn btn-primary" />
-            </div>
+                <!--just save-->
+                <div class="form-group">
+                    <input asp-action="Create1" method="post" type="submit" value="Create" class="btn btn-primary" />
+                </div>
 
-            <input type="hidden" asp-for="Addition" value="@ViewBag.CreateParam" />
-            <!--add more information-->
-            <div class="form-group">
-                <span>Additional Burial Information</span>
-                <input asp-action="CreateAdditional" method="get" type="submit" value="Add Additional Information" class="btn btn-primary" />
-            </div>
+                <input type="hidden" asp-for="Addition" value="@ViewBag.CreateParam" />
+                <!--add more information-->
+                <div class="form-group">
+                    <input asp-action="CreateAdditional" method="get" type="submit" value="Add Additional Information" class="btn btn-primary" />
+                </div>
 
             </form>
         </div>

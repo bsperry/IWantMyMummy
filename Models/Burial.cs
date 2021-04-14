@@ -21,16 +21,16 @@ namespace IWantMyMummy.Models
         public int BurialNumber { get; set; }
         public string BurialSubplot { get; set; }
         public string BurialSquareId { get; set; }
-        public int BurialDepth { get; set; }
-        public int SouthToHead { get; set; }
-        public int SouthToFeet { get; set; }
-        public int WestToHead { get; set; }
-        public int WestToFeet { get; set; }
+        public float BurialDepth { get; set; }
+        public float SouthToHead { get; set; }
+        public float SouthToFeet { get; set; }
+        public float WestToHead { get; set; }
+        public float WestToFeet { get; set; }
         public string BurialSituation { get; set; }
         public string BurialWrapping { get; set; }
         public string BurialWrappingMaterial { get; set; }
         public bool? BurialAdult { get; set; }
-        public int LengthOfRemains { get; set; }
+        public float LengthOfRemains { get; set; }
         public int? SampleNumber { get; set; }
         public string GenderGe { get; set; }
         public bool SexMethodSkull { get; set; }

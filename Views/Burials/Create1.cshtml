@@ -5,63 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container viewContainer">
-    <h1 class="text-center">Add Burial</h1>
-    <br /><br />
-    <div class="row addBurialRow">
-        <!--CREATE WITH QUADRANT-->
-        <div class="col withQuad">
-            <h2 class="text-center">Create With Quadrant</h2>
-            <br /><br />
-            <form asp-action="CreateWith" method="get">
-                <div class="form-group">
-                    <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+@if (ViewBag.Role == 2 || ViewBag.Role == 3)
+{
+    <div class="container viewContainer">
+        <h1 class="text-center">Add Burial</h1>
+        <br /><br />
+        <div class="row addBurialRow">
+            <!--CREATE WITH QUADRANT-->
+            <div class="col withQuad">
+                <h2 class="text-center">Create With Quadrant</h2>
+                <br /><br />
+                <form asp-action="CreateWith" method="get">
+                    <div class="form-group">
+                        <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
 
-                    <select asp-for="SelectedSquareId" class="form-control">
-                        <option value="0">Select a Square</option>
-                        @foreach (var Sid in Model.BurialSquare)
-                        {
-                            <option>@Sid.BurialSquareId</option>
-                        }
-                    </select>
-                    <br />
-                    <p>
-                        <input type="submit" value="Continue With Quadrant" class="btn btn-primary withandwithoutbtn" />
-                        @*<a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>*@
-                    </p>
-                </div>
-            </form>
+                        <select required asp-for="SelectedSquareId" class="form-control">
+                            <option value="">Select a Square</option>
+                            @foreach (var Sid in Model.BurialSquare)
+                            {
+                                <option>@Sid.BurialSquareId</option>
+                            }
+                        </select>
+                        <br />
+                        <p>
+                            <input type="submit" value="Continue With Quadrant" class="btn btn-primary withandwithoutbtn" />
+                            @*<a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>*@
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!--CREATE WITHOUT QUADRANT-->
+            <div class="col withoutQuad">
+                <h2 class="text-center">Create Without Quadrant</h2>
+                <br /><br />
+                <form asp-action="CreateWithout" method="get">
+                    <div class="form-group">
+                        <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
+
+                        <select asp-for="SelectedSquareId" class="form-control">
+                            <option required value="">Select a Square</option>
+                            @foreach (var Sid in Model.BurialSquare)
+                            {
+                                <option>@Sid.BurialSquareId</option>
+                            }
+                        </select>
+                        <br />
+                        <p>
+                            <input type="submit" value="Continue Without Quadrant" class="btn btn-primary withandwithoutbtn" />
+
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <!--CREATE WITHOUT QUADRANT-->
-        <div class="col withoutQuad">
-            <h2 class="text-center">Create Without Quadrant</h2>
-            <br /><br />
-            <form asp-action="CreateWithout" method="get">
-                <div class="form-group">
-                    <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
-
-                    <select asp-for="SelectedSquareId" class="form-control">
-                        <option value="0">Select a Square</option>
-                        @foreach (var Sid in Model.BurialSquare)
-                        {
-                            <option>@Sid.BurialSquareId</option>
-                        }
-                    </select>
-                    <br />
-                    <p>
-                        <input type="submit" value="Continue Without Quadrant" class="btn btn-primary withandwithoutbtn" />
-
-                    </p>
-                </div>
-            </form>
+        <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
+        <div>
+            <a class="backLink" asp-action="Index">Back to Burials</a>
         </div>
     </div>
-    <a class="btn btn-primary createSquare" asp-controller="BurialSquares" asp-action="Create">Create New Square</a>
-    <div>
-        <a class="backLink" asp-action="Index">Back to Burials</a>
+
+}
+
+else
+{
+    <div class="container text-center">
+        <h1>Sorry you do not have permission to view this page. <img class="mummyImage" src="~/img/noun_Mummy_3417443 (2).png" /></h1>
     </div>
-</div>
+}
+
 
 
 

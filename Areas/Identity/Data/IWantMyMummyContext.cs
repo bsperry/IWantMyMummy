@@ -7,14 +7,28 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
+
 namespace IWantMyMummy.Data
 {
     public class IWantMyMummyContext : IdentityDbContext<IWantMyMummyUser>
     {
-        public IWantMyMummyContext(DbContextOptions<IWantMyMummyContext> options)
-            : base(options)
+        public IWantMyMummyContext(DbContextOptions<IWantMyMummyContext> options) : base(options) { }
+        //public IWantMyMummyContext() : base(GetRDSConnectionString()) { }
+
+        public IWantMyMummyContext()
         {
         }
+        public static IWantMyMummyContext Create() //Add this change
+        {
+            return new IWantMyMummyContext();
+        }
+        public static IWantMyMummyContext Create() //Add this change
+        {
+            return new IWantMyMummyContext();
+        }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,5 +38,7 @@ namespace IWantMyMummy.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
+
+
 
 }

@@ -258,7 +258,7 @@ html, body {
     border:none !important;
 }
 
-    .btn:hover {
+    .btn-primary:hover {
         background-color: #004d99 !important;
     }
 
@@ -322,3 +322,69 @@ html, body {
 
 }
 
+.burialFilter {
+    margin-top: 5px !important;
+    margin-bottom: 8px !important;
+    font-size: 14px;
+}
+.mummyImage{
+    margin-top:30px;
+    
+}
+
+
+
+h1{
+    margin-top:40px !important;
+    margin-bottom:30px !important;
+    text-align:center;
+}
+
+.col-centered {
+    float: none !important;
+    margin: 0 auto !important;
+}
+
+.modal-dialog{
+    max-width:50% !important;
+}
+
+
+.logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden !important;
+    margin-top: -6px;
+    position:static !important;
+}
+
+.jokes {
+    width: 20%;
+}
+
+.joke {
+    margin-bottom: 70px
+}
+
+.jokeLine {
+    margin-bottom: 20px;
+}
+
+.joking {
+    border: solid;
+    padding: 35px;
+    margin: 3px;
+    background-color: #002E5D;
+    color:white;
+    border-radius:10px;
+}
+
+.card {
+    color: #002E5D;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}

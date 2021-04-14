@@ -75,9 +75,9 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("burial_adult")
                         .HasColumnType("bit");
 
-                    b.Property<int>("BurialDepth")
+                    b.Property<float>("BurialDepth")
                         .HasColumnName("burial_depth")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
                     b.Property<int>("BurialNumber")
                         .HasColumnName("burial_number")
@@ -207,9 +207,9 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("interorbital_breadth")
                         .HasColumnType("float");
 
-                    b.Property<int>("LengthOfRemains")
+                    b.Property<float>("LengthOfRemains")
                         .HasColumnName("length_of_remains")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
                     b.Property<double?>("MaximumCranialBreadth")
                         .HasColumnName("maximum_cranial_breadth")
@@ -289,13 +289,13 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("soft_tissue_taken")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SouthToFeet")
+                    b.Property<float>("SouthToFeet")
                         .HasColumnName("south_to_feet")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
-                    b.Property<int>("SouthToHead")
+                    b.Property<float>("SouthToHead")
                         .HasColumnName("south_to_head")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
                     b.Property<int?>("SubpubicAngle")
                         .HasColumnName("subpubic_angle")
@@ -331,13 +331,13 @@ namespace IWantMyMummy.Migrations.Mummy
                         .HasColumnName("ventral_arc")
                         .HasColumnType("int");
 
-                    b.Property<int>("WestToFeet")
+                    b.Property<float>("WestToFeet")
                         .HasColumnName("west_to_feet")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
-                    b.Property<int>("WestToHead")
+                    b.Property<float>("WestToHead")
                         .HasColumnName("west_to_head")
-                        .HasColumnType("int");
+                        .HasColumnType("real");
 
                     b.Property<int?>("ZygomaticCrest")
                         .HasColumnName("zygomatic_crest")

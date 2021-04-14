@@ -9,15 +9,18 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace IWantMyMummy.Models
 {
     public partial class MummyContext : DbContext
-    {
+    {        
+        public MummyContext(DbContextOptions<MummyContext> options): base(options)
+        {
+        }
         public MummyContext()
         {
         }
-
-        public MummyContext(DbContextOptions<MummyContext> options)
-            : base(options)
+        public static MummyContext Create() //Add this change
         {
+            return new MummyContext();s
         }
+
 
         public virtual DbSet<Burial> Burial { get; set; }
         public virtual DbSet<BurialQuadrant> BurialQuadrant { get; set; }

@@ -82,8 +82,8 @@ namespace IWantMyMummy.Controllers
             //List<string> uniqueList = new List<string> { };
             //ViewBag.UniqueList = uniqueList;
             var role = (mummyContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -117,8 +117,8 @@ namespace IWantMyMummy.Controllers
             }
 
             var role = (mummyContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {

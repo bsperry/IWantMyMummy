@@ -5,110 +5,122 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container viewContainer">
-    <h1>Create Rack</h1>
+@if (ViewBag.Role == 2 || ViewBag.Role == 3)
+{
+    <div class="container viewContainer">
+        <h1>Create Rack</h1>
 
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form method="post" asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <h3>Add Image for @ViewBag.Burial @ViewBag.Subplot #@ViewBag.Num</h3>
-                    <div id="hidden">
-                        <input type="hidden" value="@ViewBag.Id" asp-for="@Model.RackSample.BurialId" />
+        <hr />
+        <div class="row">
+            <div class="col-md-4 col-centered">
+                <form method="post" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <h3>Add Image for @ViewBag.Burial @ViewBag.Subplot #@ViewBag.Num</h3>
+                        <div id="hidden">
+                            <input type="hidden" value="@ViewBag.Id" asp-for="@Model.RackSample.BurialId" />
+                        </div>
+                        <label asp-for="@Model.RackSample.RackShelf" class="control-label">Rack Shelf</label>
+                        <input asp-for="@Model.RackSample.RackShelf" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.RackShelf" class="text-danger"></span>
                     </div>
-                    <label asp-for="@Model.RackSample.RackShelf" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.RackShelf" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.RackShelf" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.RackNumber" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.RackNumber" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.RackNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="@Model.RackSample.IsBag" /> @Html.DisplayNameFor(model => model.RackSample.IsBag)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.TubeNumber" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.TubeNumber" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.TubeNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.RankDescription" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.RankDescription" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.RankDescription" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.MlSize" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.MlSize" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.MlSize" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Foci" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Foci" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Foci" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.LocationNotes" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.LocationNotes" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.LocationNotes" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Questions" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Questions" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Questions" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Conventional14cAgeBp" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Conventional14cAgeBp" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Conventional14cAgeBp" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample._14cCalendarDay" class="control-label"></label>
-                    <input asp-for="@Model.RackSample._14cCalendarDay" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample._14cCalendarDay" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Calibrated95CalendarDateMax" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Calibrated95CalendarDateMax" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateMax" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Calibrated95CalendarDateMin" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Calibrated95CalendarDateMin" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateMin" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Category" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Category" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Category" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@Model.RackSample.Notes" class="control-label"></label>
-                    <input asp-for="@Model.RackSample.Notes" class="form-control" />
-                    <span asp-validation-for="@Model.RackSample.Notes" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.RackNumber" class="control-label">Rack Number</label>
+                        <input asp-for="@Model.RackSample.RackNumber" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.RackNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="@Model.RackSample.IsBag" /> @Html.DisplayNameFor(model => model.RackSample.IsBag)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.TubeNumber" class="control-label">Tube Number</label>
+                        <input asp-for="@Model.RackSample.TubeNumber" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.TubeNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.RankDescription" class="control-label">Rank Description</label>
+                        <input asp-for="@Model.RackSample.RankDescription" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.RankDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.MlSize" class="control-label">Ml Size</label>
+                        <input asp-for="@Model.RackSample.MlSize" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.MlSize" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Foci" class="control-label">Foci</label>
+                        <input asp-for="@Model.RackSample.Foci" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Foci" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.LocationNotes" class="control-label">Location Notes</label>
+                        <input asp-for="@Model.RackSample.LocationNotes" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.LocationNotes" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Questions" class="control-label">Questions</label>
+                        <input asp-for="@Model.RackSample.Questions" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Questions" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Conventional14cAgeBp" class="control-label">Conventional 14 c Age Bp</label>
+                        <input asp-for="@Model.RackSample.Conventional14cAgeBp" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Conventional14cAgeBp" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample._14cCalendarDay" class="control-label">_14 c Calendar Day</label>
+                        <input asp-for="@Model.RackSample._14cCalendarDay" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample._14cCalendarDay" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Calibrated95CalendarDateMax" class="control-label">Calibrated 95 Calendar Date Max</label>
+                        <input asp-for="@Model.RackSample.Calibrated95CalendarDateMax" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateMax" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Calibrated95CalendarDateMin" class="control-label">Calibrated 95 Calendar Date Min</label>
+                        <input asp-for="@Model.RackSample.Calibrated95CalendarDateMin" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateMin" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="control-label">Calibrated 95 Calendar Date Avg</label>
+                        <input asp-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Calibrated95CalendarDateAvg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Category" class="control-label">Category</label>
+                        <input asp-for="@Model.RackSample.Category" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Category" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.RackSample.Notes" class="control-label">Notes</label>
+                        <input asp-for="@Model.RackSample.Notes" class="form-control" />
+                        <span asp-validation-for="@Model.RackSample.Notes" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
+}
 
-    <div>
-        <a asp-action="Index">Back to List</a>
+else
+{
+    <div class="container text-center">
+        <h1>Sorry you do not have permission to view this page. <img class="mummyImage" src="~/img/noun_Mummy_3417443 (2).png" /></h1>
     </div>
-    </div>
+}
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

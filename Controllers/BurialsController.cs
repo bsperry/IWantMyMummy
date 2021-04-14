@@ -28,8 +28,8 @@ namespace IWantMyMummy.Controllers
             wantContext = con;
         }
 
-        // GET: Burials
-        public IActionResult Index(string filterId, int pageNum = 1)
+        // GET: Burials (filters and sorts)
+        public IActionResult Index(string sortString, string filterId, int pageNum = 1)
         {
             int pageSize = 5;
             //ViewBag.LocationNS = locationNS;
@@ -57,6 +57,7 @@ namespace IWantMyMummy.Controllers
             //                     .Take(pageSize)
             //                     .ToList();
 
+
             var queryFilter = (from b in _context.Burial
                                join bsquare in _context.BurialSquare on b.BurialSquareId equals bsquare.BurialSquareId
                                select new JoinBurialSquareViewModel
@@ -65,9 +66,9 @@ namespace IWantMyMummy.Controllers
                                    BurialSquare = bsquare,
                                });
 
-
             var test = _context.Burial;
 
+            //Filter
 
             var filterLoc = new FilterLocation(filterId);
             ViewBag.FilterString = filterId;
@@ -96,27 +97,38 @@ namespace IWantMyMummy.Controllers
                                       .Select(b => b.HighPairEw)
                                       .Distinct()
                                       .ToList();
+            ViewBag.SubPlotFilter = _context.BurialQuadrant
+                                        .Select(b => b.BurialSubplot)
+                                        .Distinct()
+                                        .ToList();
             ViewBag.Gender = _context.Burial
                                       .Select(b => b.GenderGe)
                                       .Distinct()
                                       .ToList();
+            ViewBag.HeadDirection = _context.Burial
+                                        .Where(b => b.HeadDirection != null)
+                                        .Select(b => b.HeadDirection)
+                                        .Distinct()
+                                        .ToList();
+            ViewBag.AdultChild = _context.Burial
+                                        .Select(b => b.BurialAdult)
+                                        .Distinct()
+                                        .ToList();
+
 
 
             if (filterLoc.HasLocationNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationNs == filterLoc.LocationNs);
             }
-
             if (filterLoc.HasLowPairNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.LowPairNs.ToString() == filterLoc.LowPairNs);
             }
-
             if (filterLoc.HasHighPairNs)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairNs.ToString() == filterLoc.HighPairNs);
             }
-
             if (filterLoc.HasLocationEw)
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.BurialLocationEw == filterLoc.LocationEw);
@@ -129,14 +141,33 @@ namespace IWantMyMummy.Controllers
             {
                 queryFilter = queryFilter.Where(b => b.BurialSquare.HighPairEw.ToString() == filterLoc.HighPairEw);
             }
+            if (filterLoc.HasSubPlot)
+            {
+                queryFilter = queryFilter.Where(b => b.Burials.BurialSubplot == filterLoc.SubPlotFilter);
+            }
             if (filterLoc.HasGender)
             {
                 queryFilter = queryFilter.Where(b => b.Burials.GenderGe == filterLoc.Gender);
             }
+            if (filterLoc.HasHeadDirection)
+            {   
+                if (filterLoc.HeadDirection == "blank")
+                {
+                    queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == null);
+                } 
+                else
+                {
+                    queryFilter = queryFilter.Where(b => b.Burials.HeadDirection == filterLoc.HeadDirection);
+                }
+            }
+            if (filterLoc.HasAdultChild)
+            {
+                queryFilter = queryFilter.Where(b => b.Burials.BurialAdult == bool.Parse(filterLoc.AdultChild));
+            }
 
-            var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
-            ViewBag.mummy = mummyContext
-                            .ToList();
+            //var mummyContext = _context.Burial.Include(b => b.BurialS).Include(b => b.BurialSquare);
+            //ViewBag.mummy = mummyContext
+            //                .ToList();
 
             return View(new BurialsViewModel
             {
@@ -162,7 +193,8 @@ namespace IWantMyMummy.Controllers
         {
             string filterId = string.Join('-', filter);
             int pageNum = 1;
-            return RedirectToAction("Index", new { filterId, pageNum });
+            string sortString = "";
+            return RedirectToAction("Index", new {sortString, filterId, pageNum });
         }
 
         // GET: Burials/Details/5
@@ -182,8 +214,8 @@ namespace IWantMyMummy.Controllers
                 return NotFound();
             }
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -256,9 +288,9 @@ namespace IWantMyMummy.Controllers
         public IActionResult Create1(string Addition, string SelectedSquareId, string BurialSubplot, int BurialNumber,
             int BurialDepth, int SouthToHead, int SouthToFeet, int WestToHead, int WestToFeet, string BurialSituation,
             string BurialWrapping, string BurialWrappingMaterial, bool BurialAdult, int LengthOfRemains, int SampleNumber, string GenderGe,
-            string HeadDirection, double GeFunctionTotal, 
+            string HeadDirection, double GeFunctionTotal, bool SexMethodSkull,
 
-            bool SexMethodSkull, string GenderBodyCol, bool BasilarSuture,
+            string GenderBodyCol, bool BasilarSuture,
             int VentralArc, int SubpubicAngle, int SciaticNotch, int PubicBone, int PreaurSulcus, int MedialIpRamus, int DorsalPitting,
             double ForemanMagnum, double FemurHead, double HumerusHead, int Osteophytosis, int PubicSymphysis, double FemurLength,
             double HumerusLength, double TibiaLength, int Robust, int SupraorbitalRidges, int OrbitEdge, int ParietalBossing, int Gonian,
@@ -288,6 +320,7 @@ namespace IWantMyMummy.Controllers
                 burial.BurialAdult = BurialAdult;
                 burial.LengthOfRemains = LengthOfRemains;
                 burial.SampleNumber = SampleNumber;
+                burial.SexMethodSkull = SexMethodSkull;
                 burial.GenderGe = GenderGe;
                 burial.HeadDirection = HeadDirection;
                 burial.GeFunctionTotal = GeFunctionTotal;
@@ -296,7 +329,7 @@ namespace IWantMyMummy.Controllers
                 if (Addition == "Additional")
                 {
 
-                    burial.SexMethodSkull = SexMethodSkull;
+                    
                     burial.GenderBodyCol = GenderBodyCol;
                     burial.BasilarSuture = BasilarSuture;
                     burial.VentralArc = VentralArc;
@@ -369,6 +402,11 @@ namespace IWantMyMummy.Controllers
         //Create new burial WITH a subplot
         public IActionResult CreateWith(string SelectedSquareId)
         {
+            if(SelectedSquareId == "0")
+            {
+                return NotFound();
+            }
+
             SelectedSquareId = SelectedSquareId.Replace("%2F", "/");
             ViewBag.Sid = SelectedSquareId;
             ViewBag.CreateParam = "NoAdditional";
@@ -392,13 +430,17 @@ namespace IWantMyMummy.Controllers
         //Create new burial WITHOUT a subplot
         public IActionResult CreateWithout(string SelectedSquareId)
         {
+            if (SelectedSquareId == "0")
+            {
+                return NotFound();
+            }
             SelectedSquareId = SelectedSquareId.Replace("%2F", "/");
             ViewBag.CreateParam = "NoAdditional";
 
             ViewBag.Sid = SelectedSquareId;
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -459,8 +501,8 @@ namespace IWantMyMummy.Controllers
                 HeadDirection = HeadDirection,
             };
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                .Where(r => r.UserId == userManager.GetUserId(User))
+                .FirstOrDefault());
 
             if (!(role is null))
             {
@@ -469,29 +511,41 @@ namespace IWantMyMummy.Controllers
             return View(viewModel);
         }
         // GET: Burials/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
+        public async Task<IActionResult> Edit(int id, string BurialSquareId)
+        {    
             if (id == null)
             {
                 return NotFound();
             }
+            ViewBag.BurialId = id;
+
+            BurialInformationViewModel viewModel = new BurialInformationViewModel
+            {
+                BurialSquare = _context.BurialSquare.ToList(),
+                BurialQuadrantsList = _context.BurialQuadrant.Where(x=>x.BurialSquareId ==BurialSquareId).ToList(),
+                Burial = await _context.Burial.FindAsync(id),
+            };
 
             var burial = await _context.Burial.FindAsync(id);
-            if (burial == null)
-            {
-                return NotFound();
-            }
+
+            //if (burial == null)
+            //{
+            //    return NotFound();
+            //}
+
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
                 ViewBag.Role = Int32.Parse(role.RoleId);
             }
+
             ViewData["BurialSubplot"] = new SelectList(_context.BurialQuadrant, "BurialSubplot", "BurialSubplot", burial.BurialSubplot);
             ViewData["BurialSquareId"] = new SelectList(_context.BurialSquare, "BurialSquareId", "BurialSquareId", burial.BurialSquareId);
-            return View(burial);
+            //ViewBag.Subplot = burial.BurialSubplot;
+            return View(viewModel);
         }
 
         // POST: Burials/Edit/5
@@ -527,8 +581,8 @@ namespace IWantMyMummy.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var role = (wantContext.UserRoles
-.Where(r => r.UserId == userManager.GetUserId(User))
-.FirstOrDefault());
+                        .Where(r => r.UserId == userManager.GetUserId(User))
+                        .FirstOrDefault());
 
             if (!(role is null))
             {
