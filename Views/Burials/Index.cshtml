@@ -17,7 +17,7 @@
             <!--Location-->
             <form asp-controller="Burials" asp-action="FilterLoc" method="post" class="burialForm form-inline">
                 <div class="row">
-                    <div class="joke">
+                    <div>
                         <a class="btn btn-primary" data-toggle="collapse" href="#filter1" role="button" aria-expanded="false" aria-controls="filter1">
                             Filter by Location
                         </a>
@@ -27,10 +27,11 @@
                     </div>
                 </div>
                 <br /><br />
+
                 <div class="row">
                     <br />
                     <!--Gender-->
-                    <div class="joke">
+                    <div>
                         <a class="btn btn-primary" data-toggle="collapse" href="#filter2" role="button" aria-expanded="false" aria-controls="filter2">
                             Filter by Gender
                         </a>
@@ -40,9 +41,9 @@
                     </div>
                 </div>
                 <br /><br />
+
                 <div class="row">
-                    <br />
-                    <div class="joke">
+                    <div>
                         <!--Characteristics-->
 
                         <a class="btn btn-primary" data-toggle="collapse" href="#characteristics" role="button" aria-expanded="false" aria-controls="filter2">
@@ -53,9 +54,10 @@
                         </div>
                     </div>
                 </div>
-                <br /><br /><br />
+                <br /><br />
+
                 <div class="row">
-                    <div class="joke">
+                    <div>
                         <a class="btn btn-secondary" asp-controller="Burials" asp-action="Index">Clear Filters</a>
                     </div>
                 </div>

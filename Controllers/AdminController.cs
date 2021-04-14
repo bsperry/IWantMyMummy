@@ -43,7 +43,7 @@ namespace IWantMyMummy.Controllers
                     from userrole in ps.DefaultIfEmpty()
                     join roledef in context.Roles on userrole.RoleId equals roledef.Id into rd
                     from roledef in rd.DefaultIfEmpty()
-                    // orderby user.LastName
+                    orderby userrole.RoleId descending, user.LastName ascending
                     select new UsersRolesViewModel { mummyUser = user, identityUserRole = userrole, identityRole = roledef };
 
             return View(viewModel);

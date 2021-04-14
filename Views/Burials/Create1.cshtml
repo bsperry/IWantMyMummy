@@ -19,8 +19,8 @@
                     <div class="form-group">
                         <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
 
-                        <select asp-for="SelectedSquareId" class="form-control">
-                            <option value="0">Select a Square</option>
+                        <select required asp-for="SelectedSquareId" class="form-control">
+                            <option value="">Select a Square</option>
                             @foreach (var Sid in Model.BurialSquare)
                             {
                                 <option>@Sid.BurialSquareId</option>
@@ -44,7 +44,7 @@
                         <label hidden asp-for="@Model.Burial.BurialSquareId" class="control-label"></label>
 
                         <select asp-for="SelectedSquareId" class="form-control">
-                            <option value="0">Select a Square</option>
+                            <option required value="">Select a Square</option>
                             @foreach (var Sid in Model.BurialSquare)
                             {
                                 <option>@Sid.BurialSquareId</option>
